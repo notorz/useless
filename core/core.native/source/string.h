@@ -1,4 +1,11 @@
-#pragma once
+//
+// Copyright (c) 2015. notorz.
+//
+// Distributed under the MIT License.
+//
+
+#ifndef USELESS_CORE_NATIVE_STRING_INCLUDED
+#define USELESS_CORE_NATIVE_STRING_INCLUDED
 
 #include "string/string.h"
 
@@ -13,3 +20,5 @@ namespace useless
 	typedef string_ansi string;
 #endif
 }
+
+#endif USELESS_CORE_NATIVE_STRING_INCLUDED

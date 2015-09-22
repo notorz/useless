@@ -1,4 +1,11 @@
-#pragma once
+//
+// Copyright (c) 2015. notorz.
+//
+// Distributed under the MIT License.
+//
+
+#ifndef USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED
+#define USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED
 
 #include <string.h>
 #include <stdlib.h>
@@ -192,3 +199,5 @@ namespace useless
 		}
 	};
 }
+
+#endif USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED

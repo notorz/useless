@@ -1,3 +1,9 @@
+//
+// Copyright (c) 2015. notorz.
+//
+// Distributed under the MIT License.
+//
+
 #include <stdio.h>
 #include <tchar.h>
 #include <memory.h>

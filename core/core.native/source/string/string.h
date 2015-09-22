@@ -1,4 +1,11 @@
-#pragma once
+//
+// Copyright (c) 2015. notorz.
+//
+// Distributed under the MIT License.
+//
+
+#ifndef USELESS_CORE_NATIVE_STRING_STRING_INCLUDED
+#define USELESS_CORE_NATIVE_STRING_STRING_INCLUDED
 
 #include <string>
 #include <stdarg.h>
@@ -541,3 +548,5 @@ namespace useless
 		buffer_type m_buffer;
 	};
 }
+
+#endif USELESS_CORE_NATIVE_STRING_STRING_INCLUDED

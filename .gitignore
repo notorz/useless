@@ -1,0 +1,6 @@
+*.suo
+*.sdf
+*.opensdf
+*.user
+core/core.native/interm
+core/core.native/output

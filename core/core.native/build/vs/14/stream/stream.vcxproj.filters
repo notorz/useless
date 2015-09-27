@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="stream">
+      <UniqueIdentifier>{3302b128-b476-49dd-80d0-427d2b856364}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\stream\memorybuf.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\stream\fixedbuf.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\stream\dynamicbuf.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\stream.h" />
+    <ClInclude Include="..\..\..\..\source\stream\memorystream.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\stream\streambuf.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\stream\filebuf.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -11,8 +11,8 @@
 
 namespace useless
 {
-	typedef basic_string<char> string_ansi;
-	typedef basic_string<wchar_t> string_wide;
+	typedef basic_string<char, std::allocator<char>> string_ansi;
+	typedef basic_string<wchar_t, std::allocator<wchar_t>> string_wide;
 
 #ifdef UNICODE
 	typedef string_wide string;

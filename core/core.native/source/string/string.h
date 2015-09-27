@@ -14,23 +14,22 @@
 
 namespace useless
 {
-	template<typename C>
+	template<typename C, typename Allocator>
 	class basic_string
 	{
 	public:
 		typedef C char_type;
-		typedef std::basic_string<char_type, std::char_traits<char_type>, std::allocator<char_type>> buffer_type;
+		typedef std::basic_string<char_type, std::char_traits<char_type>, Allocator> buffer_type;
 		typedef typename buffer_type::const_iterator const_iterator;
 
 	private:
-		template<typename C>
 		class tag_compare
 		{
 		private:
-			const std::basic_string<C, std::char_traits<char_type>, std::allocator<char_type>>& m_findTag;
+			const buffer_type& m_findTag;
 
 		public:
-			tag_compare( const std::basic_string<C, std::char_traits<char_type>, std::allocator<char_type>>& findTag )
+			tag_compare( const buffer_type& findTag )
 				: m_findTag( findTag )
 			{
 			}
@@ -42,7 +41,7 @@ namespace useless
 
 			bool operator () ( C ch ) const
 			{
-				return m_findTag.find( ch ) != std::basic_string<C, std::char_traits<char_type>, std::allocator<char_type>>::npos;
+				return m_findTag.find( ch ) != buffer_type::npos;
 			}
 		};
 
@@ -52,61 +51,61 @@ namespace useless
 			return buffer_type::npos;
 		}
 
-		static basic_string<char_type> trim( const basic_string<char_type>& other )
+		static basic_string<char_type, Allocator> trim( const basic_string<char_type, Allocator>& other )
 		{
-			basic_string<char_type> result( other );
+			basic_string<char_type, Allocator> result( other );
 			result.trim();
 			return result;
 		}
 
-		static basic_string<char_type> trim( const basic_string<char_type>&& other )
+		static basic_string<char_type, Allocator> trim( const basic_string<char_type, Allocator>&& other )
 		{
-			basic_string<char_type> result( other );
+			basic_string<char_type, Allocator> result( other );
 			result.trim();
 			return result;
 		}
 
-		static basic_string<char_type> make_upper( const basic_string<char_type>& other )
+		static basic_string<char_type, Allocator> make_upper( const basic_string<char_type, Allocator>& other )
 		{
 			return other.make_upper();
 		}
 
-		static basic_string<char_type> make_lower( const basic_string<char_type>& other )
+		static basic_string<char_type, Allocator> make_lower( const basic_string<char_type, Allocator>& other )
 		{
 			return other.make_lower();
 		}
 
-		static int parse_int( const basic_string<char_type>& str )
+		static int parse_int( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_int();
 		}
 
-		static unsigned int parse_uint( const basic_string<char_type>& str )
+		static unsigned int parse_uint( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_uint();
 		}
 
-		static __int64 parse_int64( const basic_string<char_type>& str )
+		static __int64 parse_int64( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_int64();
 		}
 
-		static __int64 parse_uint64( const basic_string<char_type>& str )
+		static __int64 parse_uint64( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_uint64();
 		}
 
-		static float parse_float( const basic_string<char_type>& str )
+		static float parse_float( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_float();
 		}
 
-		static double parse_double( const basic_string<char_type>& str )
+		static double parse_double( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_double();
 		}
 
-		static basic_string<char_type> make_format( const char_type* fmt, ... )
+		static basic_string<char_type, Allocator> make_format( const char_type* fmt, ... )
 		{
 			__declspec( thread ) static va_list marker;
 			va_start( marker, fmt );
@@ -115,7 +114,7 @@ namespace useless
 			string_helper<char_type>::format_helper( fmt, marker, buffer );
 
 			va_end( marker );
-			return basic_string<char_type>( buffer );
+			return basic_string<char_type, Allocator>( buffer );
 		}
 
 	public:
@@ -125,13 +124,13 @@ namespace useless
 
 		}
 
-		basic_string( const basic_string<char_type>& value )
+		basic_string( const basic_string<char_type, Allocator>& value )
 			: m_buffer( value.m_buffer )
 		{
 
 		}
 
-		basic_string( basic_string<char_type>&& value )
+		basic_string( basic_string<char_type, Allocator>&& value )
 			: m_buffer( std::move( value.m_buffer ) )
 		{
 
@@ -165,58 +164,58 @@ namespace useless
 		{
 		}
 
-		basic_string<char_type>& operator = ( const basic_string<char_type>& other )
+		basic_string<char_type, Allocator>& operator = ( const basic_string<char_type, Allocator>& other )
 		{
 			m_buffer = other.m_buffer;
 
 			return *this;
 		}
 
-		basic_string<char_type>& operator = ( basic_string<char_type>&& other )
+		basic_string<char_type, Allocator>& operator = ( basic_string<char_type, Allocator>&& other )
 		{
 			m_buffer = std::move( other.m_buffer );
 
 			return *this;
 		}
 
-		basic_string<char_type>& operator += ( const basic_string<char_type>& other )
+		basic_string<char_type, Allocator>& operator += ( const basic_string<char_type, Allocator>& other )
 		{
 			m_buffer += other.m_buffer;
 
 			return *this;
 		}
 
-		bool operator == ( const basic_string<char_type>& other ) const
+		bool operator == ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer == other.m_buffer;
 		}
 
-		bool operator != ( const basic_string<char_type>& other ) const
+		bool operator != ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer != other.m_buffer;
 		}
 
-		bool operator < ( const basic_string<char_type>& other ) const
+		bool operator < ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer < other.m_buffer;
 		}
 
-		bool operator > ( const basic_string<char_type>& other ) const
+		bool operator > ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer > other.m_buffer;
 		}
 
-		bool operator <= ( const basic_string<char_type>& other ) const
+		bool operator <= ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer <= other.m_buffer;
 		}
 
-		bool operator >= ( const basic_string<char_type>& other ) const
+		bool operator >= ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer >= other.m_buffer;
 		}
 
-		basic_string<char_type> operator + ( const basic_string<char_type>& other ) const
+		basic_string<char_type, Allocator> operator + ( const basic_string<char_type, Allocator>& other ) const
 		{
 			return basic_string( m_buffer + other.m_buffer );
 		}
@@ -271,7 +270,7 @@ namespace useless
 			return m_buffer.c_str();
 		}
 
-		basic_string<char_type>& format( const char_type* fmt, ... )
+		basic_string<char_type, Allocator>& format( const char_type* fmt, ... )
 		{
 			va_list marker;
 			va_start( marker, fmt );
@@ -285,12 +284,12 @@ namespace useless
 			return *this;
 		}
 
-		basic_string<char_type> sub_string( size_t index, size_t count ) const
+		basic_string<char_type, Allocator> sub_string( size_t index, size_t count ) const
 		{
 			return basic_string( m_buffer.substr( index, count ) );
 		}
 
-		basic_string<char_type> sub_string( size_t index ) const
+		basic_string<char_type, Allocator> sub_string( size_t index ) const
 		{
 			return basic_string( m_buffer.substr( index ) );
 		}
@@ -300,9 +299,9 @@ namespace useless
 			m_buffer.erase( index, count );
 		}
 
-		void remove( const basic_string<char_type>& term )
+		void remove( const basic_string<char_type, Allocator>& term )
 		{
-			buffer_type::iterator it = std::remove_if<buffer_type::iterator, tag_compare<char_type>>( m_buffer.begin(), m_buffer.end(), tag_compare<char_type>( term.m_buffer ) );
+			buffer_type::iterator it = std::remove_if<buffer_type::iterator, tag_compare>( m_buffer.begin(), m_buffer.end(), tag_compare( term.m_buffer ) );
 			if( it != m_buffer.end() )
 			{
 				m_buffer.erase( it, m_buffer.end() );
@@ -314,22 +313,22 @@ namespace useless
 			m_buffer.insert( pos, count, ch );
 		}
 
-		void insert( size_t pos, const basic_string<char_type>& other )
+		void insert( size_t pos, const basic_string<char_type, Allocator>& other )
 		{
 			m_buffer.insert( pos, other.m_buffer );
 		}
 
-		void insert( size_t pos, const basic_string<char_type>& other, size_t count )
+		void insert( size_t pos, const basic_string<char_type, Allocator>& other, size_t count )
 		{
 			m_buffer.insert( pos, other.m_buffer, 0, count );
 		}
 
-		void insert( size_t pos, const basic_string<char_type>& other, size_t srcPos, size_t srcCount )
+		void insert( size_t pos, const basic_string<char_type, Allocator>& other, size_t srcPos, size_t srcCount )
 		{
 			m_buffer.insert( pos, other.m_buffer, srcPos, srcCount );
 		}
 
-		basic_string<char_type>& append( const char_type* pAppend, size_t count )
+		basic_string<char_type, Allocator>& append( const char_type* pAppend, size_t count )
 		{
 			m_buffer.append( pAppend, count );
 			return *this;
@@ -340,12 +339,12 @@ namespace useless
 			return m_buffer.find( value, offset );
 		}
 
-		size_t find( const basic_string<char_type>& other, size_t offset = 0 ) const
+		size_t find( const basic_string<char_type, Allocator>& other, size_t offset = 0 ) const
 		{
 			return m_buffer.find( other.m_buffer, offset );
 		}
 
-		size_t find( const basic_string<char_type>& other, size_t offset, size_t count ) const
+		size_t find( const basic_string<char_type, Allocator>& other, size_t offset, size_t count ) const
 		{
 			return m_buffer.find( other.m_buffer.c_str(), offset, count );
 		}
@@ -360,12 +359,12 @@ namespace useless
 			return m_buffer.rfind( value, offset );
 		}
 
-		size_t reverse_find( const basic_string<char_type>& other, size_t offset = -1 ) const
+		size_t reverse_find( const basic_string<char_type, Allocator>& other, size_t offset = -1 ) const
 		{
 			return m_buffer.rfind( other.m_buffer, offset );
 		}
 
-		size_t reverse_find( const basic_string<char_type>& other, size_t offset, size_t count ) const
+		size_t reverse_find( const basic_string<char_type, Allocator>& other, size_t offset, size_t count ) const
 		{
 			return m_buffer.rfind( other.m_buffer.c_str(), offset, count );
 		}
@@ -375,22 +374,22 @@ namespace useless
 			return m_buffer.rfind( char_type, offset );
 		}
 
-		int compare( const basic_string<char_type>& other ) const
+		int compare( const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer.compare( other.m_buffer );
 		}
 
-		int compare( size_t pos, size_t count, const basic_string<char_type>& other ) const
+		int compare( size_t pos, size_t count, const basic_string<char_type, Allocator>& other ) const
 		{
 			return m_buffer.compare( pos, count, other.m_buffer );
 		}
 
-		int compare( size_t pos, size_t count, const basic_string<char_type>& other, size_t srcCount ) const
+		int compare( size_t pos, size_t count, const basic_string<char_type, Allocator>& other, size_t srcCount ) const
 		{
 			return m_buffer.compare( pos, count, other.m_buffer, 0, srcCount );
 		}
 
-		int compare( size_t pos, size_t count, const basic_string<char_type>& other, size_t srcPos, size_t srcCount ) const
+		int compare( size_t pos, size_t count, const basic_string<char_type, Allocator>& other, size_t srcPos, size_t srcCount ) const
 		{
 			return m_buffer.compare( pos, count, other.m_buffer, srcPos, srcCount );
 		}
@@ -420,22 +419,22 @@ namespace useless
 			boost::to_lower( m_buffer );
 		}
 
-		basic_string<char_type> make_upper() const
+		basic_string<char_type, Allocator> make_upper() const
 		{
 			return boost::to_upper_copy( m_buffer );
 		}
 
-		basic_string<char_type> make_lower() const
+		basic_string<char_type, Allocator> make_lower() const
 		{
 			return boost::to_lower_copy( m_buffer );
 		}
 
-		int compare_no_case( const basic_string<char_type>& other ) const
+		int compare_no_case( const basic_string<char_type, Allocator>& other ) const
 		{
 			return string_helper<char_type>::compare_no_case( &m_buffer[ 0 ], &other[ 0 ] );
 		}
 
-		basic_string<char_type> left( size_t count ) const
+		basic_string<char_type, Allocator> left( size_t count ) const
 		{
 			if( count >= m_buffer.size() )
 			{
@@ -445,7 +444,7 @@ namespace useless
 			return sub_string( 0, count );
 		}
 
-		basic_string<char_type> right( size_t count ) const
+		basic_string<char_type, Allocator> right( size_t count ) const
 		{
 			if( count >= m_buffer.size() )
 			{
@@ -455,7 +454,7 @@ namespace useless
 			return sub_string( m_buffer.size() - count, count );
 		}
 
-		basic_string<char_type> mid( size_t start, size_t count ) const
+		basic_string<char_type, Allocator> mid( size_t start, size_t count ) const
 		{
 			if( start >= m_buffer.size() || count >= m_buffer.size() )
 			{
@@ -465,17 +464,17 @@ namespace useless
 			return sub_string( start, count );
 		}
 
-		void replace_first( const basic_string<char_type>& findString, const basic_string<char_type>& replaceString )
+		void replace_first( const basic_string<char_type, Allocator>& findString, const basic_string<char_type, Allocator>& replaceString )
 		{
 			boost::algorithm::replace_first( m_buffer, findString.m_buffer, replaceString.m_buffer );
 		}
 
-		void replace_last( const basic_string<char_type>& findString, const basic_string<char_type>& replaceString )
+		void replace_last( const basic_string<char_type, Allocator>& findString, const basic_string<char_type, Allocator>& replaceString )
 		{
 			boost::algorithm::replace_last( m_buffer, findString.m_buffer, replaceString.m_buffer );
 		}
 
-		void replace_all( const basic_string<char_type>& findString, const basic_string<char_type>& replaceString )
+		void replace_all( const basic_string<char_type, Allocator>& findString, const basic_string<char_type, Allocator>& replaceString )
 		{
 			boost::algorithm::replace_all( m_buffer, findString.m_buffer, replaceString.m_buffer );
 		}
@@ -515,13 +514,13 @@ namespace useless
 			return string_helper<char_type>::parse_bool( m_buffer.c_str() );
 		}
 
-		bool start_with( const basic_string<char_type>& findstr ) const
+		bool start_with( const basic_string<char_type, Allocator>& findstr ) const
 		{
 			const size_t index = findstr.length();
 			return ( length() >= index && left( index ) == findstr );
 		}
 
-		bool end_with( const basic_string<char_type>& findstr ) const
+		bool end_with( const basic_string<char_type, Allocator>& findstr ) const
 		{
 			const size_t index = findstr.length();
 			return ( index >= 0 && length() >= index && right( index ) == findstr );
@@ -537,7 +536,7 @@ namespace useless
 			return m_buffer.end();
 		}
 
-		// boost serialize
+		// serialize
 		template<typename Archive>
 		void serialize( Archive& ar, const unsigned int )
 		{

@@ -204,6 +204,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>
@@ -220,6 +221,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>
@@ -250,6 +252,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>
@@ -260,6 +263,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>
@@ -290,6 +294,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>
@@ -300,6 +305,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>CORE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link />
   </ItemDefinitionGroup>

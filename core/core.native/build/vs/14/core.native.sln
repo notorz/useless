@@ -12,6 +12,14 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stream", "stream\stream.vcxproj", "{59AB2826-65B7-481C-BDD9-53D79F1D099C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_stream", "sample\sample_stream\sample_stream.vcxproj", "{6DC14AE1-5CD4-4091-ADEC-59E1BB8BF7E2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{59AB2826-65B7-481C-BDD9-53D79F1D099C} = {59AB2826-65B7-481C-BDD9-53D79F1D099C}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{18EDAB1C-BAC2-4307-9E83-DBB6F97216D1}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\source\useless_api.h = ..\..\..\source\useless_api.h
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

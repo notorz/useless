@@ -18,8 +18,8 @@ namespace useless
 		virtual bool can_be_read() const = 0;
 		virtual bool can_be_write() const = 0;
 		virtual const void* raw_data() const = 0;
-		virtual int read( void* buffer, int size ) = 0;
-		virtual int write( const void* buffer, int size ) = 0;
+		virtual int read( void* buffer, int count ) = 0;
+		virtual int write( const void* buffer, int count ) = 0;
 	};
 }
 

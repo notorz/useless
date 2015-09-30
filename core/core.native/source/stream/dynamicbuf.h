@@ -45,14 +45,14 @@ namespace useless
 			return &m_buffer[ 0 ];
 		}
 
-		virtual int read( void* buffer, int size )
+		virtual int read( void* buffer, int count )
 		{
 			if( !can_be_read() )
 			{
 				return 0;
 			}
 
-			if( egptr() - gptr() < size )
+			if( egptr() - gptr() < count )
 			{
 				if( m_seekhigh < pptr() )
 				{
@@ -65,7 +65,7 @@ namespace useless
 				}
 			}
 
-			int read = ( ( gptr() + size ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : size;
+			int read = ( ( gptr() + count ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : count;
 
 			::memcpy_s( buffer, read, gptr(), read );
 			gbump( read );
@@ -73,20 +73,20 @@ namespace useless
 			return read;
 		}
 
-		virtual int write( const void* buffer, int size )
+		virtual int write( const void* buffer, int count )
 		{
 			if( !can_be_write() )
 			{
 				return 0;
 			}
 
-			if( ( pptr() + size ) > epptr() )
+			if( ( pptr() + count ) > epptr() )
 			{
 				size_t gnextpos = gptr() - eback();
 				size_t pnextpos = pptr() - pbase();
 				size_t seekhighoff = m_seekhigh - eback();
 
-				m_buffer.resize( ( pptr() + size ) - epptr() + m_buffer.size() );
+				m_buffer.resize( ( pptr() + count ) - epptr() + m_buffer.size() );
 				m_buffer.resize( m_buffer.capacity() );
 
 				char* newbase = &m_buffer[ 0 ];
@@ -96,10 +96,10 @@ namespace useless
 				m_seekhigh = newbase + seekhighoff;
 			}
 			
-			::memcpy_s( pptr(), size, buffer, size );
-			pbump( size );
+			::memcpy_s( pptr(), count, buffer, count );
+			pbump( count );
 
-			return size;
+			return count;
 		}
 
 		void reserve( size_t count )
@@ -110,15 +110,9 @@ namespace useless
 	protected:
 		virtual int_type overflow( int_type meta = traits_type::eof() )
 		{
-			if( traits_type::eq_int_type( traits_type::eof(), meta ) )
-			{
-				return traits_type::not_eof( meta );
-			}
-
 			if( pptr() != epptr() )
 			{
-				*pptr() = traits_type::to_char_type( meta );
-				pbump( 1 );
+				*_Pninc() = traits_type::to_char_type( meta );
 			}
 			else
 			{

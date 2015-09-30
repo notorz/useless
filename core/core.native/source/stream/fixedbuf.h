@@ -45,14 +45,14 @@ namespace useless
 			return &m_buffer[ 0 ];
 		}
 
-		virtual int read( void* buffer, int size )
+		virtual int read( void* buffer, int count )
 		{
 			if( !can_be_read() )
 			{
 				return 0;
 			}
 
-			if( egptr() - gptr() < size )
+			if( egptr() - gptr() < count )
 			{
 				if( m_seekhigh < pptr() )
 				{
@@ -65,7 +65,7 @@ namespace useless
 				}
 			}
 
-			int read = ( ( gptr() + size ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : size;
+			int read = ( ( gptr() + count ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : count;
 
 			::memcpy_s( buffer, read, gptr(), read );
 			gbump( read );
@@ -73,14 +73,14 @@ namespace useless
 			return read;
 		}
 
-		virtual int write( const void* buffer, int size )
+		virtual int write( const void* buffer, int count )
 		{
 			if( !can_be_write() )
 			{
 				return 0;
 			}
 
-			int write = ( ( pptr() + size ) > epptr() ) ? static_cast< int >( epptr() - pptr() ) : size;
+			int write = ( ( pptr() + count ) > epptr() ) ? static_cast< int >( epptr() - pptr() ) : count;
 
 			::memcpy_s( pptr(), write, buffer, write );
 			pbump( write );

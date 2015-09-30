@@ -15,13 +15,7 @@
 
 using namespace useless;
 
-void testfunc( const void* )
-{
-
-}
-
 int _tmain( int /*argc*/, _TCHAR* /*argv[]*/ )
 {
-
 	return 0;
 }

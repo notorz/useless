@@ -318,6 +318,10 @@
     <ClInclude Include="..\..\..\..\source\stream\memorystream.h" />
     <ClInclude Include="..\..\..\..\source\stream\streambuf.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\stream\filebuf.cpp" />
+    <ClCompile Include="..\..\..\..\source\stream\memorybuf.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

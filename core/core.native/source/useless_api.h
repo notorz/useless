@@ -8,13 +8,13 @@
 #define USELESS_CORE_NATIVE_USELESS_API_INCLUDED
 
 #ifdef USELESS_DLL
-#ifdef CORE_EXPORT
-#define Core_API __declspec(dllexport)
+#	ifdef CORE_EXPORT
+#		define Core_API __declspec(dllexport)
+#	else
+#		define Core_API __declspec(dllimport)
+#	endif
 #else
-#define Core_API __declspec(dllimport)
-#endif
-#else
-#define Core_API
+#	define Core_API
 #endif
 
 #endif USELESS_CORE_NATIVE_USELESS_API_INCLUDED

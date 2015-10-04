@@ -11,13 +11,11 @@
 #include "stream/fixedbuf.h"
 #include "stream/dynamicbuf.h"
 #include "stream/filebuf.h"
-#include "stream/memorystream.h"
 
 namespace useless
 {
 	typedef basic_fixedbuf<std::allocator<char>> fixedbuf;
 	typedef basic_dynamicbuf<std::allocator<char>> dynamicbuf;
-	typedef basic_memorystream<std::allocator<char>> memorystream;
 }
 
 #endif USELESS_CORE_NATIVE_STREAM_INCLUDED

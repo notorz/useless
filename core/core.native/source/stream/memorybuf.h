@@ -14,145 +14,21 @@ namespace useless
 	class memorybuf : public streambuf
 	{
 	public:
-		memorybuf( void* address, size_t size )
-			: m_buffer( static_cast<char*>( address ) )
-			, m_size( size )
-		{
-			setg( m_buffer, m_buffer, m_buffer + size );
-			setp( m_buffer, m_buffer + size );
-		}
+		memorybuf( void* address, size_t size );
 
-		virtual size_t size() const
-		{
-			return m_size;
-		}
-
-		virtual bool can_be_read() const
-		{
-			return ( egptr() > gptr() );
-		}
-
-		virtual bool can_be_write() const
-		{
-			return ( _Pnavail() > 0 );
-		}
-
-		virtual const void* raw_data() const
-		{
-			return m_buffer;
-		}
-
-		virtual int read( void* buffer, int count )
-		{
-			if( !can_be_read() )
-			{
-				return 0;
-			}
-
-			int read = ( ( gptr() + count ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : count;
-
-			::memcpy_s( buffer, read, gptr(), read );
-			gbump( read );
-
-			return read;
-		}
-
-		virtual int write( const void* buffer, int count )
-		{
-			if( !can_be_write() )
-			{
-				return 0;
-			}
-
-			int write = ( ( pptr() + count ) > epptr() ) ? static_cast< int >( epptr() - pptr() ) : count;
-
-			::memcpy_s( pptr(), write, buffer, write );
-			pbump( write );
-			
-			return write;
-		}
-
-	protected:
-		virtual pos_type seekoff( off_type off,
-			std::ios_base::seekdir way,
-			std::ios_base::openmode which =
-			( std::ios_base::openmode )( std::ios_base::in | std::ios_base::out ) )
-		{
-			if( which & std::ios_base::in )
-			{
-				if( way == std::ios_base::end )
-				{
-					off += static_cast< off_type >( egptr() - eback() );
-				}
-				else if( way == std::ios_base::cur && which & std::ios_base::out )
-				{
-					off += static_cast< off_type >( gptr() - eback() );
-				}
-				else if( way != std::ios_base::beg )
-				{
-					off = std::_BADOFF;
-				}
-
-				if( off >= 0 && egptr() - eback() >= off )
-				{
-					gbump( static_cast< int >( eback() - gptr() + off ) );
-					if( which & std::ios_base::out )
-					{
-						setp( pbase(), gptr(), epptr() );
-					}
-				}
-				else
-				{
-					off = std::_BADOFF;
-				}
-			}
-			else if( which & std::ios_base::out )
-			{
-				if( way == std::ios_base::end )
-				{
-					off += static_cast< off_type >( epptr() - pbase() );
-				}
-				else if( way == std::ios_base::cur )
-				{
-					off += static_cast< off_type >( pptr() - pbase() );
-				}
-				else if( way != std::ios_base::beg )
-				{
-					off = std::_BADOFF;
-				}
-
-				if( off >= 0 && epptr() - pbase() >= off )
-				{
-					pbump( static_cast< int >( pbase() - pptr() + off ) );
-				}
-				else
-				{
-					off = std::_BADOFF;
-				}
-			}
-			else if( off != 0 )
-			{
-				off = std::_BADOFF;
-			}
-
-			return pos_type( off );
-		}
-
-		virtual pos_type seekpos( pos_type pos,
-			std::ios_base::openmode mode =
-			( std::ios_base::openmode )( std::ios_base::in | std::ios_base::out ) )
-		{
-			off_type off = static_cast< off_type >( pos );
-			if( off != std::_BADOFF )
-			{
-				return seekoff( off, std::ios_base::beg, mode );
-			}
-
-			return pos_type( off );
-		}
+		virtual size_t size() const;
+		virtual bool can_be_read() const;
+		virtual bool can_be_write() const;
+		virtual const void* raw_data() const;
+		virtual size_t read( void* buffer, size_t count );
+		virtual size_t write( const void* buffer, size_t count );
+		virtual streamoff setpos( seekdir::type way, streamoff off );
+		virtual streamoff getpos() const;
 
 	private:
-		char* m_buffer;
+		char* m_base;
+		char* m_next;
+		char* m_end;
 		size_t m_size;
 	};
 }

@@ -19,9 +19,8 @@ namespace useless
 		basic_dynamicbuf( size_t size )
 			: m_buffer( size )
 		{
-			char* base = &m_buffer[ 0 ];
-			setg( base, base, base );
-			setp( base, base + size );
+			m_base = m_next = &m_buffer[ 0 ];
+			m_end = m_base + size;
 			m_seekhigh = base;
 		}
 
@@ -32,7 +31,7 @@ namespace useless
 
 		virtual bool can_be_read() const
 		{
-			return ( egptr() > gptr() ) || ( ( m_seekhigh < pptr() ? pptr() : m_seekhigh ) > gptr() );
+			return ( m_seekhigh > m_next );
 		}
 
 		virtual bool can_be_write() const
@@ -45,61 +44,80 @@ namespace useless
 			return &m_buffer[ 0 ];
 		}
 
-		virtual int read( void* buffer, int count )
+		virtual size_t read( void* buffer, size_t count )
 		{
 			if( !can_be_read() )
 			{
 				return 0;
 			}
 
-			if( egptr() - gptr() < count )
-			{
-				if( m_seekhigh < pptr() )
-				{
-					m_seekhigh = pptr();
-				}
+			size_t read = ( ( m_next + count ) > m_seekhigh ) ? ( m_seekhigh - m_next ) : count;
 
-				if( gptr() < m_seekhigh )
-				{
-					setg( &m_buffer[ 0 ], gptr(), m_seekhigh );
-				}
-			}
-
-			int read = ( ( gptr() + count ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : count;
-
-			::memcpy_s( buffer, read, gptr(), read );
-			gbump( read );
+			::memcpy_s( buffer, read, m_next, read );
+			m_next += read;
 
 			return read;
 		}
 
-		virtual int write( const void* buffer, int count )
+		virtual size_t write( const void* buffer, size_t count )
 		{
 			if( !can_be_write() )
 			{
 				return 0;
 			}
 
-			if( ( pptr() + count ) > epptr() )
+			if( ( m_next + count ) > m_end )
 			{
-				size_t gnextpos = gptr() - eback();
-				size_t pnextpos = pptr() - pbase();
-				size_t seekhighoff = m_seekhigh - eback();
-
-				m_buffer.resize( ( pptr() + count ) - epptr() + m_buffer.size() );
+				size_t nextpos = m_next - m_base;
+				size_t seekhighoff = m_seekhigh - m_base;
+				
+				m_buffer.resize( ( ( m_next + count ) - m_end ) + m_buffer.size() );
 				m_buffer.resize( m_buffer.capacity() );
 
 				char* newbase = &m_buffer[ 0 ];
-				setg( newbase, newbase + gnextpos, newbase + pnextpos );
-				setp( newbase, newbase + pnextpos, newbase + m_buffer.size() );
-
-				m_seekhigh = newbase + seekhighoff;
+				m_base = &m_buffer[ 0 ];
+				m_next = m_base + nextpos;
+				m_end = m_base + m_buffer.size();
+				m_seekhigh = m_base + seekhighoff;
 			}
 			
-			::memcpy_s( pptr(), count, buffer, count );
-			pbump( count );
+			::memcpy_s( m_next, count, buffer, count );
+			m_next += count;
+
+			if( m_next > m_seekhigh )
+			{
+				m_seekhigh = m_next;
+			}
 
 			return count;
+		}
+
+		virtual streamoff setpos( seekdir::type way, streamoff off )
+		{
+			if( way == seekdir::end )
+			{
+				off += static_cast< streamoff >( m_seekhigh - m_base );
+			}
+			else if( way == seekdir::cur )
+			{
+				off += static_cast< streamoff >( m_next - m_base );
+			}
+
+			if( off >= 0 && ( m_seekhigh - m_base ) >= off )
+			{
+				m_next = m_base + off;
+			}
+			else
+			{
+				off = -1;
+			}
+
+			return off;
+		}
+
+		virtual streamoff getpos() const
+		{
+			return static_cast< streamoff >( m_next - m_base );
 		}
 
 		void reserve( size_t count )
@@ -107,135 +125,11 @@ namespace useless
 			m_buffer.reserve( count );
 		}
 
-	protected:
-		virtual int_type overflow( int_type meta = traits_type::eof() )
-		{
-			if( pptr() != epptr() )
-			{
-				*_Pninc() = traits_type::to_char_type( meta );
-			}
-			else
-			{
-				size_t gnextpos = gptr() - eback();
-				size_t pnextpos = pptr() - pbase();
-				size_t seekhighoff = m_seekhigh - eback();
-
-				m_buffer.push_back( traits_type::to_char_type( meta ) );
-				++pnextpos;
-
-				m_buffer.resize( m_buffer.capacity() );
-
-				char* newbase = &m_buffer[ 0 ];
-				setg( newbase, newbase + gnextpos, newbase + pnextpos );
-				setp( newbase, newbase + pnextpos, newbase + m_buffer.size() );
-
-				m_seekhigh = newbase + seekhighoff;
-			}
-
-			return meta;
-		}
-
-		virtual int_type underflow()
-		{
-			if( m_seekhigh < pptr() )
-			{
-				m_seekhigh = pptr();
-			}
-
-			if( gptr() < m_seekhigh )
-			{
-				setg( &m_buffer[ 0 ], gptr(), m_seekhigh );
-				return traits_type::to_int_type( *gptr() );
-			}
-
-			return traits_type::eof();
-		}
-
-		virtual pos_type seekoff( off_type off,
-			std::ios_base::seekdir way,
-			std::ios_base::openmode which =
-			( std::ios_base::openmode )( std::ios_base::in | std::ios_base::out ) )
-		{
-			if( m_seekhigh < pptr() )
-			{
-				m_seekhigh = pptr();
-			}
-
-			if( which & std::ios_base::in )
-			{
-				if( way == std::ios_base::end )
-				{
-					off += static_cast< off_type >( m_seekhigh - eback() );
-				}
-				else if( way == std::ios_base::cur && which & std::ios_base::out )
-				{
-					off += static_cast< off_type >( gptr() - eback() );
-				}
-				else if( way != std::ios_base::beg )
-				{
-					off = std::_BADOFF;
-				}
-
-				if( off >= 0 && m_seekhigh - eback() >= off )
-				{
-					gbump( static_cast< int >( eback() - gptr() + off ) );
-					if( which & std::ios_base::out )
-					{
-						setp( pbase(), gptr(), epptr() );
-					}
-				}
-				else
-				{
-					off = std::_BADOFF;
-				}
-			}
-			else if( which & std::ios_base::out )
-			{
-				if( way == std::ios_base::end )
-				{
-					off += static_cast< off_type >( m_seekhigh - pbase() );
-				}
-				else if( way == std::ios_base::cur )
-				{
-					off += static_cast< off_type >( pptr() - pbase() );
-				}
-				else if( way != std::ios_base::beg )
-				{
-					off = std::_BADOFF;
-				}
-
-				if( off >= 0 && m_seekhigh - pbase() >= off )
-				{
-					pbump( static_cast< int >( pbase() - pptr() + off ) );
-				}
-				else
-				{
-					off = std::_BADOFF;
-				}
-			}
-			else if( off != 0 )
-			{
-				off = std::_BADOFF;
-			}
-
-			return pos_type( off );
-		}
-
-		virtual pos_type seekpos( pos_type pos,
-			std::ios_base::openmode mode =
-			( std::ios_base::openmode )( std::ios_base::in | std::ios_base::out ) )
-		{
-			off_type off = static_cast< off_type >( pos );
-			if( off != std::_BADOFF )
-			{
-				return seekoff( off, std::ios_base::beg, mode );
-			}
-
-			return pos_type( off );
-		}
-
 	private:
 		std::vector<char, Allocator> m_buffer;
+		char* m_base;
+		char* m_next;
+		char* m_end;
 		char* m_seekhigh;
 	};
 }

@@ -17,5 +17,10 @@ using namespace useless;
 
 int _tmain( int /*argc*/, _TCHAR* /*argv[]*/ )
 {
+	filebuf fb( "test.txt", std::ios_base::out );
+	
+	char* value = "qqqqqaaaaazzzzz";
+	fb.write( value, 15 );
+
 	return 0;
 }

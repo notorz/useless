@@ -19,9 +19,8 @@ namespace useless
 		basic_fixedbuf( size_t size )
 			: m_buffer( size )
 		{
-			char* base = &m_buffer[ 0 ];
-			setg( base, base, base );
-			setp( base, base + size );
+			m_base = m_next = &m_buffer[ 0 ];
+			m_end = m_base + size;
 			m_seekhigh = base;
 		}
 
@@ -32,12 +31,12 @@ namespace useless
 
 		virtual bool can_be_read() const
 		{
-			return ( egptr() > gptr() ) || ( ( m_seekhigh < pptr() ? pptr() : m_seekhigh ) > gptr() );
+			return ( m_seekhigh > m_next );
 		}
 
 		virtual bool can_be_write() const
 		{
-			return ( _Pnavail() > 0 );
+			return ( m_end > m_next );
 		}
 
 		virtual const void* raw_data() const
@@ -45,151 +44,74 @@ namespace useless
 			return &m_buffer[ 0 ];
 		}
 
-		virtual int read( void* buffer, int count )
+		virtual size_t read( void* buffer, size_t count )
 		{
 			if( !can_be_read() )
 			{
 				return 0;
 			}
 
-			if( egptr() - gptr() < count )
-			{
-				if( m_seekhigh < pptr() )
-				{
-					m_seekhigh = pptr();
-				}
+			size_t read = ( ( m_next + count ) > m_seekhigh ) ? ( m_seekhigh - m_next ) : count;
 
-				if( gptr() < m_seekhigh )
-				{
-					setg( &m_buffer[ 0 ], gptr(), m_seekhigh );
-				}
-			}
-
-			int read = ( ( gptr() + count ) > egptr() ) ? static_cast<int>( egptr() - gptr() ) : count;
-
-			::memcpy_s( buffer, read, gptr(), read );
-			gbump( read );
+			::memcpy_s( buffer, read, m_next, read );
+			m_next += read;
 
 			return read;
 		}
 
-		virtual int write( const void* buffer, int count )
+		virtual size_t write( const void* buffer, size_t count )
 		{
 			if( !can_be_write() )
 			{
 				return 0;
 			}
 
-			int write = ( ( pptr() + count ) > epptr() ) ? static_cast< int >( epptr() - pptr() ) : count;
+			size_t write = ( ( m_next + count ) > m_end ) ? ( m_end - m_next ) : count;
 
-			::memcpy_s( pptr(), write, buffer, write );
-			pbump( write );
+			::memcpy_s( m_next, write, buffer, write );
+			m_next += write;
+
+			if( m_next > m_seekhigh )
+			{
+				m_seekhigh = m_next;
+			}
 
 			return write;
 		}
 
-	protected:
-		virtual int_type underflow()
+		virtual streamoff setpos( seekdir::type way, streamoff off )
 		{
-			if( m_seekhigh < pptr() )
+			if( way == seekdir::end )
 			{
-				m_seekhigh = pptr();
+				off += static_cast< streamoff >( m_seekhigh - m_base );
+			}
+			else if( way == seekdir::cur )
+			{
+				off += static_cast< streamoff >( m_next - m_base );
 			}
 
-			if( gptr() < m_seekhigh )
+			if( off >= 0 && ( m_seekhigh - m_base ) >= off )
 			{
-				setg( &m_buffer[ 0 ], gptr(), m_seekhigh );
-				return traits_type::to_int_type( *gptr() );
+				m_next = m_base + off;
+			}
+			else
+			{
+				off = -1;
 			}
 
-			return traits_type::eof();
+			return off;
 		}
 
-		virtual pos_type seekoff( off_type off,
-			std::ios_base::seekdir way,
-			std::ios_base::openmode which =
-			( std::ios_base::openmode )( std::ios_base::in | std::ios_base::out ) )
+		virtual streamoff getpos() const
 		{
-			if( m_seekhigh < pptr() )
-			{
-				m_seekhigh = pptr();
-			}
-
-			if( which & std::ios_base::in )
-			{
-				if( way == std::ios_base::end )
-				{
-					off += static_cast< off_type >( m_seekhigh - eback() );
-				}
-				else if( way == std::ios_base::cur && which & std::ios_base::out )
-				{
-					off += static_cast< off_type >( gptr() - eback() );
-				}
-				else if( way != std::ios_base::beg )
-				{
-					off = std::_BADOFF;
-				}
-
-				if( off >= 0 && m_seekhigh - eback() >= off )
-				{
-					gbump( static_cast< int >( eback() - gptr() + off ) );
-					if( which & std::ios_base::out )
-					{
-						setp( pbase(), gptr(), epptr() );
-					}
-				}
-				else
-				{
-					off = std::_BADOFF;
-				}
-			}
-			else if( which & std::ios_base::out )
-			{
-				if( way == std::ios_base::end )
-				{
-					off += static_cast< off_type >( m_seekhigh - pbase() );
-				}
-				else if( way == std::ios_base::cur )
-				{
-					off += static_cast< off_type >( pptr() - pbase() );
-				}
-				else if( way != std::ios_base::beg )
-				{
-					off = std::_BADOFF;
-				}
-
-				if( off >= 0 && m_seekhigh - pbase() >= off )
-				{
-					pbump( static_cast< int >( pbase() - pptr() + off ) );
-				}
-				else
-				{
-					off = std::_BADOFF;
-				}
-			}
-			else if( off != 0 )
-			{
-				off = std::_BADOFF;
-			}
-
-			return pos_type( off );
-		}
-
-		virtual pos_type seekpos( pos_type pos,
-			std::ios_base::openmode mode =
-			( std::ios_base::openmode )( std::ios_base::in | std::ios_base::out ) )
-		{
-			off_type off = static_cast< off_type >( pos );
-			if( off != std::_BADOFF )
-			{
-				return seekoff( off, std::ios_base::beg, mode );
-			}
-
-			return pos_type( off );
+			return static_cast< streamoff >( m_next - m_base );
 		}
 
 	private:
 		std::vector<char, Allocator> m_buffer;
+		char* m_base;
+		char* m_next;
+		char* m_end;
 		char* m_seekhigh;
 	};
 }

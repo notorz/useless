@@ -52,7 +52,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{1DDDF9DB-EBCF-4F49-8FEA-E945424361AA}</ProjectGuid>
-    <RootNamespace>string</RootNamespace>
+    <RootNamespace>sample_string</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
     <ProjectName>sample_string</ProjectName>
   </PropertyGroup>

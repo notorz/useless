@@ -7,9 +7,9 @@
 #ifndef USELESS_CORE_NATIVE_STREAM_FILEBUF_INCLUDED
 #define USELESS_CORE_NATIVE_STREAM_FILEBUF_INCLUDED
 
-#include "core.native/useless_api.h"
 #include "core.native/string.h"
 #include "streambuf.h"
+#include "../useless_api.h"
 
 namespace useless
 {

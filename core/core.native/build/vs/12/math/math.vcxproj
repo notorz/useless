@@ -26,22 +26,9 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\core.native\stream.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\dynamicbuf.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\fixedbuf.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\streambuf.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\stream\useless_api.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.cpp" />
-    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{F846AE75-B454-4798-ABE9-65B20F221544}</ProjectGuid>
-    <RootNamespace>stream</RootNamespace>
+    <ProjectGuid>{A3CD3EDB-39C5-44B5-8823-1ABAC9F24C67}</ProjectGuid>
+    <RootNamespace>math</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -118,10 +105,9 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">
-    <ClCompile />
     <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_MATH_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,10 +115,9 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|Win32'">
-    <ClCompile />
     <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_MATH_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
@@ -140,10 +125,9 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ProfileDll|Win32'">
-    <ClCompile />
     <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_MATH_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

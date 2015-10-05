@@ -25,6 +25,9 @@
       <Filter>stream\streambuf</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\stream.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\useless_api.h">
+      <Filter>stream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.cpp">

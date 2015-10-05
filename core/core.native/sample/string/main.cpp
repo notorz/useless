@@ -9,7 +9,7 @@
 #include <memory.h>
 #include <map>
 
-#include "../../source/string.h"
+#include "core.native/string.h"
 
 using namespace useless;
 

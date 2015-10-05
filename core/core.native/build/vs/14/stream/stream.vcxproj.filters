@@ -4,34 +4,34 @@
     <Filter Include="stream">
       <UniqueIdentifier>{3302b128-b476-49dd-80d0-427d2b856364}</UniqueIdentifier>
     </Filter>
+    <Filter Include="stream\streambuf">
+      <UniqueIdentifier>{ab380bbc-602d-427c-a0cb-a74e02f4e9ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\stream\memorybuf.h">
-      <Filter>stream</Filter>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\dynamicbuf.h">
+      <Filter>stream\streambuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\stream\fixedbuf.h">
-      <Filter>stream</Filter>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.h">
+      <Filter>stream\streambuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\stream\dynamicbuf.h">
-      <Filter>stream</Filter>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\fixedbuf.h">
+      <Filter>stream\streambuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\stream.h" />
-    <ClInclude Include="..\..\..\..\source\stream\memorystream.h">
-      <Filter>stream</Filter>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.h">
+      <Filter>stream\streambuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\stream\streambuf.h">
-      <Filter>stream</Filter>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\streambuf.h">
+      <Filter>stream\streambuf</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\stream\filebuf.h">
-      <Filter>stream</Filter>
-    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\stream.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\source\stream\filebuf.cpp">
-      <Filter>stream</Filter>
+    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.cpp">
+      <Filter>stream\streambuf</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\source\stream\memorybuf.cpp">
-      <Filter>stream</Filter>
+    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.cpp">
+      <Filter>stream\streambuf</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

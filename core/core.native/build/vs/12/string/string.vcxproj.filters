@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\string.h" />
-    <ClInclude Include="..\..\..\..\source\string\string.h">
-      <Filter>string</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\string\string_helper.h">
-      <Filter>string</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="string">
       <UniqueIdentifier>{ebd969d1-3f69-4f52-93ac-a494506c3d93}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\core.native\string\string.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\string\string_helper.h">
+      <Filter>string</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\string.h" />
   </ItemGroup>
 </Project>

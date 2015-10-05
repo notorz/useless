@@ -7,11 +7,12 @@
 #ifndef USELESS_CORE_NATIVE_STREAM_MEMORYBUF_INCLUDED
 #define USELESS_CORE_NATIVE_STREAM_MEMORYBUF_INCLUDED
 
+#include "core.native/useless_api.h"
 #include "streambuf.h"
 
 namespace useless
 {
-	class memorybuf : public streambuf
+	class Core_API memorybuf : public streambuf
 	{
 	public:
 		memorybuf( void* address, size_t size );

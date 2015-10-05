@@ -7,10 +7,10 @@
 #ifndef USELESS_CORE_NATIVE_STREAM_INCLUDED
 #define USELESS_CORE_NATIVE_STREAM_INCLUDED
 
-#include "stream/memorybuf.h"
-#include "stream/fixedbuf.h"
-#include "stream/dynamicbuf.h"
-#include "stream/filebuf.h"
+#include "stream/streambuf/memorybuf.h"
+#include "stream/streambuf/fixedbuf.h"
+#include "stream/streambuf/dynamicbuf.h"
+#include "stream/streambuf/filebuf.h"
 
 namespace useless
 {

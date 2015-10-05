@@ -11,7 +11,7 @@
 #include <iostream>
 #include <vector>
 
-#include "../../source/stream.h"
+#include "core.native/stream.h"
 
 using namespace useless;
 

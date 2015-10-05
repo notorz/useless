@@ -6,11 +6,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\string\string.h">
+    <ClInclude Include="..\..\..\..\source\core.native\string.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\string\string.h">
       <Filter>string</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\string.h" />
-    <ClInclude Include="..\..\..\..\source\string\string_helper.h">
+    <ClInclude Include="..\..\..\..\source\core.native\string\string_helper.h">
       <Filter>string</Filter>
     </ClInclude>
   </ItemGroup>

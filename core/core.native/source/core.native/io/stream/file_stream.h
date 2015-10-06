@@ -4,12 +4,12 @@
 // Distributed under the MIT License.
 //
 
-#ifndef USELESS_CORE_NATIVE_STREAM_FILEBUF_INCLUDED
-#define USELESS_CORE_NATIVE_STREAM_FILEBUF_INCLUDED
+#ifndef USELESS_CORE_NATIVE_IO_FILE_STREAM_INCLUDED
+#define USELESS_CORE_NATIVE_IO_FILE_STREAM_INCLUDED
 
 #include "core.native/string.h"
-#include "streambuf.h"
-#include "../useless_api.h"
+#include "core.native/io/useless_api.h"
+#include "streambase.h"
 
 namespace useless
 {
@@ -28,19 +28,27 @@ namespace useless
 		};
 	}
 
-	class Core_API filebuf : public streambuf
+	namespace prot
+	{
+		enum type
+		{
+			
+		};
+	}
+
+	class Core_API file_stream : public streambase
 	{
 	public:
-		filebuf( const char* filename, int openmode, int prot = _SH_DENYNO );
-		filebuf( const string_ansi& filename, int openmode, int prot = _SH_DENYNO );
-		filebuf( const wchar_t* filename, int openmode, int prot = _SH_DENYNO );
-		filebuf( const string_wide& filename, int openmode, int prot = _SH_DENYNO );
-		virtual ~filebuf();
+		file_stream( const char* filename, int openmode );
+		file_stream( const string_ansi& filename, int openmode );
+		file_stream( const wchar_t* filename, int openmode );
+		file_stream( const string_wide& filename, int openmode );
+		virtual ~file_stream();
 
-		bool open( const char* filename, int openmode, int prot = _SH_DENYNO );
-		bool open( const string_ansi& filename, int openmode, int prot = _SH_DENYNO );
-		bool open( const wchar_t* filename, int openmode, int prot = _SH_DENYNO );
-		bool open( const string_wide& filename, int openmode, int prot = _SH_DENYNO );
+		bool open( const char* filename, int openmode );
+		bool open( const string_ansi& filename, int openmode );
+		bool open( const wchar_t* filename, int openmode );
+		bool open( const string_wide& filename, int openmode );
 		void close();
 
 		bool is_open() const;
@@ -59,11 +67,11 @@ namespace useless
 	protected:
 		void init( FILE*file, bool open );
 
-		FILE* xfsopen( const char* filename, int mode, int prot );
-		FILE* xfsopen( const wchar_t* filename, int mode, int prot );
+		bool xfsopen( FILE*& file, const char* filename, int mode );
+		bool xfsopen( FILE*& file, const wchar_t* filename, int mode );
 
 		template<typename CharT>
-		bool open( const CharT* filename, int openmode, int prot = _SH_DENYNO )
+		bool open( const CharT* filename, int openmode )
 		{
 			static const int valid[] =
 			{
@@ -84,7 +92,7 @@ namespace useless
 				0
 			};
 
-			if( m_file != NULL )
+			if( m_file != nullptr )
 			{
 				return false;
 			}
@@ -115,20 +123,21 @@ namespace useless
 				return false;
 			}
 
-			FILE* file = NULL;
-			if( norepflag && ( openmode & ( openmode::out | openmode::app ) ) &&
-				( file = xfsopen( filename, 0, prot ) ) != NULL )
+			FILE* file = nullptr;
+			if( norepflag && 
+				( openmode & ( openmode::out | openmode::app ) ) && 
+				xfsopen( file, filename, 0 ) )
 			{
 				::fclose( file );
 				return false;
 			}
 
-			if( file != NULL && ::fclose( file ) != 0 )
+			if( file != nullptr && ::fclose( file ) != 0 )
 			{
 				return false;
 			}
 
-			if( ( file = xfsopen( filename, n, prot ) ) == NULL )
+			if( !xfsopen( file, filename, n ) )
 			{
 				return false;
 			}
@@ -165,4 +174,4 @@ namespace useless
 	};
 }
 
-#endif USELESS_CORE_NATIVE_STREAM_FILEBUF_INCLUDED
+#endif USELESS_CORE_NATIVE_IO_FILE_STREAM_INCLUDED

@@ -17,6 +17,7 @@ using namespace useless;
 
 int _tmain( int /*argc*/, _TCHAR* /*argv[]*/ )
 {
+	std::ofstream
 	filebuf fb( "test.txt", std::ios_base::out );
 	
 	char* value = "qqqqqaaaaazzzzz";

@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="io">
+      <UniqueIdentifier>{33513055-414d-41a1-b9cf-b6cb5f71ed43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io\stream">
+      <UniqueIdentifier>{3f7167a4-bb96-4e70-ac5d-32805c893a4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io\binary_writer">
+      <UniqueIdentifier>{1bf94531-e8eb-41c1-a5f7-1e15c4857b8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io\binary_writer\STL">
+      <UniqueIdentifier>{247c0dd7-c780-49b7-93e0-a72809a6db02}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\core.native\io.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\useless_api.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\binary_writer.h">
+      <Filter>io\binary_writer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\stream\dynamic_stream.h">
+      <Filter>io\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\stream\file_stream.h">
+      <Filter>io\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\stream\fixed_stream.h">
+      <Filter>io\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\stream\memory_stream.h">
+      <Filter>io\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\stream\streambase.h">
+      <Filter>io\stream</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\string.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\vector.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\deque.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\list.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\map.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\set.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\pair.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\array.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\core.native\io\stream\file_stream.cpp">
+      <Filter>io\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core.native\io\stream\memory_stream.cpp">
+      <Filter>io\stream</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

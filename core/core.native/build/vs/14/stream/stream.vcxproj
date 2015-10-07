@@ -50,31 +50,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\..\..\source\core.native\io.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\binary_writer.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\array.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\deque.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\list.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\map.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\pair.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\set.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\string.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\vector.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\stream\dynamic_stream.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\stream\file_stream.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\stream\fixed_stream.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\stream\memory_stream.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\stream\streambase.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\useless_api.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\source\core.native\io\stream\file_stream.cpp" />
-    <ClCompile Include="..\..\..\..\source\core.native\io\stream\memory_stream.cpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{5EA6CBAD-4AD3-44BD-B61A-440779F74E4C}</ProjectGuid>
-    <RootNamespace>io</RootNamespace>
+    <ProjectGuid>{59AB2826-65B7-481C-BDD9-53D79F1D099C}</ProjectGuid>
+    <RootNamespace>stream</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -218,22 +196,20 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDll|Win32'">
-    <ClCompile />
-    <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_IO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile />
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugDll|x64'">
-    <ClCompile />
-    <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_IO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile />
@@ -244,18 +220,16 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ProfileDll|Win32'">
-    <ClCompile />
-    <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_IO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|Win32'">
-    <ClCompile />
-    <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_IO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile />
@@ -266,19 +240,30 @@
     <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ProfileDll|x64'">
-    <ClCompile />
-    <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_IO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseDll|x64'">
-    <ClCompile />
-    <Link />
     <ClCompile>
-      <PreprocessorDefinitions>CORE_IO_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>CORE_STREAM_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link />
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\core.native\stream.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\dynamicbuf.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\fixedbuf.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\streambuf.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\useless_api.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.cpp" />
+    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

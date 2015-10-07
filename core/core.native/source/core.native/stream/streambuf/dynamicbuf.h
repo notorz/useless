@@ -4,19 +4,19 @@
 // Distributed under the MIT License.
 //
 
-#ifndef USELESS_CORE_NATIVE_IO_DYNAMIC_STREAM_INCLUDED
-#define USELESS_CORE_NATIVE_IO_DYNAMIC_STREAM_INCLUDED
+#ifndef USELESS_CORE_NATIVE_STREAM_DYNAMICBUF_INCLUDED
+#define USELESS_CORE_NATIVE_STREAM_DYNAMICBUF_INCLUDED
 
 #include <vector>
-#include "streambase.h"
+#include "streambuf.h"
 
 namespace useless
 {
 	template<typename Allocator>
-	class basic_dynamic_stream : public streambase
+	class basic_dynamicbuf : public streambuf
 	{
 	public:
-		basic_dynamic_stream( size_t size )
+		basic_dynamicbuf( size_t size )
 			: m_buffer( size )
 		{
 			m_base = m_next = &m_buffer[ 0 ];
@@ -134,4 +134,4 @@ namespace useless
 	};
 }
 
-#endif USELESS_CORE_NATIVE_IO_DYNAMIC_STREAM_INCLUDED
+#endif USELESS_CORE_NATIVE_STREAM_DYNAMICBUF_INCLUDED

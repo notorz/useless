@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="stream">
+      <UniqueIdentifier>{3302b128-b476-49dd-80d0-427d2b856364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="stream\streambuf">
+      <UniqueIdentifier>{ab380bbc-602d-427c-a0cb-a74e02f4e9ee}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\dynamicbuf.h">
+      <Filter>stream\streambuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.h">
+      <Filter>stream\streambuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\fixedbuf.h">
+      <Filter>stream\streambuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.h">
+      <Filter>stream\streambuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\stream\streambuf\streambuf.h">
+      <Filter>stream\streambuf</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\stream.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\stream\useless_api.h">
+      <Filter>stream</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\filebuf.cpp">
+      <Filter>stream\streambuf</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core.native\stream\streambuf\memorybuf.cpp">
+      <Filter>stream\streambuf</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

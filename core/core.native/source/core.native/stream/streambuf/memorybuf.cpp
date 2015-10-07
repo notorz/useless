@@ -5,11 +5,11 @@
 //
 
 #include <memory.h>
-#include "memory_stream.h"
+#include "memorybuf.h"
 
 namespace useless
 {
-	memory_stream::memory_stream( void* address, size_t size )
+	memorybuf::memorybuf( void* address, size_t size )
 		: m_base( static_cast<char*>( address ) )
 		, m_size( size )
 	{
@@ -17,27 +17,27 @@ namespace useless
 		m_end = m_base + size;
 	}
 
-	size_t memory_stream::size() const
+	size_t memorybuf::size() const
 	{
 		return m_size;
 	}
 
-	bool memory_stream::can_be_read() const
+	bool memorybuf::can_be_read() const
 	{
 		return true;
 	}
 
-	bool memory_stream::can_be_write() const
+	bool memorybuf::can_be_write() const
 	{
 		return ( m_end > m_next );
 	}
 
-	const void* memory_stream::raw_data() const
+	const void* memorybuf::raw_data() const
 	{
 		return m_base;
 	}
 
-	size_t memory_stream::read( void* buffer, size_t count )
+	size_t memorybuf::read( void* buffer, size_t count )
 	{
 		if( !can_be_read() )
 		{
@@ -52,7 +52,7 @@ namespace useless
 		return read;
 	}
 
-	size_t memory_stream::write( const void* buffer, size_t count )
+	size_t memorybuf::write( const void* buffer, size_t count )
 	{
 		if( !can_be_write() )
 		{
@@ -67,7 +67,7 @@ namespace useless
 		return write;
 	}
 
-	streamoff memory_stream::setpos( seekdir::type way, streamoff off )
+	streamoff memorybuf::setpos( seekdir::type way, streamoff off )
 	{
 		if( way == seekdir::end )
 		{
@@ -90,7 +90,7 @@ namespace useless
 		return off;
 	}
 
-	streamoff memory_stream::getpos() const
+	streamoff memorybuf::getpos() const
 	{
 		return static_cast< streamoff >( m_next - m_base );
 	}

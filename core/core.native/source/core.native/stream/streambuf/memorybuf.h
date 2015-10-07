@@ -4,18 +4,18 @@
 // Distributed under the MIT License.
 //
 
-#ifndef USELESS_CORE_NATIVE_IO_MEMORY_STREAM_INCLUDED
-#define USELESS_CORE_NATIVE_IO_MEMORY_STREAM_INCLUDED
+#ifndef USELESS_CORE_NATIVE_STREAM_MEMORYBUF_INCLUDED
+#define USELESS_CORE_NATIVE_STREAM_MEMORYBUF_INCLUDED
 
-#include "core.native/io/useless_api.h"
-#include "streambase.h"
+#include "streambuf.h"
+#include "../useless_api.h"
 
 namespace useless
 {
-	class Core_API memory_stream : public streambase
+	class Core_API memorybuf : public streambuf
 	{
 	public:
-		memory_stream( void* address, size_t size );
+		memorybuf( void* address, size_t size );
 
 		virtual size_t size() const;
 		virtual bool can_be_read() const;
@@ -34,4 +34,4 @@ namespace useless
 	};
 }
 
-#endif USELESS_CORE_NATIVE_IO_MEMORY_STREAM_INCLUDED
+#endif USELESS_CORE_NATIVE_STREAM_MEMORYBUF_INCLUDED

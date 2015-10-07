@@ -4,10 +4,8 @@
 // Distributed under the MIT License.
 //
 
-#ifndef USELESS_CORE_NATIVE_IO_STREAM_BASE_INCLUDED
-#define USELESS_CORE_NATIVE_IO_STREAM_BASE_INCLUDED
-
-#include <stdint.h>
+#ifndef USELESS_CORE_NATIVE_STREAM_STREAMBUF_INCLUDED
+#define USELESS_CORE_NATIVE_STREAM_STREAMBUF_INCLUDED
 
 namespace useless
 {
@@ -21,31 +19,13 @@ namespace useless
 		};
 	}
 
-	// Check windows
-#if _WIN32 || _WIN64
-#	if _WIN64
-#		define ENV64 1
-#	else
-#		define ENV32 1
-#	endif
+#ifdef _WIN64
+	typedef __int64 streamoff;
+#elif _WIN32
+	typedef int streamoff;
 #endif
 
-	// Check GCC
-#if __GNUC__
-#	if __x86_64__ || __ppc64__
-#		define ENV64
-#	else
-#		define ENV32
-#	endif
-#endif
-
-#if ENV64
-	typedef int64_t streamoff;
-#elif ENV32
-	typedef int32_t streamoff;
-#endif
-
-	class streambase
+	class streambuf
 	{
 	public:
 		virtual size_t size() const = 0;
@@ -59,4 +39,4 @@ namespace useless
 	};
 }
 
-#endif USELESS_CORE_NATIVE_IO_STREAM_BASE_INCLUDED
+#endif USELESS_CORE_NATIVE_STREAM_STREAMBUF_INCLUDED

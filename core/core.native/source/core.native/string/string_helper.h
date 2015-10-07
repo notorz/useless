@@ -69,7 +69,7 @@ namespace useless
 
 		static unsigned int parse_uint( const char* value )
 		{
-			return static_cast<unsigned int>( ::strtoul( value, nullptr, 10 ) );
+			return static_cast<unsigned int>( ::strtoul( value, NULL, 10 ) );
 		}
 
 		static __int64 parse_int64( const char* value )
@@ -79,7 +79,7 @@ namespace useless
 
 		static __int64 parseuint64( const char* value )
 		{
-			return ::_strtoui64( value, nullptr, 10 );
+			return ::_strtoui64( value, NULL, 10 );
 		}
 
 		static float parse_float( const char* value )
@@ -152,7 +152,7 @@ namespace useless
 
 		static unsigned int parse_uint( const wchar_t* value )
 		{
-			return static_cast<unsigned int>( ::wcstoul( value, nullptr, 10 ) );
+			return static_cast<unsigned int>( ::wcstoul( value, NULL, 10 ) );
 		}
 
 		static __int64 parse_int64( const wchar_t* value )
@@ -162,7 +162,7 @@ namespace useless
 
 		static unsigned __int64 parse_uint64( const wchar_t* value )
 		{
-			return ::_wcstoui64( value, nullptr, 10 );
+			return ::_wcstoui64( value, NULL, 10 );
 		}
 
 		static float parse_float( const wchar_t* value )

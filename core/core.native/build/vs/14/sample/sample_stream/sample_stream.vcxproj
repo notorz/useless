@@ -50,17 +50,9 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\sample\io\main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\io\io.vcxproj">
-      <Project>{5ea6cbad-4ad3-44bd-b61a-440779f74e4c}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{11E75019-2D59-4EA5-A327-6480B22E23B2}</ProjectGuid>
-    <RootNamespace>sample_io</RootNamespace>
+    <ProjectGuid>{6DC14AE1-5CD4-4091-ADEC-59E1BB8BF7E2}</ProjectGuid>
+    <RootNamespace>sample_stream</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -247,6 +239,14 @@
     <ClCompile />
     <Link />
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\sample\stream\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\stream\stream.vcxproj">
+      <Project>{59ab2826-65b7-481c-bdd9-53d79f1d099c}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -26,6 +26,9 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\sample\math\main.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D3F57C5D-4B23-4285-A0D7-E5379D3EE29E}</ProjectGuid>
     <RootNamespace>sample_math</RootNamespace>

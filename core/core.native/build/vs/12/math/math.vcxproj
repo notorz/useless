@@ -26,6 +26,9 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\core.native\math.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A3CD3EDB-39C5-44B5-8823-1ABAC9F24C67}</ProjectGuid>
     <RootNamespace>math</RootNamespace>

@@ -28,14 +28,6 @@ namespace useless
 		};
 	}
 
-	namespace prot
-	{
-		enum type
-		{
-			
-		};
-	}
-
 	class Core_API file_stream : public streambase
 	{
 	public:

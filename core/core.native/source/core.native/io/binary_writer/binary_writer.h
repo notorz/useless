@@ -7,6 +7,7 @@
 #ifndef USELESS_CORE_NATIVE_IO_BINARY_WITER_INCLUDED
 #define USELESS_CORE_NATIVE_IO_BINARY_WITER_INCLUDED
 
+#include <stdint.h>
 #include <type_traits>
 #include <boost/mpl/eval_if.hpp>
 #include "core.native/string.h"
@@ -182,28 +183,40 @@ namespace useless
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
 		{
-			m_stream = new file_stream( filename, openmode );
+			if( openmode & openmode::out )
+			{
+				m_stream = new file_stream( filename, openmode );
+			}
 		}
 
 		basic_binary_writer( const string_ansi& filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
 		{
-			m_stream = new file_stream( filename, openmode );
+			if( openmode & openmode::out )
+			{
+				m_stream = new file_stream( filename, openmode );
+			}
 		}
 
 		basic_binary_writer( const wchar_t* filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
 		{
-			m_stream = new file_stream( filename, openmode );
+			if( openmode & openmode::out )
+			{
+				m_stream = new file_stream( filename, openmode );
+			}
 		}
 
 		basic_binary_writer( const string_wide& filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
 		{
-			m_stream = new file_stream( filename, openmode );
+			if( openmode & openmode::out )
+			{
+				m_stream = new file_stream( filename, openmode );
+			}
 		}
 
 		virtual ~basic_binary_writer()

@@ -13,6 +13,12 @@
     <Filter Include="io\binary_writer\STL">
       <UniqueIdentifier>{598b214d-9430-4a13-b8a1-9be88c4c3577}</UniqueIdentifier>
     </Filter>
+    <Filter Include="io\binary_reader">
+      <UniqueIdentifier>{b5e4a96f-2546-4216-9221-ad6b4748be21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io\binary_reader\STL">
+      <UniqueIdentifier>{b5e9300a-b69e-4583-8354-ddf1225e3f63}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\core.native\io.h" />
@@ -60,6 +66,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\vector.h">
       <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\binary_reader.h">
+      <Filter>io\binary_reader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\array.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\deque.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\list.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\map.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\pair.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\set.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\string.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\vector.h">
+      <Filter>io\binary_reader\STL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

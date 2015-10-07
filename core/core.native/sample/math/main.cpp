@@ -11,5 +11,8 @@ using namespace useless;
 
 int _tmain(int /*argc*/, _TCHAR* /*argv[]*/)
 {
+	std::cout << math::DgreeToRadian(180.0) << std::endl;
+	std::cout << math::RadianToDgree(math::PI) << std::endl;
+
 	return 0;
 }

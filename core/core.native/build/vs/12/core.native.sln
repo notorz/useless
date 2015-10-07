@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "string", "string\string.vcxproj", "{F6DA53FE-7980-479A-B6BF-A02E9FD4950E}"
 EndProject
@@ -12,6 +12,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "math", "math\math.vcxproj", "{A3CD3EDB-39C5-44B5-8823-1ABAC9F24C67}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_math", "sample\sample_math\sample_math.vcxproj", "{D3F57C5D-4B23-4285-A0D7-E5379D3EE29E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A3CD3EDB-39C5-44B5-8823-1ABAC9F24C67} = {A3CD3EDB-39C5-44B5-8823-1ABAC9F24C67}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "io", "io\io.vcxproj", "{F846AE75-B454-4798-ABE9-65B20F221544}"
 EndProject

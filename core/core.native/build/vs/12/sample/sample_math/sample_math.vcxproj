@@ -29,6 +29,11 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\sample\math\main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\math\math.vcxproj">
+      <Project>{a3cd3edb-39c5-44b5-8823-1abac9f24c67}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{D3F57C5D-4B23-4285-A0D7-E5379D3EE29E}</ProjectGuid>
     <RootNamespace>sample_math</RootNamespace>

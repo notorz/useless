@@ -4,11 +4,11 @@
 // Distributed under the MIT License.
 //
 
-#ifndef USELESS_CORE_NATIVE_STREAM_USELESS_API_INCLUDED
-#define USELESS_CORE_NATIVE_STREAM_USELESS_API_INCLUDED
+#ifndef USELESS_CORE_NATIVE_IO_USELESS_API_INCLUDED
+#define USELESS_CORE_NATIVE_IO_USELESS_API_INCLUDED
 
 #ifdef USELESS_DLL
-#	ifdef CORE_STREAM_EXPORT
+#	ifdef CORE_IO_EXPORT
 #		define Core_API __declspec(dllexport)
 #	else
 #		define Core_API __declspec(dllimport)
@@ -17,4 +17,4 @@
 #	define Core_API
 #endif
 
-#endif USELESS_CORE_NATIVE_STREAM_USELESS_API_INCLUDED
+#endif USELESS_CORE_NATIVE_IO_USELESS_API_INCLUDED

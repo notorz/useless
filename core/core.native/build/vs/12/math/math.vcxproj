@@ -28,6 +28,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\core.native\math.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\math\math.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\math\useless_api.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\core.native\math\math.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A3CD3EDB-39C5-44B5-8823-1ABAC9F24C67}</ProjectGuid>

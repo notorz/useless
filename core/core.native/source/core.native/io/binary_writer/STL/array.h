@@ -36,17 +36,6 @@ namespace useless
 			write_member( bw, val, use_optimized() );
 		}
 
-		// bool Æ¯¼öÈ­
-		template<typename Archive, size_t _Size>
-		void write_member( Archive& bw, const std::array<bool, _Size>& val )
-		{
-			for( size_t i = 0; i < _Size; ++i )
-			{
-				char temp = val[ i ] ? 1 : 0;
-				bw.write( &temp, sizeof( char ) );
-			}
-		}
-
 		template<typename Archive, typename Type, size_t _Size>
 		void invoke( Archive& bw, const std::array<Type, _Size>& val )
 		{

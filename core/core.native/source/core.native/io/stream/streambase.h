@@ -48,6 +48,8 @@ namespace useless
 	class streambase
 	{
 	public:
+		virtual ~streambase() = 0 {}
+
 		virtual size_t size() const = 0;
 		virtual bool can_be_read() const = 0;
 		virtual bool can_be_write() const = 0;

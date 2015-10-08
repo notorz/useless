@@ -201,7 +201,7 @@ namespace useless
 
 	void file_stream::init( FILE*file, bool open )
 	{
-		m_must_be_closed = !open;
+		m_must_be_closed = open;
 		m_file = file;
 	}
 

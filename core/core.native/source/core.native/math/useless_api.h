@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2015. SeongJun Park.
+// Copyright (c) 2015. Lee eui jong.
 //
 // Distributed under the MIT License.
 //

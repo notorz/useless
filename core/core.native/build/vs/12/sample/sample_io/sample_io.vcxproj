@@ -29,11 +29,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\sample\io\main.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\io\io.vcxproj">
-      <Project>{f846ae75-b454-4798-abe9-65b20f221544}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{B70F2BD4-E851-4FB5-B9B1-BCA64A6CBE4B}</ProjectGuid>
     <RootNamespace>sample_io</RootNamespace>

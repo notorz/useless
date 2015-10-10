@@ -4,6 +4,7 @@
 // Distributed under the MIT License.
 //
 
+#define USELESS_IO_SOURCE
 #include <memory.h>
 #include "memory_stream.h"
 

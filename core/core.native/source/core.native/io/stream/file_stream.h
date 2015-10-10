@@ -8,7 +8,7 @@
 #define USELESS_CORE_NATIVE_IO_FILE_STREAM_INCLUDED
 
 #include "core.native/string.h"
-#include "core.native/io/useless_api.h"
+#include "core.native/io/definitions.h"
 #include "streambase.h"
 
 namespace useless
@@ -28,7 +28,7 @@ namespace useless
 		};
 	}
 
-	class Core_API file_stream : public streambase
+	class CORE_IO_DECL file_stream : public streambase
 	{
 	public:
 		file_stream( const char* filename, int openmode );

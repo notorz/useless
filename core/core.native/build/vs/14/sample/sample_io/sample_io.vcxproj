@@ -53,11 +53,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\sample\io\main.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\io\io.vcxproj">
-      <Project>{5ea6cbad-4ad3-44bd-b61a-440779f74e4c}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{11E75019-2D59-4EA5-A327-6480B22E23B2}</ProjectGuid>
     <RootNamespace>sample_io</RootNamespace>

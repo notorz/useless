@@ -7,7 +7,7 @@
 #ifndef USELESS_CORE_NATIVE_IO_STREAM_BASE_INCLUDED
 #define USELESS_CORE_NATIVE_IO_STREAM_BASE_INCLUDED
 
-#include <stdint.h>
+#include <boost/cstdint.hpp>
 
 namespace useless
 {

@@ -7,12 +7,12 @@
 #ifndef USELESS_CORE_NATIVE_IO_MEMORY_STREAM_INCLUDED
 #define USELESS_CORE_NATIVE_IO_MEMORY_STREAM_INCLUDED
 
-#include "core.native/io/useless_api.h"
+#include "core.native/io/definitions.h"
 #include "streambase.h"
 
 namespace useless
 {
-	class Core_API memory_stream : public streambase
+	class CORE_IO_DECL memory_stream : public streambase
 	{
 	public:
 		memory_stream( void* address, size_t size );

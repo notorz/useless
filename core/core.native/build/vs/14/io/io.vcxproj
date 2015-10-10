@@ -75,7 +75,7 @@
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\fixed_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\memory_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\streambase.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\useless_api.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\definitions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\core.native\io\stream\file_stream.cpp" />

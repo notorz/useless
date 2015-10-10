@@ -22,9 +22,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\core.native\io.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\useless_api.h">
-      <Filter>io</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\binary_writer.h">
       <Filter>io\binary_writer</Filter>
     </ClInclude>
@@ -93,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\vector.h">
       <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\definitions.h">
+      <Filter>io</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,8 @@ namespace useless
 	public:
 		static double PI;
 
-		static double RadianToDgree(double radian);
-		static double DgreeToRadian(double degree);
+		static double rad_to_deg(double radian);
+		static double deg_to_rad(double degree);
 	};
 }
 

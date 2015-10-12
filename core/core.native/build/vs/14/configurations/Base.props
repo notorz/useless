@@ -5,6 +5,8 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)..\..\..\output\vc$(PlatformToolsetVersion)\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\..\..\interm\$(ProjectName)\vc$(PlatformToolsetVersion)\$(PlatformTarget)\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+    <LibraryPath>$(OutDir);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -18,7 +20,6 @@
       <ProgramDataBaseFileName>$(TargetDir)$(TargetName).pdb</ProgramDataBaseFileName>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\..\..\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <ManifestFile>$(TargetDir)$(TargetName)$(TargetExt).intermediate.manifest</ManifestFile>

@@ -46,12 +46,12 @@
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\set.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\string.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\vector.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\definitions.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\dynamic_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\file_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\fixed_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\memory_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\streambase.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\useless_api.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\core.native\io\stream\file_stream.cpp" />

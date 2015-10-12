@@ -4,6 +4,7 @@
 // Distributed under the MIT License.
 //
 
+#define USELESS_IO_SOURCE
 #include "file_stream.h"
 
 namespace useless

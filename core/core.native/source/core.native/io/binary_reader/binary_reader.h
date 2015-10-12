@@ -7,9 +7,9 @@
 #ifndef USELESS_CORE_NATIVE_IO_BINARY_READER_INCLUDED
 #define USELESS_CORE_NATIVE_IO_BINARY_READER_INCLUDED
 
-#include <stdint.h>
 #include <type_traits>
 #include <vector>
+#include <boost/cstdint.hpp>
 #include <boost/mpl/eval_if.hpp>
 #include "core.native/string.h"
 #include "core.native/io/stream/streambase.h"

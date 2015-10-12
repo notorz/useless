@@ -7,14 +7,22 @@
 #ifndef USELESS_CORE_NATIVE_MATH_USELESS_API_INCLUDED
 #define USELESS_CORE_NATIVE_MATH_USELESS_API_INCLUDED
 
+#include <boost/config.hpp>
+
 #ifdef USELESS_DLL
 #	ifdef CORE_MATH_EXPORT
-#		define Core_API __declspec(dllexport)
+#		define CORE_MATH_DECL BOOST_SYMBOL_EXPORT
 #	else
-#		define Core_API __declspec(dllimport)
+#		define CORE_MATH_DECL BOOST_SYMBOL_IMPORT
 #	endif
 #else
-#	define Core_API
+#	define CORE_MATH_DECL
+#endif
+
+#if defined( _MSC_VER ) || defined( __BORLANDC__ )
+#	if !defined( USELESS_MATH_SOURCE )
+#		pragma comment( lib, "math.lib" )
+#	endif
 #endif
 
 #endif USELESS_CORE_NATIVE_MATH_USELESS_API_INCLUDED

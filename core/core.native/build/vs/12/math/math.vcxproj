@@ -29,7 +29,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\core.native\math.h" />
     <ClInclude Include="..\..\..\..\source\core.native\math\math.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\math\useless_api.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\math\definitions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\core.native\math\math.cpp" />

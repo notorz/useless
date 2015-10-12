@@ -5,7 +5,7 @@
     <ClInclude Include="..\..\..\..\source\core.native\math\math.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\math\useless_api.h">
+    <ClInclude Include="..\..\..\..\source\core.native\math\definitions.h">
       <Filter>math</Filter>
     </ClInclude>
   </ItemGroup>

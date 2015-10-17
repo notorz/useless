@@ -76,9 +76,6 @@
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\list.h">
       <Filter>io\binary_reader\STL</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\map.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\pair.h">
       <Filter>io\binary_reader\STL</Filter>
     </ClInclude>
@@ -93,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\definitions.h">
       <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\map.h">
+      <Filter>io\binary_writer\STL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

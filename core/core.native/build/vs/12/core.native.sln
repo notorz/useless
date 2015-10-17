@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "string", "string\string.vcxproj", "{F6DA53FE-7980-479A-B6BF-A02E9FD4950E}"
 EndProject
@@ -19,6 +19,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "io", "io\io.vcxproj", "{F846AE75-B454-4798-ABE9-65B20F221544}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_io", "sample\sample_io\sample_io.vcxproj", "{B70F2BD4-E851-4FB5-B9B1-BCA64A6CBE4B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "encoding", "encoding\encoding.vcxproj", "{2431C338-00A1-464C-99FD-8195A01AD09D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "sample_encoding", "sample\sample_encoding\sample_encoding.vcxproj", "{52D076A4-ECF1-44A5-83F0-B84B92782A51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -102,6 +106,30 @@ Global
 		{B70F2BD4-E851-4FB5-B9B1-BCA64A6CBE4B}.Release|Win32.Build.0 = Release|Win32
 		{B70F2BD4-E851-4FB5-B9B1-BCA64A6CBE4B}.ReleaseDll|Win32.ActiveCfg = ReleaseDll|Win32
 		{B70F2BD4-E851-4FB5-B9B1-BCA64A6CBE4B}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.Debug|Win32.Build.0 = Debug|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.DebugDll|Win32.ActiveCfg = DebugDll|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.DebugDll|Win32.Build.0 = DebugDll|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.Profile|Win32.ActiveCfg = Profile|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.Profile|Win32.Build.0 = Profile|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.ProfileDll|Win32.ActiveCfg = ProfileDll|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.ProfileDll|Win32.Build.0 = ProfileDll|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.Release|Win32.ActiveCfg = Release|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.Release|Win32.Build.0 = Release|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.ReleaseDll|Win32.ActiveCfg = ReleaseDll|Win32
+		{2431C338-00A1-464C-99FD-8195A01AD09D}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.Debug|Win32.ActiveCfg = Debug|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.Debug|Win32.Build.0 = Debug|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.DebugDll|Win32.ActiveCfg = DebugDll|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.DebugDll|Win32.Build.0 = DebugDll|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.Profile|Win32.ActiveCfg = Profile|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.Profile|Win32.Build.0 = Profile|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.ProfileDll|Win32.ActiveCfg = ProfileDll|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.ProfileDll|Win32.Build.0 = ProfileDll|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.Release|Win32.ActiveCfg = Release|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.Release|Win32.Build.0 = Release|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.ReleaseDll|Win32.ActiveCfg = ReleaseDll|Win32
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51}.ReleaseDll|Win32.Build.0 = ReleaseDll|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,5 +138,6 @@ Global
 		{751FD4A3-21DE-49FA-BB34-0D59B881B8D5} = {AA0DD40D-51F2-452C-A559-8FBD271394C6}
 		{D3F57C5D-4B23-4285-A0D7-E5379D3EE29E} = {AA0DD40D-51F2-452C-A559-8FBD271394C6}
 		{B70F2BD4-E851-4FB5-B9B1-BCA64A6CBE4B} = {AA0DD40D-51F2-452C-A559-8FBD271394C6}
+		{52D076A4-ECF1-44A5-83F0-B84B92782A51} = {AA0DD40D-51F2-452C-A559-8FBD271394C6}
 	EndGlobalSection
 EndGlobal

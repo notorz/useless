@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="encoding">
+      <UniqueIdentifier>{8fc7f197-6634-48e8-b9b6-fac230d6a22a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\core.native\encoding.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\encoding\definitions.h">
+      <Filter>encoding</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\encoding\encoding.h">
+      <Filter>encoding</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\core.native\encoding\encoding.cpp">
+      <Filter>encoding</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

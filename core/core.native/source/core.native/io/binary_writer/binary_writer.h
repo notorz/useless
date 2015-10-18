@@ -253,11 +253,11 @@ namespace useless
 			return m_stream;
 		}
 
-		void write( const void* buffer, size_t size )
+		void write( const void* buffer, size_t count )
 		{
 			if( m_stream != nullptr )
 			{
-				m_stream->write( buffer, size );
+				m_stream->write( buffer, count );
 			}
 		}
 

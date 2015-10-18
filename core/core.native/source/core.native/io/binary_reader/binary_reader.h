@@ -264,11 +264,11 @@ namespace useless
 			return m_stream;
 		}
 
-		void read( void* buffer, size_t size )
+		void read( void* buffer, size_t count )
 		{
 			if( m_stream != nullptr )
 			{
-				m_stream->read( buffer, size );
+				m_stream->read( buffer, count );
 			}
 		}
 

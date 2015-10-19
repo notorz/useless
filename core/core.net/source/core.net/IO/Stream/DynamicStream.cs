@@ -25,6 +25,11 @@ namespace Useless.IO
 
 		public DynamicStream( uint size )
 		{
+			if( size < 1 )
+			{
+				throw new ArgumentOutOfRangeException( "size" );
+			}
+
 			m_base = new byte[ size ];
 		}
 

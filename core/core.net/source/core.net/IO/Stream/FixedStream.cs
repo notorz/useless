@@ -24,6 +24,11 @@ namespace Useless.IO
 
 		public FixedStream( int size )
 		{
+			if( size < 1 )
+			{
+				throw new ArgumentOutOfRangeException( "size" );
+			}
+
 			m_base = new byte[ size ];
 		}
 

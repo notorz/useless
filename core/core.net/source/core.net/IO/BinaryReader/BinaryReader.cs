@@ -64,9 +64,6 @@ namespace Useless.IO
 
 			m_stream = stream;
 			m_mustBeDispose = false;
-
-			int temp = 0;
-			Read<int>( ref temp );
         }
 
 		public IStream GetStream()

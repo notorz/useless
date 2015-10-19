@@ -24,7 +24,17 @@ namespace Useless.IO
 
 		public MemoryStream( byte[] address, int size )
         {
-            m_base = address;
+			if( address == null )
+			{
+				throw new ArgumentNullException( "buffer" );
+			}
+
+			if( size < 1 )
+			{
+				throw new ArgumentOutOfRangeException( "size" );
+			}
+
+			m_base = address;
             m_size = size;
         }
 
@@ -90,7 +100,7 @@ namespace Useless.IO
 
         public int Seek( int offset, SeekDir way )
         {
-            if( way == SeekDir.End )
+			if( way == SeekDir.End )
             {
                 offset += m_size;
             }

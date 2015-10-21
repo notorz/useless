@@ -23,13 +23,18 @@ namespace Useless.IO
                     br.Read( m_internalBuffer, Marshal.SizeOf<T>() );
 					val = Utility.BitConverter.To<T>( m_internalBuffer );
 				}
-				else if( typeof( T ) == typeof( String ) )
+				else if( TypeTraits.IsString<T>.value )
 				{
-					uint count = br.ReadU32();
-					byte[] buffer = new byte[ count ];
-					br.Read( buffer, ( int )count );
-					Encoding.UTF8.GetString( buffer );
-					String temp = val as String;
+					uint countUnsigned = br.ReadU32();
+					if( countUnsigned > int.MaxValue )
+					{
+						throw new NotSupportedException( "count" );
+					}
+
+					int count = ( int )countUnsigned;
+                    byte[] buffer = new byte[ count ];
+					br.Read( buffer, count );
+					val = ( T )( object )( Encoding.UTF8.GetString( buffer ) );
 				}
 				else
 				{

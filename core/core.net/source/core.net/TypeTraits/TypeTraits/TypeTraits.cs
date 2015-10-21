@@ -63,4 +63,9 @@ namespace Useless.TypeTraits
 			IsVoid<T>.value ) ? 
 			true : false;
 	}
+
+	public class IsString<T>
+	{
+		public static bool value = ( typeof( T ) == typeof( string ) ) ? true : false;
+	}
 }

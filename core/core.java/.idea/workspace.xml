@@ -41,8 +41,8 @@
       <file leaf-file-name="Program.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sample/sample_io/src/Program.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53731346" vertical-offset="0" max-vertical-offset="670">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.69402987" vertical-offset="0" max-vertical-offset="670">
+              <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -669,12 +669,12 @@
       <workItem from="1445203613179" duration="97000" />
       <workItem from="1445203791671" duration="547000" />
       <workItem from="1445204376219" duration="8074000" />
-      <workItem from="1445276255657" duration="16944000" />
+      <workItem from="1445276255657" duration="17355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26656000" />
+    <option name="totallyTimeSpent" value="27067000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -820,13 +820,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="15060">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -872,13 +872,13 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="10875">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1445441992000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1445443527000" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1158,8 +1158,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sample/sample_io/src/Program.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53731346" vertical-offset="0" max-vertical-offset="670">
-          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.69402987" vertical-offset="0" max-vertical-offset="670">
+          <caret line="38" column="9" selection-start-line="38" selection-start-column="9" selection-end-line="38" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

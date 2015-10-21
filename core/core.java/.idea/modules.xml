@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/source/core.java/io/io.iml" filepath="$PROJECT_DIR$/source/core.java/io/io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sample/sample_io/sample_io.iml" filepath="$PROJECT_DIR$/sample/sample_io/sample_io.iml" />
+      <module fileurl="file://$PROJECT_DIR$/source/core.java/type_traits/type_traits.iml" filepath="$PROJECT_DIR$/source/core.java/type_traits/type_traits.iml" />
+      <module fileurl="file://$PROJECT_DIR$/source/core.java/utility/utility.iml" filepath="$PROJECT_DIR$/source/core.java/utility/utility.iml" />
+    </modules>
+  </component>
+</project>

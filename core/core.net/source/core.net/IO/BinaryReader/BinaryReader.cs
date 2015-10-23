@@ -206,84 +206,84 @@ namespace Useless.IO
 		public bool ReadBoolean()
 		{
 			bool val = false;
-			Read<bool>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public sbyte ReadS8()
 		{
 			sbyte val = 0;
-			Read<sbyte>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public byte ReadU8()
 		{
 			byte val = 0;
-			Read<byte>( ref val );
+			Read( ref val );
 			return val;
 		}
 		
 		public short ReadS16()
 		{
 			short val = 0;
-			Read<short>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public ushort ReadU16()
 		{
 			ushort val = 0;
-			Read<ushort>( ref val );
+			Read( ref val );
 			return val;
 		}
 		
 		public int ReadS32()
 		{
 			int val = 0;
-			Read<int>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public uint ReadU32()
 		{
 			uint val = 0;
-			Read<uint>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public long ReadS64()
 		{
 			long val = 0;
-			Read<long>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public ulong ReadU64()
 		{
 			ulong val = 0;
-			Read<ulong>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public float ReadF32()
 		{
 			float val = 0;
-			Read<float>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public double ReadF64()
 		{
 			double val = 0;
-			Read<double>( ref val );
+			Read( ref val );
 			return val;
 		}
 
 		public String ReadString()
 		{
 			String val = null;
-			Read<String>( ref val );
+			Read( ref val );
 			return val;
 		}
 	}

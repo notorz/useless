@@ -10,6 +10,57 @@ namespace Useless.Utility
 {
 	public class BitConverter
 	{
+		public static byte[] GetBytes( Type type, object val )
+		{
+			if( type == typeof( bool ) )
+			{
+				return System.BitConverter.GetBytes( ( bool )val );
+			}
+			else if( type == typeof( sbyte ) )
+			{
+				return System.BitConverter.GetBytes( ( sbyte )val );
+			}
+			else if( type == typeof( byte ) )
+			{
+				return System.BitConverter.GetBytes( ( byte )val );
+			}
+			else if( type == typeof( short ) )
+			{
+				return System.BitConverter.GetBytes( ( short )val );
+			}
+			else if( type == typeof( ushort ) )
+			{
+				return System.BitConverter.GetBytes( ( ushort )val );
+			}
+			else if( type == typeof( int ) )
+			{
+				return System.BitConverter.GetBytes( ( int )val );
+			}
+			else if( type == typeof( uint ) )
+			{
+				return System.BitConverter.GetBytes( ( uint )val );
+			}
+			else if( type == typeof( long ) )
+			{
+				return System.BitConverter.GetBytes( ( long )val );
+			}
+			else if( type == typeof( ulong ) )
+			{
+				return System.BitConverter.GetBytes( ( ulong )val );
+			}
+			else if( type == typeof( float ) )
+			{
+				return System.BitConverter.GetBytes( ( float )val );
+			}
+			else if( type == typeof( double ) )
+			{
+				return System.BitConverter.GetBytes( ( double )val );
+			}
+
+			throw new NotSupportedException();
+			
+		}
+
 		public static bool ToBoolean( byte[] bytes )
 		{
 			return System.BitConverter.ToBoolean( bytes, 0 );
@@ -70,54 +121,59 @@ namespace Useless.Utility
 			return System.BitConverter.ToDouble( bytes, 0 );
 		}
 		
-		public static T To<T>( byte[] bytes )
+		public static object To( Type type, byte[] bytes )
 		{
-			if( typeof( T ) == typeof( bool ) )
+			if( type == typeof( bool ) )
 			{
-				return ( T )( object )ToBoolean( bytes );
-            }
-			else if( typeof( T ) == typeof( sbyte ) )
-			{
-				return ( T )( object )ToS8( bytes );
-            }
-			else if( typeof( T ) == typeof( byte ) )
-			{
-				return ( T )( object )ToU8( bytes );
-            }
-			else if( typeof( T ) == typeof( short ) )
-			{
-				return ( T )( object )ToS16( bytes );
-            }
-			else if( typeof( T ) == typeof( ushort ) )
-			{
-				return ( T )( object )ToU16( bytes );
-            }
-			else if( typeof( T ) == typeof( int ) )
-			{
-				return ( T )( object )ToS32( bytes );
-            }
-			else if( typeof( T ) == typeof( uint ) )
-			{
-				return ( T )( object )ToU32( bytes );
-            }
-			else if( typeof( T ) == typeof( long ) )
-			{
-				return ( T )( object )ToS64( bytes );
-            }
-			else if( typeof( T ) == typeof( ulong ) )
-			{
-				return ( T )( object )ToU64( bytes );
-            }
-			else if( typeof( T ) == typeof( float ) )
-			{
-				return ( T )( object )ToF32( bytes );
+				return ToBoolean( bytes );
 			}
-			else if( typeof( T ) == typeof( double ) )
+			else if( type == typeof( sbyte ) )
 			{
-				return ( T )( object )ToF64( bytes );
-            }
+				return ToS8( bytes );
+			}
+			else if( type == typeof( byte ) )
+			{
+				return ToU8( bytes );
+			}
+			else if( type == typeof( short ) )
+			{
+				return ToS16( bytes );
+			}
+			else if( type == typeof( ushort ) )
+			{
+				return ToU16( bytes );
+			}
+			else if( type == typeof( int ) )
+			{
+				return ToS32( bytes );
+			}
+			else if( type == typeof( uint ) )
+			{
+				return ToU32( bytes );
+			}
+			else if( type == typeof( long ) )
+			{
+				return ToS64( bytes );
+			}
+			else if( type == typeof( ulong ) )
+			{
+				return ToU64( bytes );
+			}
+			else if( type == typeof( float ) )
+			{
+				return ToF32( bytes );
+			}
+			else if( type == typeof( double ) )
+			{
+				return ToF64( bytes );
+			}
 
 			throw new NotSupportedException();
+		}
+
+		public static T To<T>( byte[] bytes )
+		{
+			return ( T )( To( typeof( T ), bytes ) );
 		}
 	}
 }

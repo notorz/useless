@@ -8,7 +8,7 @@ namespace Useless.IO
 {
 	interface ISerializable
 	{
-        void Serialize( ref BinaryReader br );
-		//void Deserialize( ref BinaryWriter bw );
+		void Serialize( ref BinaryWriter bw );
+		void Deserialize( ref BinaryReader br );
 	}
 }

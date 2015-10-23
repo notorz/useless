@@ -4,29 +4,32 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2A07489E-E9DF-481F-9E13-ED6760384F2E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{AE9338AA-FD89-4B9E-A2DC-860114CA9651}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IO</RootNamespace>
-    <AssemblyName>IO</AssemblyName>
+    <RootNamespace>Sample_IO</RootNamespace>
+    <AssemblyName>Sample_IO</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\output\IO\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>..\..\..\interm\IO\$(Configuration)\</IntermediateOutputPath>
+    <OutputPath>..\..\output\Sample_IO\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>..\..\interm\Sample_IO\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\output\IO\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>..\..\..\interm\IO\$(Configuration)\</IntermediateOutputPath>
+    <OutputPath>..\..\output\Sample_IO\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>..\..\interm\Sample_IO\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,25 +45,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BinaryReader\BinaryReader.cs" />
-    <Compile Include="BinaryWriter\BinaryWriter.cs" />
-    <Compile Include="Exception\ObjectSerializeException.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialize\Serializable.cs" />
-    <Compile Include="Stream\DynamicStream.cs" />
-    <Compile Include="Stream\FileStream.cs" />
-    <Compile Include="Stream\FixedStream.cs" />
-    <Compile Include="Stream\MemoryStream.cs" />
-    <Compile Include="Stream\Stream.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TypeTraits\TypeTraits.csproj">
-      <Project>{c7cd5b0c-3a98-4522-a055-604227c87b5b}</Project>
-      <Name>TypeTraits</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{c7cab7ef-f5d7-45c3-9132-ced93e33a40f}</Project>
-      <Name>Utility</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\source\core.net\IO\IO.csproj">
+      <Project>{2a07489e-e9df-481f-9e13-ed6760384f2e}</Project>
+      <Name>IO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

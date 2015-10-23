@@ -23,7 +23,7 @@ namespace Useless.IO
 		public bool CanRead { get { return m_seekhigh > m_position; } }
 		public bool CanWrite { get { return true; } }
 
-		public DynamicStream( uint size )
+		public DynamicStream( int size )
 		{
 			if( size < 1 )
 			{

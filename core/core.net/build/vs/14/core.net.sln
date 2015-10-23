@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypeTraits", "..\..\..\sour
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "..\..\..\source\core.net\Utility\Utility.csproj", "{C7CAB7EF-F5D7-45C3-9132-CED93E33A40F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{A403027D-1BBB-4A64-B88B-267322B85A96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample_IO", "..\..\..\sample\Sample_IO\Sample_IO.csproj", "{AE9338AA-FD89-4B9E-A2DC-860114CA9651}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +31,15 @@ Global
 		{C7CAB7EF-F5D7-45C3-9132-CED93E33A40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7CAB7EF-F5D7-45C3-9132-CED93E33A40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7CAB7EF-F5D7-45C3-9132-CED93E33A40F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9338AA-FD89-4B9E-A2DC-860114CA9651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9338AA-FD89-4B9E-A2DC-860114CA9651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9338AA-FD89-4B9E-A2DC-860114CA9651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9338AA-FD89-4B9E-A2DC-860114CA9651}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE9338AA-FD89-4B9E-A2DC-860114CA9651} = {A403027D-1BBB-4A64-B88B-267322B85A96}
 	EndGlobalSection
 EndGlobal

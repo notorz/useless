@@ -34,6 +34,11 @@ namespace Useless.IO
 				throw new ArgumentOutOfRangeException( "size" );
 			}
 
+			if( address.Length < size )
+			{
+				throw new ArgumentOutOfRangeException( "size" );
+			}
+
 			m_base = address;
             m_size = size;
         }

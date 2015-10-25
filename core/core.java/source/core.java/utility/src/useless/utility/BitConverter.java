@@ -39,8 +39,8 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-					( byte ) ( ( value >> 8 ) & 0xFF ),
-					( byte ) ( ( value ) & 0xFF )
+					( byte ) ( ( value ) & 0xFF ),
+					( byte ) ( ( value >> 8 ) & 0xFF )
 				};
 	}
 
@@ -48,10 +48,10 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-					( byte )( ( value >> 24 ) & 0xFF ),
-					( byte )( ( value >> 16 ) & 0xFF ),
+					( byte )( ( value ) & 0xFF ),
 					( byte )( ( value >> 8 ) & 0xFF ),
-					( byte )( ( value ) & 0xFF )
+					( byte )( ( value >> 16 ) & 0xFF ),
+					( byte )( ( value >> 24 ) & 0xFF )
 				};
 	}
 
@@ -59,14 +59,14 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-					( byte )( ( value >> 56 ) & 0xFF ),
-					( byte )( ( value >> 48 ) & 0xFF ),
-					( byte )( ( value >> 40 ) & 0xFF ),
-					( byte )( ( value >> 32 ) & 0xFF ),
-					( byte )( ( value >> 24 ) & 0xFF ),
-					( byte )( ( value >> 16 ) & 0xFF ),
+					( byte )( ( value ) & 0xFF ),
 					( byte )( ( value >> 8 ) & 0xFF ),
-					( byte )( ( value ) & 0xFF )
+					( byte )( ( value >> 16 ) & 0xFF ),
+					( byte )( ( value >> 24 ) & 0xFF ),
+					( byte )( ( value >> 32 ) & 0xFF ),
+					( byte )( ( value >> 40 ) & 0xFF ),
+					( byte )( ( value >> 48 ) & 0xFF ),
+					( byte )( ( value >> 56 ) & 0xFF ),
 				};
 	}
 
@@ -97,8 +97,8 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-						( byte ) ( ( value >> 8 ) & 0xFF ),
-						( byte ) ( ( value ) & 0xFF )
+						( byte ) ( ( value ) & 0xFF ),
+						( byte ) ( ( value >> 8 ) & 0xFF )
 				};
 	}
 
@@ -106,10 +106,10 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-						( byte )( ( value >> 24 ) & 0xFF ),
-						( byte )( ( value >> 16 ) & 0xFF ),
+						( byte )( ( value ) & 0xFF ),
 						( byte )( ( value >> 8 ) & 0xFF ),
-						( byte )( ( value ) & 0xFF )
+						( byte )( ( value >> 16 ) & 0xFF ),
+						( byte )( ( value >> 24 ) & 0xFF )
 				};
 	}
 
@@ -204,8 +204,8 @@ public class BitConverter
 
 		return ( short )
 				(
-					( ( short )( bytes[ 0 ] ) << 8 ) |
-					( ( short )( bytes[ 1 ] ) )
+					( ( short )( bytes[ 0 ] ) |
+					( ( short )( bytes[ 1 ] ) << 8 ) )
 				);
 	}
 
@@ -218,8 +218,8 @@ public class BitConverter
 
 		return ( int )
 				(
-					( ( int )( bytes[ 0 ] ) << 8 ) |
-					( ( int )( bytes[ 1 ] ) )
+					( ( short )( bytes[ 0 ] ) |
+					( ( short )( bytes[ 1 ] ) << 8 ) )
 				);
 	}
 
@@ -232,10 +232,10 @@ public class BitConverter
 
 		return ( int )
 				(
-					( ( int )( bytes[ 0 ] ) << 24 ) |
-					( ( int )( bytes[ 1 ] ) << 16 ) |
-					( ( int )( bytes[ 2 ] ) << 8 ) |
-					( ( int )( bytes[ 3 ] ) )
+					( ( int )( bytes[ 0 ] ) |
+					( ( int )( bytes[ 1 ] ) << 8 ) |
+					( ( int )( bytes[ 2 ] ) << 16 ) |
+					( ( int )( bytes[ 3 ] ) << 24 ) )
 				);
 	}
 
@@ -248,10 +248,10 @@ public class BitConverter
 
 		return ( long )
 				(
-					( ( long )( bytes[ 0 ] ) << 24 ) |
-					( ( long )( bytes[ 1 ] ) << 16 ) |
-					( ( long )( bytes[ 2 ] ) << 8 ) |
-					( ( long )( bytes[ 3 ] ) )
+					( ( long )( bytes[ 0 ] ) |
+					( ( long )( bytes[ 1 ] ) << 8 ) |
+					( ( long )( bytes[ 2 ] ) << 16 ) |
+					( ( long )( bytes[ 3 ] ) << 24 ) )
 				);
 	}
 
@@ -264,14 +264,14 @@ public class BitConverter
 
 		return ( long )
 				(
-					( ( long )( bytes[ 0 ] ) << 56 ) |
-					( ( long )( bytes[ 1 ] ) << 48 ) |
-					( ( long )( bytes[ 2 ] ) << 40 ) |
-					( ( long )( bytes[ 3 ] ) << 32 ) |
-					( ( long )( bytes[ 4 ] ) << 24 ) |
-					( ( long )( bytes[ 5 ] ) << 16 ) |
-					( ( long )( bytes[ 6 ] ) << 8 ) |
-					( ( long )( bytes[ 7 ] ) )
+					( ( long )( bytes[ 0 ] ) |
+					( ( long )( bytes[ 1 ] ) << 8 ) |
+					( ( long )( bytes[ 2 ] ) << 16 ) |
+					( ( long )( bytes[ 3 ] ) << 24 ) |
+					( ( long )( bytes[ 4 ] ) << 32 ) |
+					( ( long )( bytes[ 5 ] ) << 40 ) |
+					( ( long )( bytes[ 6 ] ) << 48 ) |
+					( ( long )( bytes[ 7 ] ) << 56 ) )
 				);
 	}
 

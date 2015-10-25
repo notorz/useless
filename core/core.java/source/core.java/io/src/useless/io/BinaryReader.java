@@ -10,7 +10,8 @@ import useless.io.exception.*;
 import useless.type_traits.*;
 import useless.utility.*;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
+import java.lang.reflect.*;
+import java.util.*;
 
 public class BinaryReader
 {
@@ -67,25 +68,95 @@ public class BinaryReader
 	}
 
 	@SuppressWarnings( "unchecked" )
-	public <T> T read( Class<T> type ) throws UnsupportedEncodingException, InstantiationException, IllegalAccessException, ObjectSerializeException
+	public <T> T read( Class<?>[] types, int index ) throws UnsupportedEncodingException, InstantiationException, IllegalAccessException, ObjectSerializeException
 	{
+		Class<?> type = types[ index ];
 		if( IsArithmetic.invoke( type ) || IsChar.invoke( type ) )
 		{
 			read( m_internalBuffer, SizeOf.invoke( type ) );
-			return BitConverter.to( type, m_internalBuffer );
+			return ( T )BitConverter.to( type, m_internalBuffer );
 		}
 		else if( IsString.invoke( type ) )
 		{
 			return ( T )readString();
-	 	}
+		}
 		else if( type.isArray() )
 		{
 			return ( T )readArray( type );
 		}
 		else
 		{
-			T val = type.newInstance();
-			if( val instanceof Serializable )
+			T val = ( T )type.newInstance();
+			if( val instanceof Collection<?> )
+			{
+				if( types.length <= index )
+				{
+					throw new IllegalArgumentException( "types" );
+				}
+
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				Collection<?> collectionVal = ( Collection<?> )val;
+
+				for( int i = 0; i < count; ++i )
+				{
+					for( Method method : collectionVal.getClass().getDeclaredMethods() )
+					{
+						if( method.getName().equals( "add" ) )
+						{
+							try
+							{
+								method.invoke( collectionVal, read( types, index + 1 ) );
+							}
+							catch( InvocationTargetException e )
+							{
+							}
+							break;
+						}
+					}
+				}
+
+				return ( T )collectionVal;
+			}
+			else if( val instanceof Map<?, ?> )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				Map<?, ?> mapVal = ( Map<?, ?> )val;
+
+				for( int i = 0; i < count; ++i )
+				{
+					for( Method method : mapVal.getClass().getDeclaredMethods() )
+					{
+						if( method.getName().equals( "put" ) )
+						{
+							try
+							{
+								Object key = read( types, index + 1 );
+								Object value = read( types, index + 2 );
+								method.invoke( mapVal, key, value );
+							}
+							catch( InvocationTargetException e )
+							{
+							}
+							break;
+						}
+					}
+				}
+
+				return ( T )mapVal;
+			}
+			else if( val instanceof Serializable )
 			{
 				( ( Serializable )val ).deserialize( this );
 				return val;
@@ -95,6 +166,16 @@ public class BinaryReader
 				throw new ObjectSerializeException();
 			}
 		}
+	}
+
+	public <T> T read( Class<?>[] types ) throws UnsupportedEncodingException, InstantiationException, IllegalAccessException, ObjectSerializeException
+	{
+		return read( types, 0 );
+	}
+
+	public <T> T read( Class<?> type ) throws UnsupportedEncodingException, InstantiationException, IllegalAccessException, ObjectSerializeException
+	{
+		return read( new Class<?>[] { type } );
 	}
 
 	public boolean readBoolean()

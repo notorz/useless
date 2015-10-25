@@ -10,6 +10,7 @@ import useless.io.exception.*;
 import useless.type_traits.*;
 import useless.utility.*;
 import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 public class BinaryWriter
 {
@@ -91,8 +92,9 @@ public class BinaryWriter
 		}
 	}
 
-	public void write( Class<?> type, Object val ) throws UnsupportedEncodingException, ObjectSerializeException
+	public void write( Object val ) throws UnsupportedEncodingException, ObjectSerializeException
 	{
+		Class<?> type = val.getClass();
 		if( IsArithmetic.invoke( type ) )
 		{
 			if( type == Boolean.class || type == boolean.class )
@@ -142,7 +144,30 @@ public class BinaryWriter
 		}
 		else
 		{
-			if( val instanceof Serializable )
+			if( val instanceof Collection<?> )
+			{
+				Collection<?> collectionVal = ( Collection<?> )val;
+				int count = collectionVal.size();
+				writeU32( ( long ) count );
+				for( Object temp : collectionVal )
+				{
+					write( temp );
+				}
+			}
+			else if( val instanceof Map<?, ?> )
+			{
+				Map<?, ?> mapVal = ( Map<?, ?> )val;
+				int count = mapVal.size();
+				writeU32( ( long ) count );
+				Iterator<?> iterator = mapVal.entrySet().iterator();
+				while( iterator.hasNext() )
+				{
+					Map.Entry temp = ( Map.Entry )iterator.next();
+					write( temp.getKey() );
+					write( temp.getValue() );
+				}
+			}
+			else if( val instanceof Serializable )
 			{
 				( ( Serializable )val ).serialize( this );
 			}
@@ -301,7 +326,7 @@ public class BinaryWriter
 
 			for( Object obj : arrayVal )
 			{
-				write( element_type, obj );
+				write( obj );
 			}
 		}
 	}

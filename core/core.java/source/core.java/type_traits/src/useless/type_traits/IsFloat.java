@@ -8,8 +8,8 @@ package useless.type_traits;
 
 public class IsFloat
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
-		return ( classT == Float.class || classT == Double.class );
+		return ( type == Float.class || type == Double.class || type == float.class || type == double.class );
 	}
 }

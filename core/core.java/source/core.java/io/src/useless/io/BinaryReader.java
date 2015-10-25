@@ -6,13 +6,11 @@
 
 package useless.io;
 
-import useless.type_traits.IsFundamental;
-import useless.type_traits.IsString;
-import useless.type_traits.SizeOf;
+import useless.io.exception.*;
+import useless.type_traits.*;
 import useless.utility.*;
-
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.lang.reflect.Array;
 
 public class BinaryReader
 {
@@ -26,20 +24,15 @@ public class BinaryReader
 
 	public BinaryReader( StreamBase stream )
 	{
-		if( stream == null || !stream.canRead() )
-		{
-			throw new IllegalArgumentException( "stream" );
-		}
-
-		m_stream = stream;
+		open( stream );
 	}
 
 	public BinaryReader( byte[] address, int size )
 	{
-		m_stream = new MemoryStream( address, size );
+		open( address, size );
 	}
 
-	public void setStream( StreamBase stream )
+	public void open( StreamBase stream )
 	{
 		if( stream == null || !stream.canRead() )
 		{
@@ -47,6 +40,11 @@ public class BinaryReader
 		}
 
 		m_stream = stream;
+	}
+
+	public void open( byte[] address, int size )
+	{
+		m_stream = new MemoryStream( address, size );
 	}
 
 	public StreamBase getStream()
@@ -61,7 +59,42 @@ public class BinaryReader
 			throw new NullPointerException( "stream" );
 		}
 
-		m_stream.read( buffer, count );
+		int read = m_stream.read( buffer, count );
+		if( read != count )
+		{
+			throw new ReadFailedException();
+		}
+	}
+
+	@SuppressWarnings( "unchecked" )
+	public <T> T read( Class<T> type ) throws UnsupportedEncodingException, InstantiationException, IllegalAccessException, ObjectSerializeException
+	{
+		if( IsArithmetic.invoke( type ) || IsChar.invoke( type ) )
+		{
+			read( m_internalBuffer, SizeOf.invoke( type ) );
+			return BitConverter.to( type, m_internalBuffer );
+		}
+		else if( IsString.invoke( type ) )
+		{
+			return ( T )readString();
+	 	}
+		else if( type.isArray() )
+		{
+			return ( T )readArray( type );
+		}
+		else
+		{
+			T val = type.newInstance();
+			if( val instanceof Serializable )
+			{
+				( ( Serializable )val ).deserialize( this );
+				return val;
+			}
+			else
+			{
+				throw new ObjectSerializeException();
+			}
+		}
 	}
 
 	public boolean readBoolean()
@@ -76,10 +109,10 @@ public class BinaryReader
 		return BitConverter.toS8( m_internalBuffer );
 	}
 
-	public int readU8()
+	public short readU8()
 	{
 		read( m_internalBuffer, 1 );
-		return ( int )( BitConverter.toS8( m_internalBuffer ) & 0xFF );
+		return BitConverter.toU8( m_internalBuffer );
 	}
 
 	public short readS16()
@@ -90,8 +123,9 @@ public class BinaryReader
 
 	public int readU16()
 	{
+
 		read( m_internalBuffer, 2 );
-		return ( int )( BitConverter.toS16( m_internalBuffer ) & 0xFFFF );
+		return BitConverter.toU16( m_internalBuffer );
 	}
 
 	public int readS32()
@@ -103,7 +137,7 @@ public class BinaryReader
 	public long readU32()
 	{
 		read( m_internalBuffer, 4 );
-		return ( long )( BitConverter.toS32( m_internalBuffer ) & 0xFFFFFFFF );
+		return BitConverter.toU32( m_internalBuffer );
 	}
 
 	public long readS64()
@@ -124,36 +158,192 @@ public class BinaryReader
 		return BitConverter.toF64( m_internalBuffer );
 	}
 
-	public <T> T read( Class<T> classT ) throws InstantiationException, IllegalAccessException, UnsupportedEncodingException
+	public String readString() throws UnsupportedEncodingException
 	{
-		if( IsFundamental.invoke( classT ) )
+		long countUnsigned = readU32();
+		if( countUnsigned > Integer.MAX_VALUE )
 		{
-			read( m_internalBuffer, SizeOf.invoke( classT ) );
-			return BitConverter.to( classT, m_internalBuffer );
+			throw new UnsupportedOperationException( "count" );
 		}
-		else if( IsString.invoke( classT ) )
+
+		int count = ( int )countUnsigned;
+		byte[] buffer = new byte[ count ];
+		read( buffer, count );
+		return new String( buffer, "UTF-8" );
+	}
+
+	public Object readArray( Class<?> type ) throws UnsupportedEncodingException, InstantiationException, IllegalAccessException, ObjectSerializeException
+	{
+		Class<?> element_type = type.getComponentType();
+		if( IsArithmetic.invoke( element_type ) )
 		{
-			long longCount = readU32();
-			if( longCount > Integer.MAX_VALUE )
+			if( element_type == Boolean.class || element_type == boolean.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				boolean[] ba = new boolean[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					ba[ i ] = readBoolean();
+				}
+
+				return ba;
+			}
+			else if( element_type == Byte.class || element_type == byte.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				byte[] ba = new byte[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					ba[ i ] = readS8();
+				}
+
+				return ba;
+			}
+			else if( element_type == Short.class || element_type == short.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				short[] sa = new short[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					sa[ i ] = readS16();
+				}
+
+				return sa;
+			}
+			else if( element_type == Integer.class || element_type == int.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				int[] ia = new int[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					ia[ i ] = readS32();
+				}
+
+				return ia;
+			}
+			else if( element_type == Long.class || element_type == long.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				long[] la = new long[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					la[ i ] = readS64();
+				}
+
+				return la;
+			}
+			else if( element_type == Float.class || element_type == float.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				float[] fa = new float[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					fa[ i ] = readF32();
+				}
+
+				return fa;
+			}
+			else if( element_type == Double.class || element_type == double.class )
+			{
+				long countUnsigned = readU32();
+				if( countUnsigned > Integer.MAX_VALUE )
+				{
+					throw new UnsupportedOperationException( "count" );
+				}
+
+				int count = ( int )countUnsigned;
+				double[] da = new double[ count ];
+
+				for( int i = 0; i < count; ++i )
+				{
+					da[ i ] = readF64();
+				}
+
+				return da;
+			}
+			else
+			{
+				throw new UnsupportedOperationException();
+			}
+		}
+		else if( IsChar.invoke( element_type ) )
+		{
+			long countUnsigned = readU32();
+			if( countUnsigned > Integer.MAX_VALUE )
 			{
 				throw new UnsupportedOperationException( "count" );
 			}
 
-			int count = ( int )longCount;
-			byte[] buffer = new byte[ count ];
-			read( buffer, count );
-			return ( T )new String( buffer, "UTF-8" );
+			int count = ( int )countUnsigned;
+			char[] ca = new char[ count ];
+
+			for( int i = 0; i < count; ++i )
+			{
+				read( m_internalBuffer, 2 );
+				ca[ i ] = BitConverter.toChar( m_internalBuffer );
+			}
+
+			return ca;
 		}
 		else
 		{
-			T val = classT.newInstance();
-			if( val instanceof Serializable )
+			long countUnsigned = readU32();
+			if( countUnsigned > Integer.MAX_VALUE )
 			{
-				( ( Serializable )val ).Serialize( this );
-				return val;
+				throw new UnsupportedOperationException( "count" );
 			}
-		}
 
-		throw new UnsupportedOperationException();
+			int count = ( int )countUnsigned;
+			Object arrayVal = Array.newInstance( element_type, count );
+
+			for( int i = 0; i < count; ++i )
+			{
+				Array.set( arrayVal, i, read( element_type ) );
+			}
+
+			return arrayVal;
+		}
 	}
 }

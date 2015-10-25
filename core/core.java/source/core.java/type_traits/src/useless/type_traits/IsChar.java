@@ -8,8 +8,8 @@ package useless.type_traits;
 
 public class IsChar
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
-		return ( classT == Character.class );
+		return ( type == Character.class || type == char.class );
 	}
 }

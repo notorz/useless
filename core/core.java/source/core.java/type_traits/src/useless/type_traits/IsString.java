@@ -8,8 +8,8 @@ package useless.type_traits;
 
 public class IsString
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
-		return ( classT == String.class );
+		return ( type == String.class );
 	}
 }

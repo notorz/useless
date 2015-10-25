@@ -8,8 +8,8 @@ package useless.type_traits;
 
 public class IsBoolean
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
-		return ( classT == Boolean.class );
+		return ( type == Boolean.class || type == boolean.class );
 	}
 }

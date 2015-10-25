@@ -12,7 +12,7 @@ public class DynamicStream implements StreamBase
 	private int m_position = 0;
 	private int m_seekhigh = 0;
 
-	DynamicStream( int size )
+	public DynamicStream( int size )
 	{
 		if( size < 1 )
 		{

@@ -8,5 +8,6 @@ package useless.io;
 
 public interface Serializable
 {
-	public void Serialize( BinaryReader br );
+	public void serialize( BinaryWriter bw );
+	public void deserialize( BinaryReader br );
 }

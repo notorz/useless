@@ -6,13 +6,15 @@
 
 package useless.utility;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 public class BitConverter
 {
 	public static byte[] getBytes( boolean value )
 	{
 		return new byte[]
 				{
-						( byte )( value ? 1 : 0 )
+					( byte )( value ? 1 : 0 )
 				};
 	}
 
@@ -20,7 +22,7 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-						value
+					value
 				};
 	}
 
@@ -28,8 +30,8 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-						( byte )( ( value ) & 0xFF ),
-						( byte )( ( value >> 8 ) & 0xFF )
+					( byte )( ( value ) & 0xFF ),
+					( byte )( ( value >> 8 ) & 0xFF )
 				};
 	}
 
@@ -37,8 +39,8 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-						( byte ) ( ( value >> 8 ) & 0xFF ),
-						( byte ) ( ( value ) & 0xFF )
+					( byte ) ( ( value >> 8 ) & 0xFF ),
+					( byte ) ( ( value ) & 0xFF )
 				};
 	}
 
@@ -46,10 +48,10 @@ public class BitConverter
 	{
 		return new byte[]
 				{
-						( byte )( ( value >> 24 ) & 0xFF ),
-						( byte )( ( value >> 16 ) & 0xFF ),
-						( byte )( ( value >> 8 ) & 0xFF ),
-						( byte )( ( value ) & 0xFF )
+					( byte )( ( value >> 24 ) & 0xFF ),
+					( byte )( ( value >> 16 ) & 0xFF ),
+					( byte )( ( value >> 8 ) & 0xFF ),
+					( byte )( ( value ) & 0xFF )
 				};
 	}
 
@@ -65,7 +67,7 @@ public class BitConverter
 					( byte )( ( value >> 16 ) & 0xFF ),
 					( byte )( ( value >> 8 ) & 0xFF ),
 					( byte )( ( value ) & 0xFF )
-		};
+				};
 	}
 
 	public static byte[] getBytes( float value )
@@ -81,6 +83,72 @@ public class BitConverter
 	public static byte[] getBytes( String value )
 	{
 		return value.getBytes();
+	}
+
+	public static byte[] getBytes_U8( short value )
+	{
+		return new byte[]
+				{
+						( byte ) ( ( value ) & 0xFF )
+				};
+	}
+
+	public static byte[] getBytes_U16( int value )
+	{
+		return new byte[]
+				{
+						( byte ) ( ( value >> 8 ) & 0xFF ),
+						( byte ) ( ( value ) & 0xFF )
+				};
+	}
+
+	public static byte[] getBytes_U32( long value )
+	{
+		return new byte[]
+				{
+						( byte )( ( value >> 24 ) & 0xFF ),
+						( byte )( ( value >> 16 ) & 0xFF ),
+						( byte )( ( value >> 8 ) & 0xFF ),
+						( byte )( ( value ) & 0xFF )
+				};
+	}
+
+	public static <T> byte[] getBytes( Class<T> type, T value )
+	{
+		if( type == Boolean.class || type == boolean.class )
+		{
+			return getBytes( ( Boolean )value );
+		}
+		else if( type == Character.class || type == char.class )
+		{
+			return getBytes( ( Character )value );
+		}
+		else if( type == Byte.class || type == byte.class )
+		{
+			return getBytes( ( Byte )value );
+		}
+		else if( type == Short.class || type == short.class )
+		{
+			return getBytes( ( Short )value );
+		}
+		else if( type == Integer.class || type == int.class )
+		{
+			return getBytes( ( Integer )value );
+		}
+		else if( type == Long.class || type == long.class )
+		{
+			return getBytes( ( Long )value );
+		}
+		else if( type == Float.class || type == float.class )
+		{
+			return getBytes( ( Float )value );
+		}
+		else if( type == Double.class || type == double.class )
+		{
+			return getBytes( ( Double )value );
+		}
+
+		throw new UnsupportedOperationException();
 	}
 
 	public static boolean toBoolean( byte[] bytes ) throws IllegalArgumentException
@@ -117,6 +185,16 @@ public class BitConverter
 		return bytes[ 0 ];
 	}
 
+	public static short toU8( byte[] bytes ) throws IllegalArgumentException
+	{
+		if( bytes == null || bytes.length < 1 )
+		{
+			throw new IllegalArgumentException( "bytes" );
+		}
+
+		return ( short )bytes[ 0 ];
+	}
+
 	public static short toS16( byte[] bytes ) throws IllegalArgumentException
 	{
 		if( bytes == null || bytes.length < 2 )
@@ -128,6 +206,20 @@ public class BitConverter
 				(
 					( ( short )( bytes[ 0 ] ) << 8 ) |
 					( ( short )( bytes[ 1 ] ) )
+				);
+	}
+
+	public static int toU16( byte[] bytes ) throws IllegalArgumentException
+	{
+		if( bytes == null || bytes.length < 2 )
+		{
+			throw new IllegalArgumentException( "bytes" );
+		}
+
+		return ( int )
+				(
+					( ( int )( bytes[ 0 ] ) << 8 ) |
+					( ( int )( bytes[ 1 ] ) )
 				);
 	}
 
@@ -144,6 +236,22 @@ public class BitConverter
 					( ( int )( bytes[ 1 ] ) << 16 ) |
 					( ( int )( bytes[ 2 ] ) << 8 ) |
 					( ( int )( bytes[ 3 ] ) )
+				);
+	}
+
+	public static long toU32( byte[] bytes ) throws IllegalArgumentException
+	{
+		if( bytes == null || bytes.length < 4 )
+		{
+			throw new IllegalArgumentException( "bytes" );
+		}
+
+		return ( long )
+				(
+					( ( long )( bytes[ 0 ] ) << 24 ) |
+					( ( long )( bytes[ 1 ] ) << 16 ) |
+					( ( long )( bytes[ 2 ] ) << 8 ) |
+					( ( long )( bytes[ 3 ] ) )
 				);
 	}
 
@@ -197,37 +305,37 @@ public class BitConverter
 		return new String( bytes );
 	}
 
-	public static <T> T to( Class<T> classT, byte[] bytes )
+	public static <T> T to( Class<T> type, byte[] bytes )
 	{
-		if( classT == Boolean.class )
+		if( type == Boolean.class || type == boolean.class )
 		{
 			return ( T )( Object )toBoolean( bytes );
 		}
-		else if( classT == Character.class )
+		else if( type == Character.class || type == char.class )
 		{
 			return ( T )( Object )toChar( bytes );
 		}
-		else if( classT == Byte.class )
+		else if( type == Byte.class || type == byte.class )
 		{
 			return ( T )( Object )toS8( bytes );
 		}
-		else if( classT == Short.class )
+		else if( type == Short.class || type == short.class )
 		{
 			return ( T )( Object )toS16( bytes );
 		}
-		else if( classT == Integer.class )
+		else if( type == Integer.class || type == int.class )
 		{
 			return ( T )( Object )toS32( bytes );
 		}
-		else if( classT == Long.class )
+		else if( type == Long.class || type == long.class )
 		{
 			return ( T )( Object )toS64( bytes );
 		}
-		else if( classT == Float.class )
+		else if( type == Float.class || type == float.class )
 		{
 			return ( T )( Object )toF32( bytes );
 		}
-		else if( classT == Double.class )
+		else if( type == Double.class || type == double.class )
 		{
 			return ( T )( Object )toF64( bytes );
 		}

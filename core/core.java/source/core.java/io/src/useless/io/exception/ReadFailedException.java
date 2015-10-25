@@ -4,11 +4,8 @@
  * Distributed under the MIT License.
  */
 
-package useless.io;
+package useless.io.exception;
 
-public enum SeekDir
+public class ReadFailedException extends RuntimeException
 {
-	beg,
-	cur,
-	end
-};
+}

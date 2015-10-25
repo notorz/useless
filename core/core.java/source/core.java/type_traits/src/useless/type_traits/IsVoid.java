@@ -8,8 +8,8 @@ package useless.type_traits;
 
 public class IsVoid
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
-		return ( classT == Void.class );
+		return ( type == Void.class || type == void.class );
 	}
 }

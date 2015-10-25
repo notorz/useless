@@ -12,7 +12,7 @@ public class FixedStream implements StreamBase
 	private int m_position = 0;
 	private int m_seekhigh = 0;
 
-	FixedStream( int size )
+	public FixedStream( int size )
 	{
 		if( size < 1 )
 		{

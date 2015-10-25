@@ -8,8 +8,8 @@ package useless.type_traits;
 
 public class IsFundamental
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
-		return ( IsArithmetic.invoke( classT ) || IsChar.invoke( classT ) || IsVoid.invoke( classT ) );
+		return ( IsArithmetic.invoke( type ) || IsChar.invoke( type ) || IsVoid.invoke( type ) );
 	}
 }

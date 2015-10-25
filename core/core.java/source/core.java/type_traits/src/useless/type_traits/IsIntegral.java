@@ -8,13 +8,18 @@ package useless.type_traits;
 
 public class IsIntegral
 {
-	public static <T> boolean invoke( Class<T> classT )
+	public static <T> boolean invoke( Class<T> type )
 	{
 		return (
-				classT == Boolean.class ||
-				classT == Byte.class ||
-				classT == Short.class ||
-				classT == Integer.class ||
-				classT == Long.class );
+				type == Boolean.class ||
+				type == Byte.class ||
+				type == Short.class ||
+				type == Integer.class ||
+				type == Long.class ||
+				type == boolean.class ||
+				type == byte.class ||
+				type == short.class ||
+				type == int.class ||
+				type == long.class );
 	}
 }

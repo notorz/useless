@@ -8,37 +8,37 @@ package useless.type_traits;
 
 public class SizeOf
 {
-	public static <T> int invoke( Class<T> classT )
+	public static <T> int invoke( Class<T> type )
 	{
-		if( classT == Boolean.class )
+		if( type == Boolean.class || type == boolean.class )
 		{
 			return 1;
 		}
-		else if( classT == Character.class )
+		else if( type == Character.class || type == char.class )
 		{
 			return 2;
 		}
-		else if( classT == Byte.class )
+		else if( type == Byte.class || type == byte.class )
 		{
 			return 1;
 		}
-		else if( classT == Short.class )
+		else if( type == Short.class || type == short.class )
 		{
 			return 2;
 		}
-		else if( classT == Integer.class )
+		else if( type == Integer.class || type == int.class )
 		{
 			return 4;
 		}
-		else if( classT == Long.class )
+		else if( type == Long.class || type == long.class )
 		{
 			return 8;
 		}
-		else if( classT == Float.class )
+		else if( type == Float.class || type == float.class )
 		{
 			return 4;
 		}
-		else if( classT == Double.class )
+		else if( type == Double.class || type == double.class )
 		{
 			return 8;
 		}

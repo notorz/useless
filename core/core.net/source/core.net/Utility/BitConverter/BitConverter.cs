@@ -56,6 +56,10 @@ namespace Useless.Utility
 			{
 				return System.BitConverter.GetBytes( ( double )val );
 			}
+			else if( type == typeof( char ) )
+			{
+				return System.BitConverter.GetBytes( ( char )val );
+			}
 
 			throw new NotSupportedException();
 			
@@ -166,6 +170,10 @@ namespace Useless.Utility
 			else if( type == typeof( double ) )
 			{
 				return ToF64( bytes );
+			}
+			else if( type == typeof( char ) )
+			{
+				return ToChar( bytes );
 			}
 
 			throw new NotSupportedException();

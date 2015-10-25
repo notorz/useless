@@ -118,13 +118,19 @@ namespace Sample_IO
 				writeCollection.Push( 44 );
 				writeCollection.Push( 55 );
 
+				int[] writeArray = new int[ 3 ];
+				writeArray[ 0 ] = 12;
+				writeArray[ 1 ] = 22;
+				writeArray[ 2 ] = 32;
+
 				DynamicStream ds = new DynamicStream( 100 );
 
 				Useless.IO.BinaryWriter bw = new Useless.IO.BinaryWriter( ds );
 				//bw.Write( testval );
 				//bw.Write( setVal );
 				//bw.Write( dictionaryVal );
-				bw.Write( writeCollection );
+				//bw.Write( writeCollection );
+				bw.Write( writeArray );
 
 				ds.Position = 0;
                 Useless.IO.BinaryReader br = new Useless.IO.BinaryReader( ds );
@@ -135,8 +141,10 @@ namespace Sample_IO
 				//Queue<int> readCollection = new Queue<int>();
 				//SortedSet<int> readCollection = new SortedSet<int>();
 				//Stack<int> readCollection = new Stack<int>();
-				SortedSet<int> readCollection = new SortedSet<int>();
-                br.Read( ref readCollection );
+				//SortedSet<int> readCollection = new SortedSet<int>();
+				int[] arrayVal2 = new int[ 3 ];
+				br.Read( ref arrayVal2 );
+                //br.Read( ref readCollection );
 
 				//HashSet<int> setVal2 = new HashSet<int>();
 				//br.Read( ref setVal2 );

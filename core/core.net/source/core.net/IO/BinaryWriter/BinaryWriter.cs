@@ -100,7 +100,7 @@ namespace Useless.IO
 
 		public void Write( Type type, object val )
 		{
-			if( TypeTraits.IsArithmetic.Invoke( type ) )
+			if( TypeTraits.IsArithmetic.Invoke( type ) || TypeTraits.IsChar.Invoke( type ) )
 			{
 				Write( Utility.BitConverter.GetBytes( type, val ), Marshal.SizeOf( type ) );
 			}
@@ -110,6 +110,17 @@ namespace Useless.IO
 				int count = Encoding.UTF8.GetByteCount( stringVal );
                 WriteU32( ( uint )count );
 				Write( Encoding.UTF8.GetBytes( stringVal ), count );
+			}
+			else if( type.IsArray )
+			{
+				Type element_type = type.GetElementType();
+
+				Array arrayVal = ( Array )val;
+				WriteU32( ( uint )arrayVal.Length );
+				foreach( object data in arrayVal )
+				{
+					Write( element_type, data );
+				}
 			}
 			else if( val is IDictionary )
 			{

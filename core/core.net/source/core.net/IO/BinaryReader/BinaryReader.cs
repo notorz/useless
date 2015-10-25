@@ -89,7 +89,7 @@ namespace Useless.IO
 		
 		public void Read( Type type, ref object val )
 		{
-			if( TypeTraits.IsArithmetic.Invoke( type ) )
+			if( TypeTraits.IsArithmetic.Invoke( type ) || TypeTraits.IsChar.Invoke( type ) )
 			{
 				Read( m_internalBuffer, Marshal.SizeOf( type ) );
 				val = Utility.BitConverter.To( type, m_internalBuffer );
@@ -107,6 +107,19 @@ namespace Useless.IO
 				Read( buffer, count );
 				val = Encoding.UTF8.GetString( buffer );
 			}
+			else if( type.IsArray )
+			{
+				long count = ( long )ReadU32();
+				Type element_type = type.GetElementType();
+
+				Array arrayVal = ( Array )val;
+				for( long i = 0; i < count; ++i )
+				{
+					object temp = null;
+					Read( element_type, ref temp );
+					arrayVal.SetValue( temp, i );
+				}
+			}
 			else if( val is IDictionary )
 			{
 				uint countUnsigned = ReadU32();
@@ -119,7 +132,7 @@ namespace Useless.IO
 				Type value_type = val.GetType().GetTypeInfo().GenericTypeArguments[ 1 ];
 				IDictionary dictionaryVal = ( IDictionary )val;
 				int count = ( int )countUnsigned;
-				for( int i = 0; i < count; ++i )
+                for( int i = 0; i < count; ++i )
 				{
 					object key_temp = null;
 					Read( key_type, ref key_temp );
@@ -180,6 +193,10 @@ namespace Useless.IO
 						Read( element_type, ref temp );
 						method.Invoke( val, new object[] { temp } );
 					}
+				}
+				else
+				{
+					throw new NotSupportedException();
 				}
             }
 			

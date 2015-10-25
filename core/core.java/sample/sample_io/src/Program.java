@@ -35,15 +35,16 @@ public class Program
 			listVal.addLast( ( short )53 );
 			listVal.addLast( ( short ) 63 );
 			listVal.addLast( ( short ) 73 );
-			bw.write( listVal );
+			//bw.write( listVal );
+			//bw.write( "abc가나다" );
 
 			HashMap<Byte, Short> mapVal = new HashMap<Byte, Short>();
 			mapVal.put( ( byte )4, ( short )97 );
 			mapVal.put( ( byte )9, ( short )74 );
 			mapVal.put( ( byte )10, ( short )53 );
-			bw.write( mapVal );
+			//bw.write( mapVal );
 
-			//bw.write( 10 );
+			bw.write( 10 );
 
 			TestValue testValue = new TestValue( 123 );
 			//bw.write( TestValue.class, testValue );
@@ -52,14 +53,14 @@ public class Program
 			BinaryReader br = new BinaryReader( ds );
 			//int[] arrayVal2 = br.read( int[].class );
 			//TestValue[] arrayVal2 = br.read( TestValue[].class );
-			//int intValue = br.read( Integer.class );
-			LinkedList<Short> listVal2 = br.read( new Class<?>[] { LinkedList.class, short.class } );
-			HashMap<Byte, Short> mapVal2 = br.read( new Class<?>[] { HashMap.class, byte.class, short.class } );
+			int intValue = br.read( Integer.class );
+			//LinkedList<Short> listVal2 = br.read( new Class<?>[] { LinkedList.class, short.class } );
+			//HashMap<Byte, Short> mapVal2 = br.read( new Class<?>[] { HashMap.class, byte.class, short.class } );
 
 			//TestValue testValue2 = br.read( TestValue.class );
 
-			//System.out.println( intValue );
-			System.out.println( listVal2 );
+			System.out.println( intValue );
+			//System.out.println( listVal2 );
 			//System.out.println( intValue );
 
 		}

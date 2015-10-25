@@ -21,7 +21,7 @@ namespace useless
 		{
 			m_base = m_next = &m_buffer[ 0 ];
 			m_end = m_base + size;
-			m_seekhigh = base;
+			m_seekhigh = m_base;
 		}
 
 		virtual size_t size() const
@@ -74,7 +74,6 @@ namespace useless
 				m_buffer.resize( ( ( m_next + count ) - m_end ) + m_buffer.size() );
 				m_buffer.resize( m_buffer.capacity() );
 
-				char* newbase = &m_buffer[ 0 ];
 				m_base = &m_buffer[ 0 ];
 				m_next = m_base + nextpos;
 				m_end = m_base + m_buffer.size();

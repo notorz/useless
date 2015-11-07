@@ -21,4 +21,4 @@ namespace useless
 #endif
 }
 
-#endif USELESS_CORE_NATIVE_STRING_INCLUDED
+#endif //USELESS_CORE_NATIVE_STRING_INCLUDED

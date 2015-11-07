@@ -27,6 +27,8 @@ namespace useless
 		static int compare_no_case( const C* value1, const C* value2, unsigned int length );
 		static int parse_int( const C* value );
 		static unsigned int parse_uint( const C* value );
+        static int64_t parse_int64( const C* value );
+        static uint64_t parse_uint64( const char* value );
 		static float parse_float( const C* value );
 		static double parse_double( const C* value );
 		static bool parse_bool( const char* value );
@@ -58,7 +60,8 @@ namespace useless
 		{
 #if ( _WIN32 || _WIN64 )
 			return ::_stricmp( value1, value2 );
-#elif
+#elif __GNUC__
+            return ::strcasecmp( value1, value2 );
 #endif
 		}
 
@@ -66,7 +69,8 @@ namespace useless
 		{
 #if ( _WIN32 || _WIN64 )
 			return ::_strnicmp( value1, value2, length );
-#elif
+#elif __GNUC__
+            return ::strncasecmp( value1, value2, length );
 #endif
 		}
 
@@ -85,7 +89,7 @@ namespace useless
 			return std::atoll( value );
 		}
 
-		static uint64_t parseuint64( const char* value )
+		static uint64_t parse_uint64( const char* value )
 		{
 			return std::strtoull( value, nullptr, 10 );
 		}
@@ -105,6 +109,7 @@ namespace useless
 #if ( _WIN32 || _WIN64 )
 			return ::_stricmp( value, "true" ) == 0;
 #elif __GNUC__
+            return ::strcasecmp( value, "true" ) == 0;
 #endif
 		}
 
@@ -118,7 +123,7 @@ namespace useless
 			return std::isalnum( value, std::locale() ) != 0;
 		}
 
-		static void format_helper( const char* fmt, const va_list& marker, char* output )
+		static void format_helper( const char* fmt, va_list marker, char* output )
 		{
 #if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
@@ -126,9 +131,9 @@ namespace useless
 			::vsprintf_s( &output[ 0 ], len, fmt, marker );
 			output[ len ] = '\0';
 #elif __GNUC__
-			__thread static int len;
-			len = ::_vscprintf( fmt, marker ) + 1;
-			::vsprintf_s( &output[ 0 ], len, fmt, marker );
+			static __thread int len;
+            len = ::vsnprintf( 0, 0, fmt, marker ) + 1;
+            ::vsnprintf( &output[ 0 ], len, fmt, marker );
 			output[ len ] = '\0';
 #endif
 		}
@@ -157,7 +162,8 @@ namespace useless
 		{
 #if ( _WIN32 || _WIN64 )
 			return ::_wcsicmp( value1, value2 );
-#elif
+#elif __GNUC__
+            return ::wcscasecmp( value1, value2 );
 #endif
 		}
 
@@ -165,7 +171,8 @@ namespace useless
 		{
 #if ( _WIN32 || _WIN64 )
 			return ::_wcsnicmp( value1, value2, length );
-#elif
+#elif __GNUC__
+            return ::wcsncasecmp( value1, value2, length );
 #endif
 		}
 
@@ -204,6 +211,7 @@ namespace useless
 #if ( _WIN32 || _WIN64 )
 			return ::_wcsicmp( value, L"true" ) == 0;
 #elif __GNUC__
+            return ::wcscasecmp( value, L"true" ) == 0;
 #endif
 		}
 
@@ -217,7 +225,7 @@ namespace useless
 			return std::isalnum( value, std::locale() ) != 0;
 		}
 
-		static void format_helper( const wchar_t* fmt, const va_list& marker, wchar_t* output )
+		static void format_helper( const wchar_t* fmt, va_list marker, wchar_t* output )
 		{
 #if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
@@ -226,12 +234,12 @@ namespace useless
 			output[ len ] = L'\0';
 #elif __GNUC__
 			__thread static int len;
-			len = ::_vscwprintf( fmt, marker ) + 1;
-			::vswprintf_s( &output[ 0 ], len, fmt, marker );
+            len = ::vswprintf( 0, 0, fmt, marker ) + 1;
+			::vswprintf( &output[ 0 ], len, fmt, marker );
 			output[ len ] = L'\0';
 #endif
 		}
 	};
 }
 
-#endif USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED
+#endif //USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED

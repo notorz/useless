@@ -111,7 +111,7 @@ namespace useless
 			__declspec( thread ) static va_list marker;
 			va_start( marker, fmt );
 
-			__declspec( thread ) static char_type buffer[ 4096 ] = { 0, };
+			__declspec( thread ) static char_type buffer[ 4096 ];
 			string_helper<char_type>::format_helper( fmt, marker, buffer );
 
 			va_end( marker );
@@ -120,7 +120,7 @@ namespace useless
 			__thread static va_list marker;
 			va_start( marker, fmt );
 
-			__thread static char_type buffer[ 4096 ] = { 0, };
+            static __thread char_type buffer[ 4096 ];
 			string_helper<char_type>::format_helper( fmt, marker, buffer );
 
 			va_end( marker );
@@ -312,7 +312,7 @@ namespace useless
 
 		void remove( const basic_string<char_type, Allocator>& term )
 		{
-			buffer_type::iterator it = std::remove_if<buffer_type::iterator, tag_compare>( m_buffer.begin(), m_buffer.end(), tag_compare( term.m_buffer ) );
+			typename buffer_type::iterator it = std::remove_if<typename buffer_type::iterator, tag_compare>( m_buffer.begin(), m_buffer.end(), tag_compare( term.m_buffer ) );
 			if( it != m_buffer.end() )
 			{
 				m_buffer.erase( it, m_buffer.end() );
@@ -507,7 +507,7 @@ namespace useless
 
 		uint64_t get_uint64() const
 		{
-			return string-helper<char_type>::parse_uint64( m_buffer.c_str() );
+			return string_helper<char_type>::parse_uint64( m_buffer.c_str() );
 		}
 
 		float get_float() const
@@ -559,4 +559,4 @@ namespace useless
 	};
 }
 
-#endif USELESS_CORE_NATIVE_STRING_STRING_INCLUDED
+#endif //USELESS_CORE_NATIVE_STRING_STRING_INCLUDED

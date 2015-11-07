@@ -9,12 +9,91 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections;
 using System.Reflection;
+using System.IO;
 
 namespace Useless.IO
 {
 	public class BinaryWriter : IDisposable
 	{
-		private IStream m_stream = null;
+		class StreamProxy
+		{
+			private IStream m_uselessStream = null;
+			private Stream m_stream = null;
+
+			public StreamProxy( IStream stream )
+			{
+				m_uselessStream = stream;
+			}
+
+			public StreamProxy( Stream stream )
+			{
+				m_stream = stream;
+			}
+
+			public void Dispose()
+			{
+				if( m_uselessStream != null )
+				{
+					m_uselessStream.Dispose();
+				}
+				else if( m_stream != null )
+				{
+					m_stream.Dispose();
+				}
+			}
+
+			public object GetStream()
+			{
+				if( m_uselessStream != null )
+				{
+					return m_uselessStream;
+				}
+				else
+				{
+					return m_stream;
+				}
+			}
+
+			public int Seek( int offset, SeekDir way )
+			{
+				if( m_uselessStream != null )
+				{
+					return m_uselessStream.Seek( offset, way );
+				}
+				else
+				{
+					return ( int )m_stream.Seek( offset, ( SeekOrigin )way );
+				}
+			}
+
+			public int GetPosition()
+			{
+				if( m_uselessStream != null )
+				{
+
+					return m_uselessStream.Position;
+				}
+				else
+				{
+					return ( int )m_stream.Position;
+				}
+			}
+
+			public int Write( byte[] buffer, int count )
+			{
+				if( m_uselessStream != null )
+				{
+					return m_uselessStream.Write( buffer, count );
+				}
+				else
+				{
+					m_stream.Write( buffer, 0, count );
+					return count;
+				}
+			}
+		}
+
+		private StreamProxy m_stream = null;
 		private bool m_mustBeDispose = false;
 
 		public BinaryWriter()
@@ -28,18 +107,28 @@ namespace Useless.IO
 				throw new ArgumentException( "stream" );
 			}
 
-			m_stream = stream;
+			m_stream = new StreamProxy( stream );
+		}
+
+		public BinaryWriter( Stream stream )
+		{
+			if( stream == null || !stream.CanWrite )
+			{
+				throw new ArgumentException( "stream" );
+			}
+
+			m_stream = new StreamProxy( stream );
 		}
 
 		public BinaryWriter( int size, bool growable = true )
 		{
 			if( growable )
 			{
-				m_stream = new DynamicStream( size );
+				m_stream = new StreamProxy( new DynamicStream( size ) );
 			}
 			else
 			{
-				m_stream = new FixedStream( size );
+				m_stream = new StreamProxy( new FixedStream( size ) );
 			}
 
 			m_mustBeDispose = true;
@@ -47,13 +136,13 @@ namespace Useless.IO
 
 		public BinaryWriter( byte[] address, int size )
 		{
-			m_stream = new MemoryStream( address, size );
+			m_stream = new StreamProxy( new MemoryStream( address, size ) );
 			m_mustBeDispose = true;
 		}
 		
 		public BinaryWriter( String path, System.IO.FileMode openmode )
 		{
-			m_stream = new FileStream( path, openmode );
+			m_stream = new StreamProxy( new FileStream( path, openmode ) );
 			m_mustBeDispose = true;
 		}
 
@@ -79,13 +168,39 @@ namespace Useless.IO
 				m_stream.Dispose();
 			}
 
-			m_stream = stream;
+			m_stream = new StreamProxy( stream );
 			m_mustBeDispose = false;
 		}
 
-		public IStream GetStream()
+		public void SetStream( Stream stream )
 		{
-			return m_stream;
+			if( stream == null || !stream.CanWrite )
+			{
+				throw new ArgumentException( "stream" );
+			}
+
+			if( m_stream != null && m_mustBeDispose )
+			{
+				m_stream.Dispose();
+			}
+
+			m_stream = new StreamProxy( stream );
+			m_mustBeDispose = false;
+		}
+
+		public object GetStream()
+		{
+			return m_stream.GetStream();
+		}
+
+		public int Seek( int offset, SeekDir way )
+		{
+			return m_stream.Seek( offset, way );
+		}
+
+		public int GetPosition()
+		{
+			return m_stream.GetPosition();
 		}
 
 		public void Write( byte[] buffer, int count )

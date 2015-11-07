@@ -9,14 +9,92 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Collections;
 using System.Reflection;
+using System.IO;
 
 namespace Useless.IO
 {
 	public class BinaryReader : IDisposable
 	{
+		class StreamProxy
+		{
+			private IStream m_uselessStream = null;
+			private Stream m_stream = null;
+
+			public StreamProxy( IStream stream )
+			{
+				m_uselessStream = stream;
+			}
+
+			public StreamProxy( Stream stream )
+			{
+				m_stream = stream;
+			}
+
+			public void Dispose()
+			{
+				if( m_uselessStream != null )
+				{
+					m_uselessStream.Dispose();
+				}
+				else if( m_stream !=  null )
+				{
+					m_stream.Dispose();
+				}
+			}
+
+			public object GetStream()
+			{
+				if( m_uselessStream != null )
+				{
+					return m_uselessStream;
+				}
+				else
+				{
+					return m_stream;
+				}
+			}
+
+			public int Seek( int offset, SeekDir way )
+			{
+				if( m_uselessStream != null )
+				{
+					return m_uselessStream.Seek( offset, way );
+				}
+				else
+				{
+					return ( int )m_stream.Seek( offset, ( SeekOrigin )way );
+				}
+			}
+
+			public int GetPosition()
+			{
+				if( m_uselessStream != null )
+				{
+
+					return m_uselessStream.Position;
+				}
+				else
+				{
+					return ( int )m_stream.Position;
+				}
+			}
+
+			public int Read( byte[] buffer, int count )
+			{
+				if( m_uselessStream != null )
+				{
+					return m_uselessStream.Read( buffer, count );
+				}
+				else
+				{
+					return m_stream.Read( buffer, 0, count );
+				}
+			}
+		}
+
 		private static byte[] m_internalBuffer = new byte[ 8 ];
 
-		private IStream m_stream = null;
+		private StreamProxy m_stream = null;
 		private bool m_mustBeDispose = false;
 
 		public BinaryReader()
@@ -31,18 +109,28 @@ namespace Useless.IO
 				throw new ArgumentException( "stream" );
 			}
 
-			m_stream = stream;
+			m_stream = new StreamProxy( stream );
+		}
+
+		public BinaryReader( Stream stream )
+		{
+			if( stream == null || !stream.CanRead )
+			{
+				throw new ArgumentException( "stream" );
+			}
+
+			m_stream = new StreamProxy( stream );
 		}
 
 		public BinaryReader( byte[] address, int size )
 		{
-			m_stream = new MemoryStream( address, size );
+			m_stream = new StreamProxy( new MemoryStream( address, size ) );
 			m_mustBeDispose = true;
         }
 
 		public BinaryReader( String path, System.IO.FileMode openmode )
 		{
-			m_stream = new FileStream( path, openmode );
+			m_stream = new StreamProxy( new FileStream( path, openmode ) );
 			m_mustBeDispose = true;
 		}
 
@@ -68,18 +156,44 @@ namespace Useless.IO
 				m_stream.Dispose();
 			}
 
-			m_stream = stream;
+			m_stream = new StreamProxy( stream );
 			m_mustBeDispose = false;
         }
 
-		public IStream GetStream()
+		public void SetStream( Stream stream )
 		{
-			return m_stream;
+			if( stream == null || !stream.CanRead )
+			{
+				throw new ArgumentException( "stream" );
+			}
+
+			if( m_stream != null && m_mustBeDispose )
+			{
+				m_stream.Dispose();
+			}
+
+			m_stream = new StreamProxy( stream );
+			m_mustBeDispose = false;
 		}
+
+		public object GetStream()
+		{
+			return m_stream.GetStream();
+		}
+
+		public int Seek( int offset, SeekDir way )
+		{
+			return m_stream.Seek( offset, way );
+		}
+
+		public int GetPosition()
+		{
+			return m_stream.GetPosition();
+        }
 
 		public void Read( byte[] buffer, int count )
 		{
-			if( m_stream == null  )
+			if( m_stream == null )
 			{
 				throw new ObjectDisposedException( "stream" );
 			}
@@ -219,89 +333,72 @@ namespace Useless.IO
 			Read( typeof( T ), ref temp );
 			val = ( T )temp;
 		}
+		
+		public T Read<T>()
+		{
+			T val = default( T );
+			Read<T>( ref val );
+			return val;
+		}
 
 		public bool ReadBoolean()
 		{
-			bool val = false;
-			Read( ref val );
-			return val;
+			return Read<bool>();
 		}
 
 		public sbyte ReadS8()
 		{
-			sbyte val = 0;
-			Read( ref val );
-			return val;
+			return Read<sbyte>();
 		}
 
 		public byte ReadU8()
 		{
-			byte val = 0;
-			Read( ref val );
-			return val;
+			return Read<byte>();
 		}
 		
 		public short ReadS16()
 		{
-			short val = 0;
-			Read( ref val );
-			return val;
+			return Read<short>();
 		}
 
 		public ushort ReadU16()
 		{
-			ushort val = 0;
-			Read( ref val );
-			return val;
+			return Read<ushort>();
 		}
 		
 		public int ReadS32()
 		{
-			int val = 0;
-			Read( ref val );
-			return val;
+			return Read<int>();
 		}
 
 		public uint ReadU32()
 		{
-			uint val = 0;
-			Read( ref val );
-			return val;
+			return Read<uint>();
 		}
 
 		public long ReadS64()
 		{
-			long val = 0;
-			Read( ref val );
-			return val;
+			return Read<long>();
 		}
 
 		public ulong ReadU64()
 		{
-			ulong val = 0;
-			Read( ref val );
-			return val;
+			return Read<ulong>();
 		}
 
 		public float ReadF32()
 		{
-			float val = 0;
-			Read( ref val );
-			return val;
+			return Read<float>();
 		}
 
 		public double ReadF64()
 		{
-			double val = 0;
-			Read( ref val );
-			return val;
+			return Read<double>();
 		}
 
 		public String ReadString()
 		{
-			String val = null;
-			Read( ref val );
-			return val;
+			return Read<String>();
 		}
 	}
 }

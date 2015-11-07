@@ -21,7 +21,15 @@ using namespace useless;
 int _tmain( int /*argc*/, _TCHAR* /*argv[]*/ )
 {
 	{
+		dynamic_stream ds( 100 );
+		binary_writer bw( ds );
+		bw << 12;
+		bw << 14;
+	}
+
+	{
 		binary_writer bw( "test.txt", openmode::out );
+		//bw << 12;
 
 		bw << "12345";
 

@@ -130,7 +130,8 @@ namespace Sample_IO
 				//bw.Write( setVal );
 				//bw.Write( dictionaryVal );
 				//bw.Write( writeCollection );
-				bw.Write( writeArray );
+				//bw.Write( writeArray );
+				bw.Write( "abc가나다" );
 
 				ds.Position = 0;
                 Useless.IO.BinaryReader br = new Useless.IO.BinaryReader( ds );

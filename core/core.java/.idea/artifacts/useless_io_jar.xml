@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="useless-io:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/useless_io_jar</output-path>
+    <root id="archive" name="useless-io.jar">
+      <element id="module-output" name="io" />
+      <element id="module-output" name="utility" />
+      <element id="module-output" name="type_traits" />
+    </root>
+  </artifact>
+</component>

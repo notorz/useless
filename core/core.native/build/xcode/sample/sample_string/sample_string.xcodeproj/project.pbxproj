@@ -205,6 +205,13 @@
 		4899E5331BEDF31400339F94 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/kiro/boost_1_59_0,
+					"$(project_dir)../../../../source",
+				);
+				LIBRARY_SEARCH_PATHS = /Users/kiro/boost_1_59_0/stage/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +219,13 @@
 		4899E5341BEDF31400339F94 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/kiro/boost_1_59_0,
+					"$(project_dir)../../../../source",
+				);
+				LIBRARY_SEARCH_PATHS = /Users/kiro/boost_1_59_0/stage/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +249,7 @@
 				4899E5341BEDF31400339F94 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

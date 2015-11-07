@@ -85,12 +85,12 @@ namespace useless
 			return str.get_uint();
 		}
 
-		static __int64 parse_int64( const basic_string<char_type, Allocator>& str )
+		static int64_t parse_int64( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_int64();
 		}
 
-		static __int64 parse_uint64( const basic_string<char_type, Allocator>& str )
+		static uint64_t parse_uint64( const basic_string<char_type, Allocator>& str )
 		{
 			return str.get_uint64();
 		}
@@ -500,12 +500,12 @@ namespace useless
 			return string_helper<char_type>::parse_uint( m_buffer.c_str() );
 		}
 
-		__int64 get_int64() const
+		int64_t get_int64() const
 		{
 			return string_helper<char_type>::parse_int64( m_buffer.c_str() );
 		}
 
-		unsigned __int64 get_uint64() const
+		uint64_t get_uint64() const
 		{
 			return string-helper<char_type>::parse_uint64( m_buffer.c_str() );
 		}

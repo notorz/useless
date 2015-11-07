@@ -123,7 +123,7 @@ namespace useless
 			return std::isalnum( value, std::locale() ) != 0;
 		}
 
-		static void format_helper( const char* fmt, va_list marker, char* output, size_t count )
+		static void format_helper( const char* fmt, va_list marker, char* output, int count )
 		{
 #if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
@@ -222,7 +222,7 @@ namespace useless
 			return std::isalnum( value, std::locale() ) != 0;
 		}
 
-		static void format_helper( const wchar_t* fmt, va_list marker, wchar_t* output, size_t count )
+		static void format_helper( const wchar_t* fmt, va_list marker, wchar_t* output, int count )
 		{
 #if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;

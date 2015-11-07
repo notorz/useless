@@ -112,10 +112,9 @@ namespace useless
 			va_start( marker, fmt );
 
 			__declspec( thread ) static char_type buffer[ 4096 ];
-			string_helper<char_type>::format_helper( fmt, marker, buffer );
+			string_helper<char_type>::format_helper( fmt, marker, buffer, 4096 );
 
 			va_end( marker );
-			return basic_string<char_type, Allocator>( buffer );
 #elif __GNUC__
 			__thread static va_list marker;
 			va_start( marker, fmt );
@@ -124,8 +123,8 @@ namespace useless
 			string_helper<char_type>::format_helper( fmt, marker, buffer, 4096 );
 
 			va_end( marker );
-			return basic_string<char_type, Allocator>( buffer );
 #endif
+			return basic_string<char_type, Allocator>( buffer );
 		}
 
 	public:
@@ -283,13 +282,23 @@ namespace useless
 
 		basic_string<char_type, Allocator>& format( const char_type* fmt, ... )
 		{
-			va_list marker;
+#if ( _WIN32 || _WIN64 )
+			__declspec( thread ) static va_list marker;
 			va_start( marker, fmt );
 
-			char_type buffer[ 4096 ] = { 0, };
+			__declspec( thread ) static char_type buffer[ 4096 ];
 			string_helper<char_type>::format_helper( fmt, marker, buffer, 4096 );
 
 			va_end( marker );
+#elif __GNUC__
+			__thread static va_list marker;
+			va_start( marker, fmt );
+
+			static __thread char_type buffer[ 4096 ];
+			string_helper<char_type>::format_helper( fmt, marker, buffer, 4096 );
+
+			va_end( marker );
+#endif
 
 			m_buffer = buffer;
 			return *this;

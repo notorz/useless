@@ -123,18 +123,15 @@ namespace useless
 			return std::isalnum( value, std::locale() ) != 0;
 		}
 
-		static void format_helper( const char* fmt, va_list marker, char* output )
+		static void format_helper( const char* fmt, va_list marker, char* output, size_t count )
 		{
 #if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
-			len = ::_vscprintf( fmt, marker ) + 1;
+            len = std::min( ::_vscprintf( fmt, marker ) + 1, count );
 			::vsprintf_s( &output[ 0 ], len, fmt, marker );
 			output[ len ] = '\0';
 #elif __GNUC__
-			static __thread int len;
-            len = ::vsnprintf( 0, 0, fmt, marker ) + 1;
-            ::vsnprintf( &output[ 0 ], len, fmt, marker );
-			output[ len ] = '\0';
+            ::vsnprintf( &output[ 0 ], count, fmt, marker );
 #endif
 		}
 	};
@@ -225,18 +222,15 @@ namespace useless
 			return std::isalnum( value, std::locale() ) != 0;
 		}
 
-		static void format_helper( const wchar_t* fmt, va_list marker, wchar_t* output )
+		static void format_helper( const wchar_t* fmt, va_list marker, wchar_t* output, size_t count )
 		{
 #if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
-			len = ::_vscwprintf( fmt, marker ) + 1;
+			len = std::min( ::_vscwprintf( fmt, marker ) + 1, count );
 			::vswprintf_s( &output[ 0 ], len, fmt, marker );
 			output[ len ] = L'\0';
 #elif __GNUC__
-			__thread static int len;
-            len = ::vswprintf( 0, 0, fmt, marker ) + 1;
-			::vswprintf( &output[ 0 ], len, fmt, marker );
-			output[ len ] = L'\0';
+			::vswprintf( &output[ 0 ], count, fmt, marker );
 #endif
 		}
 	};

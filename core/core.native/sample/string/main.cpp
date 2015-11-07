@@ -188,8 +188,8 @@ void test_array()
 
 void test_string_format()
 {
-	string str = string::make_format( TEXT( "%d+%d=%d" ), 1, 2, 1 + 2 );
-	if( str != TEXT( "1+2=3" ) )
+	string str = string::make_format( TEXT( "%d+%d=%d, %d+%d=%d" ), 1, 2, 1 + 2, 4, 5, 4 + 5 );
+	if( str != TEXT( "1+2=3, 4+5=9" ) )
 	{
 		return;
 	}

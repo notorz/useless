@@ -121,7 +121,7 @@ namespace useless
 			va_start( marker, fmt );
 
             static __thread char_type buffer[ 4096 ];
-			string_helper<char_type>::format_helper( fmt, marker, buffer );
+			string_helper<char_type>::format_helper( fmt, marker, buffer, 4096 );
 
 			va_end( marker );
 			return basic_string<char_type, Allocator>( buffer );
@@ -287,7 +287,7 @@ namespace useless
 			va_start( marker, fmt );
 
 			char_type buffer[ 4096 ] = { 0, };
-			string_helper<char_type>::format_helper( fmt, marker, buffer );
+			string_helper<char_type>::format_helper( fmt, marker, buffer, 4096 );
 
 			va_end( marker );
 

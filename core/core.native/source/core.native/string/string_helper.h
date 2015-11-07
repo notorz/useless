@@ -7,10 +7,12 @@
 #ifndef USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED
 #define USELESS_CORE_NATIVE_STRING_STRING_HELPER_INCLUDED
 
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
 #include <stdio.h>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <locale>
+#include <boost/cstdint.hpp>
 
 namespace useless
 {
@@ -39,80 +41,96 @@ namespace useless
 	public:
 		static size_t length( const char* value )
 		{
-			return ::strlen( value );
+			return std::strlen( value );
 		}
 
 		static const char* contains( const char* value1, const char* value2 )
 		{
-			return ::strstr( value1, value2 );
+			return std::strstr( value1, value2 );
 		}
 
 		static int compare( const char* value1, const char* value2 )
 		{
-			return ::strcmp( value1, value2 );
+			return std::strcmp( value1, value2 );
 		}
 
 		static int compare_no_case( const char* value1, const char* value2 )
 		{
+#if ( _WIN32 || _WIN64 )
 			return ::_stricmp( value1, value2 );
+#elif
+#endif
 		}
 
-		static int compare_no_case( const char* value1, const char* value2, unsigned int length )
+		static int compare_no_case( const char* value1, const char* value2, size_t length )
 		{
+#if ( _WIN32 || _WIN64 )
 			return ::_strnicmp( value1, value2, length );
+#elif
+#endif
 		}
 
 		static int parse_int( const char* value )
 		{
-			return ::atoi( value );
+			return std::atoi( value );
 		}
 
 		static unsigned int parse_uint( const char* value )
 		{
-			return static_cast<unsigned int>( ::strtoul( value, nullptr, 10 ) );
+			return static_cast<unsigned int>( std::strtoul( value, nullptr, 10 ) );
 		}
 
-		static __int64 parse_int64( const char* value )
+		static int64_t parse_int64( const char* value )
 		{
-			return ::_atoi64( value );
+			return std::atoll( value );
 		}
 
-		static __int64 parseuint64( const char* value )
+		static uint64_t parseuint64( const char* value )
 		{
-			return ::_strtoui64( value, nullptr, 10 );
+			return std::strtoull( value, nullptr, 10 );
 		}
 
 		static float parse_float( const char* value )
 		{
-			return static_cast<float>( ::atof( value ) );
+			return std::strtof( value, nullptr );
 		}
 
 		static double parse_double( const char* value )
 		{
-			return ::atof( value );
+			return std::atof( value );
 		}
 
 		static bool parse_bool( const char* value )
 		{
-			return ::_stricmp( value, "TRUE" ) == 0;
+#if ( _WIN32 || _WIN64 )
+			return ::_stricmp( value, "true" ) == 0;
+#elif __GNUC__
+#endif
 		}
 
 		static bool is_alpha( char value )
 		{
-			return ::isalpha( static_cast<int>( value ) ) != 0;
+			return std::isalpha( value, std::locale() ) != 0;
 		}
 
 		static bool is_alpha_number( char value )
 		{
-			return ::isalnum( static_cast<int>( value ) ) != 0;
+			return std::isalnum( value, std::locale() ) != 0;
 		}
 
 		static void format_helper( const char* fmt, const va_list& marker, char* output )
 		{
+#if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
 			len = ::_vscprintf( fmt, marker ) + 1;
 			::vsprintf_s( &output[ 0 ], len, fmt, marker );
 			output[ len ] = '\0';
+#elif __GNUC__
+			__thread static int len;
+			len = ::_vscprintf( fmt, marker ) + 1;
+			::vsprintf_s( &output[ 0 ], len, fmt, marker );
+			output[ len ] = '\0';
+#endif
 		}
 	};
 
@@ -122,80 +140,96 @@ namespace useless
 	public:
 		static size_t length( const wchar_t* value )
 		{
-			return ::wcslen( value );
+			return std::wcslen( value );
 		}
 
 		static const wchar_t* contains( const wchar_t* value1, const wchar_t* value2 )
 		{
-			return ::wcsstr( value1, value2 );
+			return std::wcsstr( value1, value2 );
 		}
 
 		static int compare( const wchar_t* value1, const wchar_t* value2 )
 		{
-			return ::wcscmp( value1, value2 );
+			return std::wcscmp( value1, value2 );
 		}
 
 		static int compare_no_case( const wchar_t* value1, const wchar_t* value2 )
 		{
+#if ( _WIN32 || _WIN64 )
 			return ::_wcsicmp( value1, value2 );
+#elif
+#endif
 		}
 
-		static int compare_no_case( const wchar_t* value1, const wchar_t* value2, unsigned int length )
+		static int compare_no_case( const wchar_t* value1, const wchar_t* value2, size_t length )
 		{
+#if ( _WIN32 || _WIN64 )
 			return ::_wcsnicmp( value1, value2, length );
+#elif
+#endif
 		}
 
 		static int parse_int( const wchar_t* value )
 		{
-			return ::_wtoi( value );
+			return static_cast<int>( std::wcstol( value, nullptr, 10 ) );
 		}
 
 		static unsigned int parse_uint( const wchar_t* value )
 		{
-			return static_cast<unsigned int>( ::wcstoul( value, nullptr, 10 ) );
+			return static_cast<unsigned int>( std::wcstoul( value, nullptr, 10 ) );
 		}
 
-		static __int64 parse_int64( const wchar_t* value )
+		static int64_t parse_int64( const wchar_t* value )
 		{
-			return ::_wtoi64( value );
+			return std::wcstoll( value, nullptr, 10 );
 		}
 
-		static unsigned __int64 parse_uint64( const wchar_t* value )
+		static uint64_t parse_uint64( const wchar_t* value )
 		{
-			return ::_wcstoui64( value, nullptr, 10 );
+			return std::wcstoull( value, nullptr, 10 );
 		}
 
 		static float parse_float( const wchar_t* value )
 		{
-			return static_cast<float>( ::_wtof( value ) );
+			return std::wcstof( value, nullptr );
 		}
 
 		static double parse_double( const wchar_t* value )
 		{
-			return ::_wtof( value );
+			return std::wcstod( value, nullptr );
 		}
 
 		static bool parse_bool( const wchar_t* value )
 		{
-			return ::_wcsicmp( value, L"TRUE" ) == 0;
+#if ( _WIN32 || _WIN64 )
+			return ::_wcsicmp( value, L"true" ) == 0;
+#elif __GNUC__
+#endif
 		}
 
 		static bool is_alpha( wchar_t value )
 		{
-			return ::iswalpha( value ) != 0;
+			return std::isalpha( value, std::locale() ) != 0;
 		}
 
 		static bool is_alpha_number( wchar_t value )
 		{
-			return ::iswalnum( value ) != 0;
+			return std::isalnum( value, std::locale() ) != 0;
 		}
 
 		static void format_helper( const wchar_t* fmt, const va_list& marker, wchar_t* output )
 		{
+#if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static int len;
 			len = ::_vscwprintf( fmt, marker ) + 1;
 			::vswprintf_s( &output[ 0 ], len, fmt, marker );
 			output[ len ] = L'\0';
+#elif __GNUC__
+			__thread static int len;
+			len = ::_vscwprintf( fmt, marker ) + 1;
+			::vswprintf_s( &output[ 0 ], len, fmt, marker );
+			output[ len ] = L'\0';
+#endif
 		}
 	};
 }

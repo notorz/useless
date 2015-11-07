@@ -107,6 +107,7 @@ namespace useless
 
 		static basic_string<char_type, Allocator> make_format( const char_type* fmt, ... )
 		{
+#if ( _WIN32 || _WIN64 )
 			__declspec( thread ) static va_list marker;
 			va_start( marker, fmt );
 
@@ -115,6 +116,16 @@ namespace useless
 
 			va_end( marker );
 			return basic_string<char_type, Allocator>( buffer );
+#elif __GNUC__
+			__thread static va_list marker;
+			va_start( marker, fmt );
+
+			__thread static char_type buffer[ 4096 ] = { 0, };
+			string_helper<char_type>::format_helper( fmt, marker, buffer );
+
+			va_end( marker );
+			return basic_string<char_type, Allocator>( buffer );
+#endif
 		}
 
 	public:

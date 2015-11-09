@@ -2,6 +2,7 @@
 *.sdf
 *.opensdf
 *.user
+*.xcuserstate
 core/core.native/interm
 core/core.native/output
 core/core.net/interm

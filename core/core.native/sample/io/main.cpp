@@ -5,7 +5,6 @@
 //
 
 #include <stdio.h>
-#include <tchar.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -18,7 +17,7 @@
 
 using namespace useless;
 
-int _tmain( int /*argc*/, _TCHAR* /*argv[]*/ )
+int main()
 {
 	{
 		dynamic_stream ds( 100 );

@@ -7,147 +7,126 @@
 #define USELESS_ENCODING_SOURCE
 #include <unordered_map>
 #include <memory>
-#pragma warning( disable : 4100 )
-#include <boost/thread.hpp>
-#pragma warning( default : 4100 )
-#include <boost/locale.hpp>
+#if ( _WIN32 || _WIN64 )
+#include <windows.h>
+#elif __GNUC__
+#endif
 #include "encoding.h"
 
 namespace useless
 {
-	const encoding& encoding::get( const string_ansi& charset )
+	const encoding& encoding::get( unsigned int codepage )
 	{
-		static std::unordered_map<std::string, std::shared_ptr<encoding>> s_map;
-		auto it = s_map.find( charset.buffer() );
+		static std::unordered_map<unsigned int, std::shared_ptr<encoding>> s_map;
+		auto it = s_map.find( codepage );
 		if( it != s_map.end() )
 		{
 			return *( it->second );
 		}
 
-		std::shared_ptr<encoding> encoding( new encoding( charset ) );
-		s_map.insert( std::make_pair( charset.buffer(), encoding ) );
+		std::shared_ptr<encoding> encoding( new encoding( codepage ) );
+		s_map.insert( std::make_pair( codepage, encoding ) );
 		return *encoding;
 	}
 
-	const encoding& encoding::default( )
+	const encoding& encoding::default()
 	{
-		return encoding::get( "" );
-	}
-
-	const encoding& encoding::ascii()
-	{
-		return encoding::get( "us-ascii" );
+		return encoding::get( CodePage::Default );
 	}
 
 	const encoding& encoding::utf8()
 	{
-		return encoding::get( "utf-8" );
-	}
-
-	const encoding& encoding::utf16()
-	{
-		return encoding::get( "utf-16le" );
-	}
-
-	const encoding& encoding::utf16_big_endian()
-	{
-		return encoding::get( "utf-16be" );
-	}
-
-	const encoding& encoding::utf32()
-	{
-		return encoding::get( "utf-32le" );
-	}
-
-	const encoding& encoding::utf32_big_endian()
-	{
-		return encoding::get( "utf-32be" );
+		return encoding::get( CodePage::UTF8 );
 	}
 
 	void encoding::convert( const encoding& src, const encoding& dst, const string_ansi& input, string_ansi& output )
 	{
-		std::string temp = boost::locale::conv::to_utf<char>( input.buffer(), src.m_loc );
-		output = boost::locale::conv::from_utf<char>( temp, dst.m_loc );
+		output = dst.from_wide( src.to_wide( input ) );
 	}
 
 	string_ansi encoding::convert( const encoding& src, const encoding& dst, const string_ansi& input )
 	{
-		std::string temp = boost::locale::conv::to_utf<char>( input.buffer(), src.m_loc );
-		return boost::locale::conv::from_utf<char>( temp, dst.m_loc );
+		return dst.from_wide( src.to_wide( input ) );
 	}
 
 	void encoding::convert( const encoding& src, const string_ansi& input, string_wide& output )
 	{
-		output = boost::locale::conv::to_utf<wchar_t>( input.buffer(), src.m_loc );
+		output = src.to_wide( input );
 	}
 
 	string_wide encoding::convert( const encoding& src, const string_ansi& input )
 	{
-		return boost::locale::conv::to_utf<wchar_t>( input.buffer(), src.m_loc );;
+		return src.to_wide( input );
 	}
 
 	void encoding::convert( const encoding& dst, const string_wide& input, string_ansi& output )
 	{
-		output = boost::locale::conv::from_utf<wchar_t>( input.buffer(), dst.m_loc );
+		output = dst.from_wide( input );
 	}
 
 	string_ansi encoding::convert( const encoding& dst, const string_wide& input )
 	{
-		return boost::locale::conv::from_utf<wchar_t>( input.buffer(), dst.m_loc );
+		return dst.from_wide( input );
 	}
 
 	bool encoding::operator == ( const encoding& other ) const
 	{
-		return ( m_loc == other.m_loc );
+		return ( m_codepage == other.m_codepage );
 	}
 
 	bool encoding::operator != ( const encoding& other ) const
 	{
-		return ( m_loc != other.m_loc );
+		return ( m_codepage != other.m_codepage );
 	}
 
-	encoding::encoding( const string_ansi& charset )
+	encoding::encoding( unsigned int codepage )
+		: m_codepage( codepage )
 	{
-		//static boost::locale::generator s_gen;
-		
-		//m_loc = s_gen( charset.buffer() );
-		m_loc = std::locale( charset.buffer() );
 	}
 
 	encoding::encoding( const encoding& other )
-		: m_loc( other.m_loc )
+		: m_codepage( other.m_codepage )
 	{
 
 	}
 
 	const encoding& encoding::operator=( const encoding& other )
 	{
-		m_loc = other.m_loc;
+		m_codepage = other.m_codepage;
 		return *this;
 	}
 
 	void encoding::from_wide( const string_wide& input, string_ansi& output ) const
 	{
-		output = boost::locale::conv::from_utf<wchar_t>( input.buffer(), m_loc );
+		int count = ::WideCharToMultiByte( m_codepage, 0, &input[ 0 ], static_cast<int>( input.length() ), 0, 0, 0, 0 );
+		if( count > 0 )
+		{
+			output.resize( count );
+			::WideCharToMultiByte( m_codepage, 0, &input[ 0 ], static_cast<int>( input.length() ), &output[ 0 ], count, 0, 0 );
+		}
 	}
 
 	string_ansi encoding::from_wide( const string_wide& input ) const
 	{
-		return boost::locale::conv::from_utf<wchar_t>( input.buffer(), m_loc );
+		string_ansi temp;
+		from_wide( input, temp );
+		return temp;
 	}
 
 	void encoding::to_wide( const string_ansi& input, string_wide& output ) const
 	{
-		output = boost::locale::conv::to_utf<wchar_t>( input.buffer(), m_loc );
+		int count = ::MultiByteToWideChar( m_codepage, 0, &input[ 0 ], static_cast<int>( input.length() ), 0, 0 );
+		if( count > 0 )
+		{
+			output.resize( count );
+			::MultiByteToWideChar( m_codepage, 0, &input[ 0 ], static_cast<int>( input.length() ), &output[ 0 ], count );
+		}
 	}
 
 	string_wide encoding::to_wide( const string_ansi& input ) const
 	{
-		return boost::locale::conv::to_utf<wchar_t>( input.buffer(), m_loc );
-	}
-
-	const char* encoding::name() const
-	{
-		return m_loc.c_str();
+		string_wide temp;
+		to_wide( input, temp );
+		return temp;
 	}
 }

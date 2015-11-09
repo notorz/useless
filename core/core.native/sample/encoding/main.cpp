@@ -5,57 +5,107 @@
 //
 
 #include <stdio.h>
-#include <tchar.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#pragma warning( disable : 4100 )
-#include <boost/thread.hpp>
-#pragma warning( default : 4100 )
-#include <boost/locale.hpp>
 
 #include "core.native/encoding.h"
 #include "core.native/string.h"
 
 using namespace useless;
 
-int _tmain( int /*argc*/, _TCHAR* /*argv[]*/ )
+bool test_static_member()
 {
-	//std::string utf8_string = boost::locale::conv::to_utf<char>( "뮴ㄴㅇㅈ", "Latin1" );
-	//printf( "%s\n", utf8_string.c_str() );
-	//std::locale::global( std::locale( "en_US.UTF8" ) );
-	//std::locale::global()
-	//boost::locale::generator gen;
-	//std::locale loc = gen( "" );
-	//std::locale loc = std::locale( "ko_KR.UTF-8" );
-	//const char* loc_name = loc.name().c_str();
-	//::printf( "%s\n", loc_name );
-	
-	//const encoding& e = encoding::unicode();
-	//const char* e_name = e.name();
-	//const encoding& e2 = encoding::ascii();
-	//const char* e2_name = e2.name();
-	//const encoding& e3 = encoding::default();
-	//const char* e3_name = e3.name();
-	//const encoding& e = encoding::get( "ko-kr" );
-	//const char* e_name = e.name();
-	//string_ansi val = e.from_wide( L"으하하" );
-	//::printf( "%s\n%s\n", val.buffer(), e_name );
-	//::printf( "%s\n", e2_name );
-	//::printf( "%s\n", e3_name );
-	//::printf( "%s\n", e_name );
+	if( encoding::convert( encoding::default(), encoding::get( 20127 ), "lover와fucker" ).compare( "lover?fucker" ) != 0 )
+	{
+		return false;
+	}
 
-	//std::locale l = std::locale( "euc-kr" );
-	//std::locale loc1;
-	//std::string loc1name = loc1.name();
+	if( encoding::convert( encoding::default(), encoding::get( 20127 ), "lover와fucker" ).compare( "lover와fucker" ) == 0 )
+	{
+		return false;
+	}
 
-	//boost::locale::generator gen;
-	//std::locale loc2 = gen( "" );
-	//std::string loc2name = loc2.name();
+	return true;
+}
 
-	//std::locale::global( loc1 );
-	//std::locale::global( loc2 );
+bool test_utf8_encoding()
+{
+	const char check[ 13 ] = { -20, -109, -72, -21, -86, -88, -20, -105, -122, -21, -118, -108, 0 };
+	if( encoding::utf8().from_wide( L"쓸모없는" ).compare( check ) != 0 )
+	{
+		return false;
+	}
 
+	if( encoding::utf8().from_wide( L"lover" ).compare( "lover" ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::utf8().from_wide( L"lover" ).compare( "fucker" ) == 0 )
+	{
+		return false;
+	}
+
+	const wchar_t checkW[ 8 ] = { 65533, 65533, 65533, 65533, 65533, 65533, 65533, 0 };
+	if( encoding::utf8().to_wide( "쓸모없는" ).compare( checkW ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::utf8().to_wide( "lover" ).compare( L"lover" ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::utf8().to_wide( "lover" ).compare( L"fucker" ) == 0 )
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool test_codepage949_encoding()
+{
+	if( encoding::get( 949 ).from_wide( L"쓸모없는" ).compare( "쓸모없는" ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::get( 949 ).from_wide( L"lover" ).compare( "lover" ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::get( 949 ).from_wide( L"lover" ).compare( "fucker" ) == 0 )
+	{
+		return false;
+	}
+
+	if( encoding::get( 949 ).to_wide( "쓸모없는" ).compare( L"쓸모없는" ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::get( 949 ).to_wide( "lover" ).compare( L"lover" ) != 0 )
+	{
+		return false;
+	}
+
+	if( encoding::get( 949 ).to_wide( "lover" ).compare( L"fucker" ) == 0 )
+	{
+		return false;
+	}
+
+	return true;
+}
+
+int main()
+{
+	printf( "test_static_member - %s\n",			test_static_member() ? "ok" : "failed" );
+	printf( "test_utf8_encoding - %s\n",			test_utf8_encoding() ? "ok" : "failed" );
+	printf( "test_codepage949_encoding - %s\n",	test_codepage949_encoding() ? "ok" : "failed" );
 
 	return 0;
 }

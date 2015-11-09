@@ -18,32 +18,28 @@
 #endif
 #endif
 
-#ifdef UNICODE
-#define tmain wmain
-#else
-#define tmain main
-#endif
-
 using namespace useless;
 
-void test_constructor()
+bool test_constructor()
 {
 	string str1( TEXT( 'a' ) );
 	string str2( TEXT( "Test String" ) );
 	string str3( TEXT( "Test" ), 3 );
 	string str4( str3 );
 
-	if( str1 == TEXT( 'a' ) &&
-		str2 == TEXT( "Test String" ) &&
-		str3 == TEXT( "Tes" ) &&
-		str3.length() == 3 && 
-		str4 == str3 )
+	if( str1 != TEXT( 'a' ) ||
+		str2 != TEXT( "Test String" ) ||
+		str3 != TEXT( "Tes" ) ||
+		str3.length() != 3 ||
+		str4 != str3 )
 	{
-		printf( "test_constructor() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_is_empty()
+bool test_is_empty()
 {
 	string str;
 
@@ -51,14 +47,16 @@ void test_is_empty()
 	{
 		str = TEXT( "abc" );
 
-		if( !str.is_empty() )
+		if( str.is_empty() )
 		{
-			::printf( "test_is_empty() - ok\n" );
+			return false;
 		}
 	}
+
+	return true;
 }
 
-void test_length()
+bool test_length()
 {
 	string str = TEXT( "0123456789" );
 
@@ -66,14 +64,16 @@ void test_length()
 	{
 		str = TEXT( "abcd" );
 
-		if( str.length() == 4 )
+		if( str.length() != 4 )
 		{
-			::printf( "test_length() - ok\n" );
+			return false;
 		}
 	}
+
+	return true;
 }
 
-void test_resize()
+bool test_resize()
 {
 	string str = TEXT( "0123456789" );
 
@@ -83,41 +83,45 @@ void test_resize()
 	{
 		str.resize( 25 );
 
-		if( str.length() == 25 )
+		if( str.length() != 25 )
 		{
-			::printf( "test_resize() - ok\n" );
+			return false;
 		}
 	}
+
+	return true;
 }
 
-void test_clear()
+bool test_clear()
 {
 	string str = TEXT( "0123456789" );
 
 	str.clear();
 
-	if( str.is_empty() )
+	if( !str.is_empty() )
 	{
-		::printf( "test_clear() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_compare_operators()
+bool test_compare_operators()
 {
 	string str1( TEXT( "hello" ) );
 	string str2( TEXT( "world!!" ) );
 	string str3( TEXT( "hello" ) );
 
-	if( str1 == str3 && 
-		str1 != str2 && 
-		str1 < str2 && 
-		str2 > str1 && 
-		str1 >= str3 && 
-		str3 <= str1 && 
-		str1 <= str2 && 
-		str2 >= str1 )
+	if( str1 != str3 ||
+		str1 == str2 ||
+		str1 >= str2 ||
+		str2 <= str1 ||
+		str1 < str3 ||
+		str3 > str1 ||
+		str1 > str2 ||
+		str2 < str1 )
 	{
-		::printf( "test_compare_operators() - ok 1\n" );
+		return false;
 	}
 
 	std::map<string, int> test_map;
@@ -133,24 +137,26 @@ void test_compare_operators()
 	std::map<string, int>::iterator find_data4 = test_map.find( TEXT( "six" ) );
 	std::map<string, int>::iterator find_data5 = test_map.find( TEXT( "ten" ) );
 
-	if( find_data1 != test_map.end() && 
-		find_data2 != test_map.end() &&
-		find_data3 != test_map.end() &&
-		find_data4 != test_map.end() &&
-		find_data5 != test_map.end() )
+	if( find_data1 == test_map.end() || 
+		find_data2 == test_map.end() ||
+		find_data3 == test_map.end() ||
+		find_data4 == test_map.end() ||
+		find_data5 == test_map.end() )
 	{
-		if( find_data1->second == 1 &&
-			find_data2->second == 2 &&
-			find_data3->second == 4 &&
-			find_data4->second == 6 &&
-			find_data5->second == 10 )
+		if( find_data1->second != 1 ||
+			find_data2->second != 2 ||
+			find_data3->second != 4 ||
+			find_data4->second != 6 ||
+			find_data5->second != 10 )
 		{
-			::printf( "test_compare_operators() - ok 2\n" );
+			return false;
 		}
 	}
+
+	return true;
 }
 
-void test_plus()
+bool test_plus()
 {
 	string str1 = TEXT( "one" );
 	string str2 = TEXT( "two" );
@@ -158,71 +164,73 @@ void test_plus()
 
 	if( str1 + str2 + str3 != TEXT( "onetwothree" ) )
 	{
-		return;
+		return false;
 	}
 
 	string str0 = str1 + str3;
 	if( str0 != TEXT( "onethree" ) )
 	{
-		return;
+		return false;
 	}
 
 	str0 += str2;
 	if( str0 != TEXT( "onethreetwo" ) )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_plus() - ok\n" );
+	return true;
 }
 
-void test_array()
+bool test_array()
 {
 	string str = TEXT( "abcdefghigklmonop" );
 
-	if( str[ 2 ] == TEXT( 'c' ) )
+	if( str[ 2 ] != TEXT( 'c' ) )
 	{
-		::printf( "test_array() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_string_format()
+bool test_string_format()
 {
 	string str = string::make_format( TEXT( "%d+%d=%d, %d+%d=%d" ), 1, 2, 1 + 2, 4, 5, 4 + 5 );
 	if( str != TEXT( "1+2=3, 4+5=9" ) )
 	{
-		return;
+		return false;
 	}
 
 	str.format( TEXT( "%d-%d=%d" ), 1, 2, 1 - 2 );
 	if( str != TEXT( "1-2=-1" ) )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_string_format() - ok\n" );
+	return true;
 }
 
-void test_trim()
+bool test_trim()
 {
 	string str1 = TEXT( "\t\tabc\v\n" );
 	str1.trim();
 	if( str1 != TEXT( "abc" ) )
 	{
-		return;
+		return false;
 	}
 
 	str1 = TEXT( "\t  string trim test       \t" );
 	str1.trim();
 	if( str1 != TEXT( "string trim test" ) )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_trim() - ok\n" );
+	return true;
 }
 
-void test_trim_left()
+bool test_trim_left()
 {
 	string str1 = TEXT( "  \t \t  \t  abc" );
 	string str2 = TEXT( "abc \t  \t  \t   " );
@@ -230,13 +238,15 @@ void test_trim_left()
 	str1.trim_left();
 	str2.trim_left();
 
-	if( str1 == TEXT( "abc" ) && str2 != TEXT( "abc" ) )
+	if( str1 != TEXT( "abc" ) || str2 == TEXT( "abc" ) )
 	{
-		::printf( "test_trim_left() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_trim_right()
+bool test_trim_right()
 {
 	string str1 = TEXT( "  \t \t  \t  abc" );
 	string str2 = TEXT( " abc \t  \t  \t   " );
@@ -244,44 +254,52 @@ void test_trim_right()
 	str1.trim_right();
 	str2.trim_right();
 
-	if( str1 != TEXT( "abc" ) && str2 == TEXT( " abc" ) )
+	if( str1 == TEXT( "abc" ) || str2 != TEXT( " abc" ) )
 	{
-		::printf( "test_trim_right() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_make_upper()
+bool test_make_upper()
 {
 	string str1 = TEXT( "aBc#Def/GhI-" );
 	string str2 = str1.make_upper();
-	if( str2 == TEXT( "ABC#DEF/GHI-" ) )
+	if( str2 != TEXT( "ABC#DEF/GHI-" ) )
 	{
-		::printf( "test_make_upper() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_make_lower()
+bool test_make_lower()
 {
 	string str1 = TEXT( "aBC/dEf#ghI-" );
 	string str2 = str1.make_lower();
-	if( str2 == TEXT( "abc/def#ghi-" ) )
+	if( str2 != TEXT( "abc/def#ghi-" ) )
 	{
-		::printf( "test_make_lower() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_compare_no_case()
+bool test_compare_no_case()
 {
 	string str1 = TEXT( "ABCDEFG" );
 	string str2 = TEXT( "abcdefg" );
 
-	if( str1.compare_no_case( str2 ) == 0 )
+	if( str1.compare_no_case( str2 ) != 0 )
 	{
-		::printf( "test_compare_no_case() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_compare()
+bool test_compare()
 {
 	string str1 = TEXT( "123" );
 	string str2 = TEXT( "456" );
@@ -289,23 +307,23 @@ void test_compare()
 
 	if( str3.compare( str1 + str2 ) != 0 || str1.compare( str2 ) == 0 )
 	{
-		return;
+		return false;
 	}
 
 	if( str3.compare( 3, 3, str2 ) != 0 || str3.compare( 3, 2, str2, 2 ) != 0 )
 	{
-		return;
+		return false;
 	}
 
 	if( str2.compare( 0, 3, str3, 3, 3 ) != 0 )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_compare() - ok\n" );
+	return true;
 }
 
-void test_parse_number()
+bool test_parse_number()
 {
 	string str1 = TEXT( "12345" );
 	string str2 = TEXT( "12345.9" );
@@ -319,40 +337,46 @@ void test_parse_number()
 	str2float += 0.1f;
 	str2double += 0.00001;
 
-	if( str2int == 12346
-		&& str2float == 12346.0f
-		&& str2double == 12345.99001 )
+	if( str2int != 12346 ||
+		str2float != 12346.0f ||
+		str2double != 12345.99001 )
 	{
-		::printf( "test_parse_number() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_left_right_mid()
+bool test_left_right_mid()
 {
 	string str = TEXT( "0123456789" );
 	string str_left4 = str.left( 4 );
 	string str_right4 = str.right( 4 );
 	string str_mid4to6 = str.mid( 4, 3 );
 
-	if( str_left4 == TEXT( "0123" ) && str_right4 == TEXT( "6789" ) && str_mid4to6 == TEXT( "456" ) )
+	if( str_left4 != TEXT( "0123" ) || str_right4 != TEXT( "6789" ) || str_mid4to6 != TEXT( "456" ) )
 	{
-		::printf( "test_left_right_mid() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_sub_string()
+bool test_sub_string()
 {
 	string str1 = TEXT( "0123456789" );
 	string str2 = str1.sub_string( 4, 3 );
 	string str3 = str1.sub_string( 6 );
 
-	if( str2 == TEXT( "456" ) && str3 == TEXT( "6789" ) )
+	if( str2 != TEXT( "456" ) || str3 != TEXT( "6789" ) )
 	{
-		::printf( "test_sub_string() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_find()
+bool test_find()
 {
 	string str1 = TEXT( "01234567890123456789" );
 	size_t find_index1 = str1.find( TEXT( "456" ) );
@@ -360,7 +384,7 @@ void test_find()
 
 	if( find_index1 != 4 || find_index2 != 14 )
 	{
-		return;
+		return false;
 	}
 
 	string find_str = TEXT( "456" );
@@ -369,7 +393,7 @@ void test_find()
 
 	if( find_index1 != 4 || find_index2 != 14 )
 	{
-		return;
+		return false;
 	}
 
 	find_index1 = str1.find( TEXT( '3' ) );
@@ -377,7 +401,7 @@ void test_find()
 
 	if( find_index1 != 3 || find_index2 != 13 )
 	{
-		return;
+		return false;
 	}
 
 	str1 = TEXT( "This is a sample string for this program" );
@@ -386,19 +410,19 @@ void test_find()
 
 	if( find_index1 != 24 )
 	{
-		return;
+		return false;
 	}
 
 	find_index1 = str1.find( TEXT( "useless" ) );
 	if( find_index1 != string::npos() )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_find() - ok\n" );
+	return true;
 }
 
-void test_reverse_find()
+bool test_reverse_find()
 {
 	string str1 = TEXT( "01234567890123456789" );
 	size_t find_index1 = str1.reverse_find( TEXT( "456" ) );
@@ -406,7 +430,7 @@ void test_reverse_find()
 
 	if( find_index1 != 14 || find_index2 != 4 )
 	{
-		return;
+		return false;
 	}
 
 	string find_str = TEXT( "456" );
@@ -415,7 +439,7 @@ void test_reverse_find()
 
 	if( find_index1 != 14 || find_index2 != 4 )
 	{
-		return;
+		return false;
 	}
 
 	find_index1 = str1.reverse_find( TEXT( '3' ) );
@@ -423,7 +447,7 @@ void test_reverse_find()
 
 	if( find_index1 != 13 || find_index2 != 3 )
 	{
-		return;
+		return false;
 	}
 
 	str1 = TEXT( "It is a nice day. I am happy" );
@@ -432,7 +456,7 @@ void test_reverse_find()
 
 	if( find_index1 != 20 )
 	{
-		return;
+		return false;
 	}
 
 	find_str = TEXT( "useless" );
@@ -440,57 +464,65 @@ void test_reverse_find()
 
 	if( find_index1 != string::npos() )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_reverse_find() - ok\n" );
+	return true;
 }
 
-void test_replace_first()
+bool test_replace_first()
 {
 	string str1 = TEXT( "I'm your lover.. I'm your lover!!" );
 	str1.replace_first( TEXT( "lover" ), TEXT( "fucker" ) );
 
-	if( str1 == TEXT( "I'm your fucker.. I'm your lover!!" ) )
+	if( str1 != TEXT( "I'm your fucker.. I'm your lover!!" ) )
 	{
-		::printf( "test_replace_first() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_replace_last()
+bool test_replace_last()
 {
 	string str1 = TEXT( "I'm your lover.. I'm your lover!!" );
 	str1.replace_last( TEXT( "lover" ), TEXT( "fucker" ) );
 
-	if( str1 == TEXT( "I'm your lover.. I'm your fucker!!" ) )
+	if( str1 != TEXT( "I'm your lover.. I'm your fucker!!" ) )
 	{
-		::printf( "test_replace_last() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_replace_all()
+bool test_replace_all()
 {
 	string str1 = TEXT( "I'm your lover.. I'm your lover!!" );
 	str1.replace_all( TEXT( "lover" ), TEXT( "fucker" ) );
 
-	if( str1 == TEXT( "I'm your fucker.. I'm your fucker!!" ) )
+	if( str1 != TEXT( "I'm your fucker.. I'm your fucker!!" ) )
 	{
-		::printf( "test_replace_all() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_remvoe()
+bool test_remvoe()
 {
 	string str1 = TEXT( "lofuckve" );
 	str1.remove( TEXT( "fuck" ) );
 
-	if( str1 == TEXT( "love" ) )
+	if( str1 != TEXT( "love" ) )
 	{
-		::printf( "test_remvoe() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_parser()
+bool test_parser()
 {
 	int i = string::parse_int( TEXT( "500" ) );
 	float f = string::parse_float( TEXT( "100.5" ) );
@@ -500,53 +532,61 @@ void test_parser()
 	f += 0.3f;
 	d *= 2.0;
 
-	if( i == 600 && f == 100.8f && d == 2.000000002 )
+	if( i != 600 || f != 100.8f || d != 2.000000002 )
 	{
-		::printf( "test_parser() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_to_upper()
+bool test_to_upper()
 {
 	string str1 = TEXT( "hardcoding" );
 	str1.to_upper();
 
-	if( str1 == TEXT( "HARDCODING" ) )
+	if( str1 != TEXT( "HARDCODING" ) )
 	{
-		::printf( "test_to_upper() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_to_lower()
+bool test_to_lower()
 {
 	string str1 = TEXT( "HARDCODING" );
 	str1.to_lower();
 
-	if( str1 == TEXT( "hardcoding" ) )
+	if( str1 != TEXT( "hardcoding" ) )
 	{
-		::printf( "test_to_lower() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_push_back()
+bool test_push_back()
 {
 	string str1 = TEXT( "Batma" );
 	str1.push_back( TEXT( 'n' ) );
 
-	if( str1 == TEXT( "Batman" ) )
+	if( str1 != TEXT( "Batman" ) )
 	{
-		::printf( "test_push_back() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_insert()
+bool test_insert()
 {
 	string origin_str = TEXT( "Oh" );
 	origin_str.insert( 2, 5, TEXT( 'h' ) );
 
 	if( origin_str != TEXT( "Ohhhhhh" ) )
 	{
-		return;
+		return false;
 	}
 
 	origin_str = TEXT( "Batman Knight" );
@@ -555,7 +595,7 @@ void test_insert()
 
 	if( origin_str != TEXT( "Batman DarkKnight" ) )
 	{
-		return;
+		return false;
 	}
 
 	origin_str = TEXT( "Oh My " );
@@ -564,7 +604,7 @@ void test_insert()
 
 	if( origin_str != TEXT( "Oh My God" ) )
 	{
-		return;
+		return false;
 	}
 
 	origin_str = TEXT( "Batman Knight" );
@@ -573,91 +613,98 @@ void test_insert()
 
 	if( origin_str != TEXT( "Batman DarkKnight" ) )
 	{
-		return;
+		return false;
 	}
 
-	::printf( "test_insert() - ok\n" );
+	return true;
 }
 
-void test_erase()
+bool test_erase()
 {
 	string str1 = TEXT( "HhhhhardCoding" );
 	str1.erase( 1, 4 );
 
-	if( str1 == TEXT( "HardCoding" ) )
+	if( str1 != TEXT( "HardCoding" ) )
 	{
-		::printf( "test_erase() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_start_with()
+bool test_start_with()
 {
 	string str1 = TEXT( "Oh My God" );
 	string find_str = TEXT( "Oh" );
 
-	if( str1.start_with( find_str ) )
+	if( !str1.start_with( find_str ) )
 	{
-		::printf( "test_start_with() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_end_with()
+bool test_end_with()
 {
 	string str1 = TEXT( "Oh My God" );
 	string find_str = TEXT( "God" );
 
-	if( str1.end_with( find_str ) )
+	if( !str1.end_with( find_str ) )
 	{
-		::printf( "test_end_with() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-void test_buffer()
+bool test_buffer()
 {
 	string str1 = TEXT( "Batman" );
 
-    if( string_helper<string::char_type>::compare( str1.buffer(), TEXT( "Batman" ) ) == 0 )
+    if( string_helper<string::char_type>::compare( str1.buffer(), TEXT( "Batman" ) ) != 0 )
 	{
-		::printf( "test_buffer() - ok\n" );
+		return false;
 	}
+
+	return true;
 }
 
-int tmain( int /*argc*/, char* /*argv*/[] )
+int main()
 {
-	test_constructor();
-	test_is_empty();
-	test_length();
-	test_resize();
-	test_clear();
-	test_compare_operators();
-	test_plus();
-	test_array();
-	test_string_format();
-	test_trim();
-	test_trim_left();
-	test_trim_right();
-	test_make_upper();
-	test_make_lower();
-	test_compare_no_case();
-	test_compare();
-	test_parse_number();
-	test_left_right_mid();
-	test_sub_string();
-	test_find();
-	test_reverse_find();
-	test_replace_first();
-	test_replace_last();
-	test_replace_all();
-	test_remvoe();
-	test_parser();
-	test_to_upper();
-	test_to_lower();
-	test_push_back();
-	test_insert();
-	test_erase();
-	test_start_with();
-	test_end_with();
-	test_buffer();
+	printf( "test_is_empty - %s\n",				test_is_empty() ? "ok" : "failed" );
+	printf( "test_length - %s\n",				test_length() ? "ok" : "failed" );
+	printf( "test_resize - %s\n",				test_resize() ? "ok" : "failed" );
+	printf( "test_clear - %s\n",					test_clear() ? "ok" : "failed" );
+	printf( "test_compare_operators - %s\n",		test_compare_operators() ? "ok" : "failed" );
+	printf( "test_plus - %s\n",					test_plus() ? "ok" : "failed" );
+	printf( "test_array - %s\n",					test_array() ? "ok" : "failed" );
+	printf( "test_string_format - %s\n",			test_string_format() ? "ok" : "failed" );
+	printf( "test_trim - %s\n",					test_trim() ? "ok" : "failed" );
+	printf( "test_trim_left - %s\n",				test_trim_left() ? "ok" : "failed" );
+	printf( "test_trim_right - %s\n",			test_trim_right() ? "ok" : "failed" );
+	printf( "test_make_upper - %s\n",			test_make_upper() ? "ok" : "failed" );
+	printf( "test_make_lower - %s\n",			test_make_lower() ? "ok" : "failed" );
+	printf( "test_compare_no_case - %s\n",		test_compare_no_case() ? "ok" : "failed" );
+	printf( "test_compare - %s\n",				test_compare() ? "ok" : "failed" );
+	printf( "test_parse_number - %s\n",			test_parse_number() ? "ok" : "failed" );
+	printf( "test_left_right_mid - %s\n",		test_left_right_mid() ? "ok" : "failed" );
+	printf( "test_sub_string - %s\n",			test_sub_string() ? "ok" : "failed" );
+	printf( "test_find - %s\n",					test_find() ? "ok" : "failed" );
+	printf( "test_reverse_find - %s\n",			test_reverse_find() ? "ok" : "failed" );
+	printf( "test_replace_first - %s\n",			test_replace_first() ? "ok" : "failed" );
+	printf( "test_replace_last - %s\n",			test_replace_last() ? "ok" : "failed" );
+	printf( "test_replace_all - %s\n",			test_replace_all() ? "ok" : "failed" );
+	printf( "test_remvoe - %s\n",				test_remvoe() ? "ok" : "failed" );
+	printf( "test_parser - %s\n",				test_parser() ? "ok" : "failed" );
+	printf( "test_to_upper - %s\n",				test_to_upper() ? "ok" : "failed" );
+	printf( "test_to_lower - %s\n",				test_to_lower() ? "ok" : "failed" );
+	printf( "test_push_back - %s\n",				test_push_back() ? "ok" : "failed" );
+	printf( "test_insert - %s\n",				test_insert() ? "ok" : "failed" );
+	printf( "test_erase - %s\n",					test_erase() ? "ok" : "failed" );
+	printf( "test_start_with - %s\n",			test_start_with() ? "ok" : "failed" );
+	printf( "test_end_with - %s\n",				test_end_with() ? "ok" : "failed" );
+	printf( "test_buffer - %s\n",				test_buffer() ? "ok" : "failed" );
 
 	return 0;
 }

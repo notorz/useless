@@ -1,4 +1,4 @@
-//
+﻿//
 // Copyright (c) 2015. SeongJun Park.
 //
 // Distributed under the MIT License.
@@ -75,9 +75,7 @@ bool test_utf8_encoding()
 	return true;
 }
 
-#include <iconv.h>
-
-bool test_Korean_encoding()
+bool test_korean_encoding()
 {
     const char temp[ 9 ] = { -66, -75, -72, -16, -66, -8, -76, -62, 0 };
     if( encoding::get( charset::Korean ).from_wide( L"쓸모없는" ).compare( temp ) != 0 )
@@ -117,7 +115,7 @@ int main()
 {
 	printf( "test_static_member - %s\n",	test_static_member() ? "ok" : "failed" );
 	printf( "test_utf8_encoding - %s\n",	test_utf8_encoding() ? "ok" : "failed" );
-	printf( "test_Korean_encoding - %s\n",	test_Korean_encoding() ? "ok" : "failed" );
+	printf( "test_Korean_encoding - %s\n",	test_korean_encoding() ? "ok" : "failed" );
 
 	return 0;
 }

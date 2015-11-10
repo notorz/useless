@@ -78,32 +78,32 @@ bool test_utf8_encoding()
 bool test_korean_encoding()
 {
     const char temp[ 9 ] = { -66, -75, -72, -16, -66, -8, -76, -62, 0 };
-    if( encoding::get( charset::Korean ).from_wide( L"쓸모없는" ).compare( temp ) != 0 )
+    if( encoding::get( charset::korean ).from_wide( L"쓸모없는" ).compare( temp ) != 0 )
 	{
 		return false;
 	}
 
-	if( encoding::get( charset::Korean ).from_wide( L"lover" ).compare( "lover" ) != 0 )
+	if( encoding::get( charset::korean ).from_wide( L"lover" ).compare( "lover" ) != 0 )
 	{
 		return false;
 	}
 
-	if( encoding::get( charset::Korean ).from_wide( L"lover" ).compare( "fucker" ) == 0 )
+	if( encoding::get( charset::korean ).from_wide( L"lover" ).compare( "fucker" ) == 0 )
 	{
 		return false;
 	}
 
-	if( encoding::get( charset::Korean ).to_wide( temp ).compare( L"쓸모없는" ) != 0 )
+	if( encoding::get( charset::korean ).to_wide( temp ).compare( L"쓸모없는" ) != 0 )
 	{
 		return false;
 	}
 
-	if( encoding::get( charset::Korean ).to_wide( "lover" ).compare( L"lover" ) != 0 )
+	if( encoding::get( charset::korean ).to_wide( "lover" ).compare( L"lover" ) != 0 )
 	{
 		return false;
 	}
 
-	if( encoding::get( charset::Korean ).to_wide( "lover" ).compare( L"fucker" ) == 0 )
+	if( encoding::get( charset::korean ).to_wide( "lover" ).compare( L"fucker" ) == 0 )
 	{
 		return false;
 	}
@@ -115,7 +115,7 @@ int main()
 {
 	printf( "test_static_member - %s\n",	test_static_member() ? "ok" : "failed" );
 	printf( "test_utf8_encoding - %s\n",	test_utf8_encoding() ? "ok" : "failed" );
-	printf( "test_Korean_encoding - %s\n",	test_korean_encoding() ? "ok" : "failed" );
+	printf( "test_korean_encoding - %s\n",	test_korean_encoding() ? "ok" : "failed" );
 
 	return 0;
 }

@@ -16,22 +16,22 @@ namespace useless
 	{
 		enum type
 		{
-			Default,
+			system_default,
 			
-            ASCII,
-            UTF8,
+            ascii,
+            utf8,
             
-			Korean,
-			Japanese,
-			ChineseSimplified,
-			ChineseTraditional,
+			korean,
+			japanese,
+			chinese_simplified,
+			chinese_traditional,
 		};
 	}
 
 	class CORE_ENCODING_DECL encoding
 	{
 	public:
-        static const encoding& get( charset::type charset = charset::Default );
+        static const encoding& get( charset::type charset = charset::system_default );
         
         static const encoding& ascii();
 		static const encoding& utf8();

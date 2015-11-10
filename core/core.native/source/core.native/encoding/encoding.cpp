@@ -46,12 +46,12 @@ namespace useless
     
     const encoding& encoding::ascii()
     {
-        return encoding::get( charset::ASCII );
+        return encoding::get( charset::ascii );
     }
     
     const encoding& encoding::utf8()
 	{
-        return encoding::get( charset::UTF8 );
+        return encoding::get( charset::utf8 );
 	}
 
 	void encoding::convert( const encoding& src, const encoding& dst, const string_ansi& input, string_ansi& output )
@@ -100,24 +100,24 @@ namespace useless
 #if ( _WIN32 || _WIN64 )
         switch( charset )
         {
-            case charset::Default: m_codepage = CP_ACP; break;
-            case charset::ASCII: m_codepage = 20127; break;
-            case charset::UTF8: m_codepage = CP_UTF8; break;
-            case charset::Korean: m_codepage = 949; break;
-            case charset::Japanese: m_codepage = 932; break;
-            case charset::ChineseSimplified: m_codepage = 936; break;
-            case charset::ChineseTraditional: m_codepage = 950; break;
+            case charset::system_default: m_codepage = CP_ACP; break;
+            case charset::ascii: m_codepage = 20127; break;
+            case charset::utf8: m_codepage = CP_UTF8; break;
+            case charset::korean: m_codepage = 949; break;
+            case charset::japanese: m_codepage = 932; break;
+            case charset::chinese_simplified: m_codepage = 936; break;
+            case charset::chinese_traditional: m_codepage = 950; break;
         }
 #elif __GNUC__
         switch( charset )
         {
-            case charset::Default: m_name = "*"; break;
-            case charset::ASCII: m_name = "us-ascii"; break;
-            case charset::UTF8: m_name = "utf-8"; break;
-            case charset::Korean: m_name = "euc-kr"; break;
-            case charset::Japanese: m_name = "euc-jp"; break;
-            case charset::ChineseSimplified: m_name = "euc-cn"; break;
-            case charset::ChineseTraditional: m_name = "euc-tw"; break;
+            case charset::system_default: m_name = "*"; break;
+            case charset::ascii: m_name = "us-ascii"; break;
+            case charset::utf8: m_name = "utf-8"; break;
+            case charset::korean: m_name = "euc-kr"; break;
+            case charset::japanese: m_name = "euc-jp"; break;
+            case charset::chinese_simplified: m_name = "euc-cn"; break;
+            case charset::chinese_traditional: m_name = "euc-tw"; break;
         }
 #endif
 	}
@@ -144,12 +144,12 @@ namespace useless
 			::WideCharToMultiByte( m_codepage, 0, &input[ 0 ], static_cast<int>( input.length() ), &output[ 0 ], count, 0, 0 );
 		}
 #elif __GNUC__
-        if( m_charset == charset::Default )
+        if( m_charset == charset::system_default )
         {
             static boost::locale::generator s_gen;
             output = boost::locale::conv::from_utf<wchar_t>( input.buffer(), s_gen( m_name.buffer() ) );
         }
-        else if( m_charset == charset::UTF8 )
+        else if( m_charset == charset::utf8 )
         {
             output = boost::locale::conv::utf_to_utf<char>( input.buffer() );
         }
@@ -177,12 +177,12 @@ namespace useless
 			::MultiByteToWideChar( m_codepage, 0, &input[ 0 ], static_cast<int>( input.length() ), &output[ 0 ], count );
 		}
 #elif __GNUC__
-        if( m_charset == charset::Default )
+        if( m_charset == charset::system_default )
         {
             static boost::locale::generator s_gen;
             output = boost::locale::conv::to_utf<wchar_t>( input.buffer(), s_gen( m_name.buffer() ) );
         }
-        else if( m_charset == charset::UTF8 )
+        else if( m_charset == charset::utf8 )
         {
             output = boost::locale::conv::utf_to_utf<wchar_t>( input.buffer() );
         }

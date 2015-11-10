@@ -12,6 +12,7 @@
 #include <boost/mpl/eval_if.hpp>
 #include "core.native/string.h"
 #include "core.native/io/stream/streambase.h"
+#include "core.native/encoding.h"
 
 namespace useless
 {
@@ -87,6 +88,16 @@ namespace useless
 				bw.write( &count, sizeof( unsigned long ) );
 				write_member( bw, &val[ 0 ], count );
 			}
+
+			static void invoke( basic_binary_writer& bw, const char val[] )
+			{
+				bw.write( std::string( val ) );
+			}
+
+			static void invoke( basic_binary_writer& bw, const wchar_t val[] )
+			{
+				bw.write( std::wstring( val ) );
+			}
 		};
 
 		struct write_non_pointer_type
@@ -144,6 +155,7 @@ namespace useless
 		basic_binary_writer()
 			: m_stream( nullptr )
 			, m_must_be_deleted( false )
+			, m_encoding( encoding::get() )
 		{
 
 		}
@@ -151,6 +163,7 @@ namespace useless
 		basic_binary_writer( streambase& stream )
 			: m_stream( nullptr )
 			, m_must_be_deleted( false )
+			, m_encoding( encoding::get() )
 		{
 			if( stream.can_be_write() )
 			{
@@ -161,6 +174,7 @@ namespace useless
 		basic_binary_writer( size_t size, bool growable = true )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( growable )
 			{
@@ -175,6 +189,7 @@ namespace useless
 		basic_binary_writer( void* address, size_t size )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			m_stream = new memory_stream( address, size );
 		}
@@ -182,6 +197,7 @@ namespace useless
 		basic_binary_writer( const char* filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::out )
 			{
@@ -192,6 +208,7 @@ namespace useless
 		basic_binary_writer( const string_ansi& filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::out )
 			{
@@ -202,6 +219,7 @@ namespace useless
 		basic_binary_writer( const wchar_t* filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::out )
 			{
@@ -212,6 +230,7 @@ namespace useless
 		basic_binary_writer( const string_wide& filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::out )
 			{
@@ -227,6 +246,11 @@ namespace useless
 			}
 		}
 
+	private:
+		basic_binary_writer( const basic_binary_writer& );
+		basic_binary_writer& operator=( const basic_binary_writer& );
+
+	public:
 		bool stream( streambase& stream )
 		{
 			if( !stream.can_be_write() )
@@ -251,6 +275,16 @@ namespace useless
 		const streambase* stream() const
 		{
 			return m_stream;
+		}
+
+		bool encoding( const encoding& encoding )
+		{
+			m_encoding = encoding;
+		}
+
+		const useless::encoding& encoding() const
+		{
+			return m_encoding;
 		}
 
 		void write( const void* buffer, size_t count )
@@ -348,6 +382,8 @@ namespace useless
 	private:
 		streambase* m_stream;
 		bool m_must_be_deleted;
+
+		const useless::encoding& m_encoding;
 	};
 }
 

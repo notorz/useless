@@ -5,13 +5,10 @@
 //
 
 #include <stdio.h>
-#include <fstream>
-#include <sstream>
-#include <iostream>
 
 #include "core.native/encoding.h"
 #include "core.native/string.h"
-#include <boost/locale.hpp>
+
 using namespace useless;
 
 bool test_static_member()

@@ -22,8 +22,16 @@ int main()
 	{
 		dynamic_stream ds( 100 );
 		binary_writer bw( ds );
-		bw << 12;
+		bw << "쓸데없는";
+		bw << L"쓸데없는";
 		bw << 14;
+
+		ds.setpos( seekdir::beg, 0 );
+		binary_reader br( ds );
+		wchar_t temp1[ 2 ] = { 0, };
+		char temp2[ 2 ] = { 0, };
+		br >> temp1;
+		br >> temp2;
 	}
 
 	{

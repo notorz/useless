@@ -13,13 +13,14 @@
 #include <boost/mpl/eval_if.hpp>
 #include "core.native/string.h"
 #include "core.native/io/stream/streambase.h"
+#include "core.native/encoding.h"
 
 namespace useless
 {
 	namespace binary_read_helper
 	{
 		template<typename Archive, typename T>
-		void read( Archive& br, T& val )
+		void invoke( Archive& br, T& val )
 		{
 			val.serialize( br, 0 );
 		}
@@ -93,15 +94,11 @@ namespace useless
 			}
 
 			template<typename T>
-			static void invoke( basic_binary_reader& br, T& val )
+			static void read( basic_binary_reader& br, T& val, size_t dest_count )
 			{
-				unsigned long dest_count = static_cast< unsigned long >( sizeof( val ) /
-					( static_cast<const char*>( static_cast<const void*>( &val[ 1 ] ) )
-						- static_cast<const char*>( static_cast<const void*>( &val[ 0 ] ) ) ) );
-
 				unsigned long count;
 				br.read( &count, sizeof( unsigned long ) );
-				
+
 				if( count > dest_count )
 				{
 					read_member( br, &val[ 0 ], dest_count );
@@ -111,6 +108,42 @@ namespace useless
 				{
 					read_member( br, &val[ 0 ], count );
 				}
+			}
+
+			static void read( basic_binary_reader& br, char val[], size_t dest_count )
+			{
+				std::string temp;
+				br.read( temp );
+
+				if( dest_count >= 1 )
+				{
+					size_t count = ( std::min )( dest_count, temp.size() );
+					::memcpy_s( val, count, temp.c_str(), count );
+					val[ dest_count - 1 ] = 0;
+				}
+			}
+
+			static void read( basic_binary_reader& br, wchar_t val[], size_t dest_count )
+			{
+				std::wstring temp;
+				br.read( temp );
+
+				if( dest_count >= 1 )
+				{
+					size_t count = ( std::min )( dest_count, temp.size() ) * sizeof( wchar_t );
+					::memcpy_s( val, count, temp.c_str(), count );
+					val[ dest_count - 1 ] = 0;
+				}
+			}
+
+			template<typename T>
+			static void invoke( basic_binary_reader& br, T& val )
+			{
+				size_t dest_count = sizeof( val ) /
+					( static_cast<const char*>( static_cast<const void*>( &val[ 1 ] ) )
+						- static_cast<const char*>( static_cast<const void*>( &val[ 0 ] ) ) );
+
+				read( br, val, dest_count );
 			}
 		};
 
@@ -140,7 +173,7 @@ namespace useless
 				typename boost::mpl::eval_if<std::is_fundamental<T>,
 					read_primitive_type,	// true
 					read_object_class_type	// false
-				>::Invoke( br, val );
+				>::invoke( br, val );
 			}
 		};
 
@@ -169,6 +202,7 @@ namespace useless
 		basic_binary_reader()
 			: m_stream( nullptr )
 			, m_must_be_deleted( false )
+			, m_encoding( encoding::get() )
 		{
 
 		}
@@ -176,6 +210,7 @@ namespace useless
 		basic_binary_reader( streambase& stream )
 			: m_stream( nullptr )
 			, m_must_be_deleted( false )
+			, m_encoding( encoding::get() )
 		{
 			if( stream.can_be_read() )
 			{
@@ -186,6 +221,7 @@ namespace useless
 		basic_binary_reader( void* address, size_t size )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			m_stream = new memory_stream( address, size );
 		}
@@ -193,6 +229,7 @@ namespace useless
 		basic_binary_reader( const char* filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::in )
 			{
@@ -203,6 +240,7 @@ namespace useless
 		basic_binary_reader( const string_ansi& filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::in )
 			{
@@ -213,6 +251,7 @@ namespace useless
 		basic_binary_reader( const wchar_t* filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::in )
 			{
@@ -223,6 +262,7 @@ namespace useless
 		basic_binary_reader( const string_wide& filename, int openmode )
 			: m_stream( nullptr )
 			, m_must_be_deleted( true )
+			, m_encoding( encoding::get() )
 		{
 			if( openmode & openmode::in )
 			{
@@ -238,6 +278,11 @@ namespace useless
 			}
 		}
 
+	private:
+		basic_binary_reader( const basic_binary_reader& );
+		basic_binary_reader& operator=( const basic_binary_reader& );
+
+	public:
 		bool stream( streambase& stream )
 		{
 			if( !stream.can_be_read() )
@@ -262,6 +307,16 @@ namespace useless
 		const streambase* stream() const
 		{
 			return m_stream;
+		}
+
+		bool encoding( const encoding& encoding )
+		{
+			m_encoding = encoding;
+		}
+
+		const useless::encoding& encoding() const
+		{
+			return m_encoding;
 		}
 
 		void read( void* buffer, size_t count )
@@ -397,6 +452,8 @@ namespace useless
 	private:
 		streambase* m_stream;
 		bool m_must_be_deleted;
+
+		const useless::encoding& m_encoding;
 	};
 }
 

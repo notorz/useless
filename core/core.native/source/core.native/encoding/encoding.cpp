@@ -56,12 +56,26 @@ namespace useless
 
 	void encoding::convert( const encoding& src, const encoding& dst, const string_ansi& input, string_ansi& output )
 	{
-		output = dst.from_wide( src.to_wide( input ) );
+		if( src == dst )
+		{
+			output = input;
+		}
+		else
+		{
+			output = dst.from_wide( src.to_wide( input ) );
+		}
 	}
 
 	string_ansi encoding::convert( const encoding& src, const encoding& dst, const string_ansi& input )
 	{
-		return dst.from_wide( src.to_wide( input ) );
+		if( src == dst )
+		{
+			return input;
+		}
+		else
+		{
+			return dst.from_wide( src.to_wide( input ) );
+		}
 	}
 
 	void encoding::convert( const encoding& src, const string_ansi& input, string_wide& output )

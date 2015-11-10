@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4899E5361BEDF33700339F94 /* string.h in Headers */ = {isa = PBXBuildFile; fileRef = 4899E5351BEDF33700339F94 /* string.h */; };
-		4899E5521BEDF4C300339F94 /* string_helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 4899E5501BEDF4C300339F94 /* string_helper.h */; };
-		4899E5531BEDF4C300339F94 /* string.h in Headers */ = {isa = PBXBuildFile; fileRef = 4899E5511BEDF4C300339F94 /* string.h */; };
+		48C1C2911BF1189100925EB7 /* encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C1C2901BF1189100925EB7 /* encoding.h */; };
+		48C1C2951BF118A100925EB7 /* definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C1C2921BF118A100925EB7 /* definitions.h */; };
+		48C1C2961BF118A100925EB7 /* encoding.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48C1C2931BF118A100925EB7 /* encoding.cpp */; };
+		48C1C2971BF118A100925EB7 /* encoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 48C1C2941BF118A100925EB7 /* encoding.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4899E5011BEDF2C000339F94 /* libstring.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libstring.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4899E5351BEDF33700339F94 /* string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string.h; path = ../../../source/core.native/string.h; sourceTree = "<group>"; };
-		4899E5501BEDF4C300339F94 /* string_helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string_helper.h; path = ../../../source/core.native/string/string_helper.h; sourceTree = "<group>"; };
-		4899E5511BEDF4C300339F94 /* string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = string.h; path = ../../../source/core.native/string/string.h; sourceTree = "<group>"; };
+		48C1C26B1BF1176800925EB7 /* libencoding.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libencoding.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		48C1C2901BF1189100925EB7 /* encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = encoding.h; path = ../../../source/core.native/encoding.h; sourceTree = "<group>"; };
+		48C1C2921BF118A100925EB7 /* definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = definitions.h; path = ../../../source/core.native/encoding/definitions.h; sourceTree = "<group>"; };
+		48C1C2931BF118A100925EB7 /* encoding.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = encoding.cpp; path = ../../../source/core.native/encoding/encoding.cpp; sourceTree = "<group>"; };
+		48C1C2941BF118A100925EB7 /* encoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = encoding.h; path = ../../../source/core.native/encoding/encoding.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4899E4FE1BEDF2C000339F94 /* Frameworks */ = {
+		48C1C2681BF1176800925EB7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -30,108 +32,110 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4899E4F81BEDF2C000339F94 = {
+		48C1C2621BF1176800925EB7 = {
 			isa = PBXGroup;
 			children = (
-				4899E54F1BEDF4A100339F94 /* string */,
-				4899E5351BEDF33700339F94 /* string.h */,
-				4899E5021BEDF2C000339F94 /* Products */,
+				48C1C28C1BF1182700925EB7 /* encoding */,
+				48C1C2901BF1189100925EB7 /* encoding.h */,
+				48C1C26C1BF1176800925EB7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4899E5021BEDF2C000339F94 /* Products */ = {
+		48C1C26C1BF1176800925EB7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4899E5011BEDF2C000339F94 /* libstring.a */,
+				48C1C26B1BF1176800925EB7 /* libencoding.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4899E54F1BEDF4A100339F94 /* string */ = {
+		48C1C28C1BF1182700925EB7 /* encoding */ = {
 			isa = PBXGroup;
 			children = (
-				4899E5501BEDF4C300339F94 /* string_helper.h */,
-				4899E5511BEDF4C300339F94 /* string.h */,
+				48C1C2921BF118A100925EB7 /* definitions.h */,
+				48C1C2931BF118A100925EB7 /* encoding.cpp */,
+				48C1C2941BF118A100925EB7 /* encoding.h */,
 			);
-			name = string;
+			name = encoding;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4899E4FF1BEDF2C000339F94 /* Headers */ = {
+		48C1C2691BF1176800925EB7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4899E5361BEDF33700339F94 /* string.h in Headers */,
-				4899E5531BEDF4C300339F94 /* string.h in Headers */,
-				4899E5521BEDF4C300339F94 /* string_helper.h in Headers */,
+				48C1C2911BF1189100925EB7 /* encoding.h in Headers */,
+				48C1C2971BF118A100925EB7 /* encoding.h in Headers */,
+				48C1C2951BF118A100925EB7 /* definitions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		4899E5001BEDF2C000339F94 /* string */ = {
+		48C1C26A1BF1176800925EB7 /* encoding */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4899E50C1BEDF2C000339F94 /* Build configuration list for PBXNativeTarget "string" */;
+			buildConfigurationList = 48C1C2761BF1176800925EB7 /* Build configuration list for PBXNativeTarget "encoding" */;
 			buildPhases = (
-				4899E4FD1BEDF2C000339F94 /* Sources */,
-				4899E4FE1BEDF2C000339F94 /* Frameworks */,
-				4899E4FF1BEDF2C000339F94 /* Headers */,
+				48C1C2671BF1176800925EB7 /* Sources */,
+				48C1C2681BF1176800925EB7 /* Frameworks */,
+				48C1C2691BF1176800925EB7 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = string;
-			productName = string;
-			productReference = 4899E5011BEDF2C000339F94 /* libstring.a */;
+			name = encoding;
+			productName = encoding;
+			productReference = 48C1C26B1BF1176800925EB7 /* libencoding.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4899E4F91BEDF2C000339F94 /* Project object */ = {
+		48C1C2631BF1176800925EB7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Park Seoung Jun";
 				TargetAttributes = {
-					4899E5001BEDF2C000339F94 = {
+					48C1C26A1BF1176800925EB7 = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
 				};
 			};
-			buildConfigurationList = 4899E4FC1BEDF2C000339F94 /* Build configuration list for PBXProject "string" */;
+			buildConfigurationList = 48C1C2661BF1176800925EB7 /* Build configuration list for PBXProject "encoding" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 4899E4F81BEDF2C000339F94;
-			productRefGroup = 4899E5021BEDF2C000339F94 /* Products */;
+			mainGroup = 48C1C2621BF1176800925EB7;
+			productRefGroup = 48C1C26C1BF1176800925EB7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4899E5001BEDF2C000339F94 /* string */,
+				48C1C26A1BF1176800925EB7 /* encoding */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4899E4FD1BEDF2C000339F94 /* Sources */ = {
+		48C1C2671BF1176800925EB7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48C1C2961BF118A100925EB7 /* encoding.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		4899E50A1BEDF2C000339F94 /* Debug */ = {
+		48C1C2741BF1176800925EB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -173,7 +177,7 @@
 			};
 			name = Debug;
 		};
-		4899E50B1BEDF2C000339F94 /* Release */ = {
+		48C1C2751BF1176800925EB7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -208,7 +212,7 @@
 			};
 			name = Release;
 		};
-		4899E50D1BEDF2C000339F94 /* Debug */ = {
+		48C1C2771BF1176800925EB7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
@@ -226,7 +230,7 @@
 			};
 			name = Debug;
 		};
-		4899E50E1BEDF2C000339F94 /* Release */ = {
+		48C1C2781BF1176800925EB7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				EXECUTABLE_PREFIX = lib;
@@ -247,25 +251,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4899E4FC1BEDF2C000339F94 /* Build configuration list for PBXProject "string" */ = {
+		48C1C2661BF1176800925EB7 /* Build configuration list for PBXProject "encoding" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4899E50A1BEDF2C000339F94 /* Debug */,
-				4899E50B1BEDF2C000339F94 /* Release */,
+				48C1C2741BF1176800925EB7 /* Debug */,
+				48C1C2751BF1176800925EB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4899E50C1BEDF2C000339F94 /* Build configuration list for PBXNativeTarget "string" */ = {
+		48C1C2761BF1176800925EB7 /* Build configuration list for PBXNativeTarget "encoding" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4899E50D1BEDF2C000339F94 /* Debug */,
-				4899E50E1BEDF2C000339F94 /* Release */,
+				48C1C2771BF1176800925EB7 /* Debug */,
+				48C1C2781BF1176800925EB7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4899E4F91BEDF2C000339F94 /* Project object */;
+	rootObject = 48C1C2631BF1176800925EB7 /* Project object */;
 }

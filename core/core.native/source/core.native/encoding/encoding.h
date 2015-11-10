@@ -12,26 +12,28 @@
 
 namespace useless
 {
-	namespace CodePage
+	namespace charset
 	{
-		enum Type
+		enum type
 		{
-			Default = 0,
-			UTF8 = 65001,
-
-			Korean = 949,
-			Japanese = 932,
-			ChineseSimplified = 936,
-			ChineseTraditional = 950
+			Default,
+			
+            ASCII,
+            UTF8,
+            
+			Korean,
+			Japanese,
+			ChineseSimplified,
+			ChineseTraditional,
 		};
 	}
 
 	class CORE_ENCODING_DECL encoding
 	{
 	public:
-		static const encoding& get( unsigned int codepage );
-
-		static const encoding& default();
+        static const encoding& get( charset::type charset = charset::Default );
+        
+        static const encoding& ascii();
 		static const encoding& utf8();
 
 		// mbs -> mbs
@@ -47,7 +49,7 @@ namespace useless
 		static string_ansi convert( const encoding& dst, const string_wide& input );
 
 	private:
-		encoding( unsigned int codepage );
+		encoding( charset::type charset );
 		encoding( const encoding& other );
 		const encoding& operator=( const encoding& other );
 
@@ -62,8 +64,14 @@ namespace useless
 		string_wide to_wide( const string_ansi& input ) const;
 
 	private:
-		unsigned int m_codepage;
+        charset::type m_charset;
+        
+#if ( _WIN32 || _WIN64 )
+        unsigned int m_codepage;
+#elif __GNUC__
+        string_ansi m_name;
+#endif
 	};
 }
 
-#endif USELESS_CORE_NATIVE_ENCODING_ENCODING_INCLUDED
+#endif //USELESS_CORE_NATIVE_ENCODING_ENCODING_INCLUDED

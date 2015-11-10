@@ -7,7 +7,13 @@
       <FileRef
          location = "group:sample/sample_string/sample_string.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:sample/sample_encoding/sample_encoding.xcodeproj">
+      </FileRef>
    </Group>
+   <FileRef
+      location = "group:encoding/encoding.xcodeproj">
+   </FileRef>
    <FileRef
       location = "group:string/string.xcodeproj">
    </FileRef>

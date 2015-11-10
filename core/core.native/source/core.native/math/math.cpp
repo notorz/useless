@@ -4,6 +4,7 @@
 // Distributed under the MIT License.
 //
 
+#define USELESS_MATH_SOURCE
 #include "math.h"
 
 namespace useless

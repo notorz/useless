@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <cctype>
 #include <locale>
+#include <algorithm>
 #include <boost/cstdint.hpp>
 
 namespace useless
@@ -125,7 +126,13 @@ namespace useless
 
 		static void format_helper( const char* fmt, va_list marker, char* output, int count )
 		{
-            ::vsnprintf( &output[ 0 ], count, fmt, marker );
+#if ( _WIN32 || _WIN64 )
+			int len = ( std::min )( ::_vscprintf( fmt, marker ) + 1, count );
+			::vsprintf_s( &output[ 0 ], len, fmt, marker );
+			output[ len ] = '\0';
+#elif __GNUC__
+			::vsnprintf( &output[ 0 ], count, fmt, marker );
+#endif
 		}
 	};
 
@@ -217,7 +224,13 @@ namespace useless
 
 		static void format_helper( const wchar_t* fmt, va_list marker, wchar_t* output, int count )
 		{
+#if ( _WIN32 || _WIN64 )
+			int len = ( std::min )( ::_vscwprintf( fmt, marker ) + 1, count );
+			::vswprintf_s( &output[ 0 ], len, fmt, marker );
+			output[ len ] = L'\0';
+#elif __GNUC__
 			::vswprintf( &output[ 0 ], count, fmt, marker );
+#endif
 		}
 	};
 }

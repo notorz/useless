@@ -50,10 +50,11 @@ namespace useless
 
 	private:
 		encoding( charset::type charset );
+
+	public:
 		encoding( const encoding& other );
 		const encoding& operator=( const encoding& other );
 
-	public:
 		bool operator == ( const encoding& other ) const;
 		bool operator != ( const encoding& other ) const;
 

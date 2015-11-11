@@ -12,10 +12,11 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename Key, typename Compare, typename Allocator>
+	struct binary_read_helper<std::set<Key, Compare, Allocator>>
 	{
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void read_member( Archive& br, std::set<Key, Compare, Allocator>& val, unsigned long count )
+		template<typename Archive>
+		static void read_member( Archive& br, std::set<Key, Compare, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -25,16 +26,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void invoke( Archive& br, std::set<Key, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::set<Key, Compare, Allocator>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
+    };
 
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void read_member( Archive& br, std::multiset<Key, Compare, Allocator>& val, unsigned long count )
+    template<typename Key, typename Compare, typename Allocator>
+    struct binary_read_helper<std::multiset<Key, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void read_member( Archive& br, std::multiset<Key, Compare, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -44,16 +49,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void invoke( Archive& br, std::multiset<Key, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::multiset<Key, Compare, Allocator>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
+    };
 
-		template<typename Archive, typename Key, typename Hasher, typename Compare, typename Allocator>
-		void read_member( Archive& br, std::unordered_set<Key, Hasher, Compare, Allocator>& val, unsigned long count )
+    template<typename Key, typename Hasher, typename Compare, typename Allocator>
+    struct binary_read_helper<std::unordered_set<Key, Hasher, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void read_member( Archive& br, std::unordered_set<Key, Hasher, Compare, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -63,14 +72,14 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Hasher, typename Compare, typename Allocator>
-		void invoke( Archive& br, std::unordered_set<Key, Hasher, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::unordered_set<Key, Hasher, Compare, Allocator>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
-	}
+    };
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_STL_SET_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_STL_SET_INCLUDED

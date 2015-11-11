@@ -12,10 +12,11 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename Key, typename Type, typename Compare, typename Allocator>
+	struct binary_read_helper<std::map<Key, Type, Compare, Allocator>>
 	{
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void read_member( Archive& br, std::map<Key, Type, Compare, Allocator>& val, unsigned long count )
+		template<typename Archive>
+		static void read_member( Archive& br, std::map<Key, Type, Compare, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -29,16 +30,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void invoke( Archive& br, std::map<Key, Type, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::map<Key, Type, Compare, Allocator>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
+    };
 
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void read_member( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val, unsigned long count )
+    template<typename Key, typename Type, typename Compare, typename Allocator>
+    struct binary_read_helper<std::multimap<Key, Type, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void read_member( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -52,16 +57,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void invoke( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
+    };
 
-		template<typename Archive, typename Key, typename Type, typename Hasher, typename Compare, typename Allocator>
-		void read_member( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val, unsigned long count )
+    template<typename Key, typename Type, typename Hasher, typename Compare, typename Allocator>
+    struct binary_read_helper<std::unordered_map<Key, Type, Hasher, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void read_member( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -75,14 +84,14 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Type, typename Hasher, typename Compare, typename Allocator>
-		void invoke( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
-	}
+    };
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_STL_MAP_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_STL_MAP_INCLUDED

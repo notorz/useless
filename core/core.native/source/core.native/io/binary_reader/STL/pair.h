@@ -11,15 +11,16 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename T1, typename T2>
+	struct binary_read_helper<std::pair<T1, T2>>
 	{
-		template<typename Archive, typename T1, typename T2>
-		void Read( Archive& br, std::pair<T1, T2>& val )
+		template<typename Archive>
+		static void Read( Archive& br, std::pair<T1, T2>& val )
 		{
 			br.read( val.first );
 			br.read( val.second );
 		}
-	}
+    };
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_STL_PAIR_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_STL_PAIR_INCLUDED

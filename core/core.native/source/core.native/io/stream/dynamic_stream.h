@@ -53,7 +53,11 @@ namespace useless
 
 			size_t read = ( ( m_next + count ) > m_seekhigh ) ? ( m_seekhigh - m_next ) : count;
 
+#if ( _WIN32 || _WIN64 )
 			::memcpy_s( buffer, read, m_next, read );
+#else
+			::memcpy( buffer, m_next, read );
+#endif
 			m_next += read;
 
 			return read;
@@ -80,7 +84,11 @@ namespace useless
 				m_seekhigh = m_base + seekhighoff;
 			}
 			
+#if ( _WIN32 || _WIN64 )
 			::memcpy_s( m_next, count, buffer, count );
+#else
+			::memcpy( m_next, buffer, count );
+#endif
 			m_next += count;
 
 			if( m_next > m_seekhigh )

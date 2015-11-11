@@ -12,10 +12,11 @@
 
 namespace useless
 {
-	namespace binary_write_helper
+    template<typename Key, typename Compare, typename Allocator>
+	struct binary_write_helper<std::set<Key, Compare, Allocator>>
 	{
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void write_member( Archive& bw, const std::set<Key, Compare, Allocator>& val )
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::set<Key, Compare, Allocator>& val )
 		{
 			if( !val.empty() )
 			{
@@ -27,16 +28,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void invoke( Archive& bw, const std::set<Key, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::set<Key, Compare, Allocator>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( val.size() );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
-
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void write_member( Archive& bw, const std::multiset<Key, Compare, Allocator>& val )
+    };
+    
+    template<typename Key, typename Compare, typename Allocator>
+    struct binary_write_helper<std::multiset<Key, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::multiset<Key, Compare, Allocator>& val )
 		{
 			if( !val.empty() )
 			{
@@ -48,16 +53,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Compare, typename Allocator>
-		void invoke( Archive& bw, const std::multiset<Key, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::multiset<Key, Compare, Allocator>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( val.size() );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
-
-		template<typename Archive, typename Key, typename Hasher, typename Compare, typename Allocator>
-		void write_member( Archive& bw, const std::unordered_set<Key, Hasher, Compare, Allocator>& val )
+    };
+    
+    template<typename Key, typename Hasher, typename Compare, typename Allocator>
+    struct binary_write_helper<std::unordered_set<Key, Hasher, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::unordered_set<Key, Hasher, Compare, Allocator>& val )
 		{
 			if( !val.empty() )
 			{
@@ -69,14 +78,14 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Hasher, typename Compare, typename Allocator>
-		void invoke( Archive& bw, const std::unordered_set<Key, Hasher, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::unordered_set<Key, Hasher, Compare, Allocator>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( val.size() );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
-	}
+    };
 }
 
 #endif //USELESS_CORE_NATIVE_IO_BINARY_WRITER_STL_SET_INCLUDED

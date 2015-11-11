@@ -139,12 +139,21 @@ namespace useless
 	encoding::encoding( const encoding& other )
 		: m_charset( other.m_charset )
 	{
-
+#if ( _WIN32 || _WIN64 )
+        m_codepage = other.m_codepage;
+#elif __GNUC__
+        m_name = other.m_name;
+#endif
 	}
 
 	const encoding& encoding::operator=( const encoding& other )
 	{
 		m_charset = other.m_charset;
+#if ( _WIN32 || _WIN64 )
+        m_codepage = other.m_codepage;
+#elif __GNUC__
+        m_name = other.m_name;
+#endif
 		return *this;
 	}
 
@@ -160,8 +169,12 @@ namespace useless
 #elif __GNUC__
         if( m_charset == charset::system_default )
         {
-            static boost::locale::generator s_gen;
-            output = boost::locale::conv::from_utf<wchar_t>( input.buffer(), s_gen( m_name.buffer() ) );
+            std::locale loc = boost::locale::generator().generate( m_name.buffer() );
+            output = boost::locale::conv::from_utf<wchar_t>( input.buffer(), loc );
+            if( output.length() == 0 )
+            {
+                output = boost::locale::conv::utf_to_utf<char>( input.buffer() );
+            }
         }
         else if( m_charset == charset::utf8 )
         {
@@ -193,8 +206,12 @@ namespace useless
 #elif __GNUC__
         if( m_charset == charset::system_default )
         {
-            static boost::locale::generator s_gen;
-            output = boost::locale::conv::to_utf<wchar_t>( input.buffer(), s_gen( m_name.buffer() ) );
+            std::locale loc = boost::locale::generator().generate( m_name.buffer() );
+            output = boost::locale::conv::to_utf<wchar_t>( input.buffer(), loc );
+            if( output.length() == 0 )
+            {
+                output = boost::locale::conv::utf_to_utf<wchar_t>( input.buffer() );
+            }
         }
         else if( m_charset == charset::utf8 )
         {

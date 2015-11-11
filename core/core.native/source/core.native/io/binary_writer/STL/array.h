@@ -12,16 +12,17 @@
 
 namespace useless
 {
-	namespace binary_write_helper
+    template<typename Type, size_t _Size>
+	struct binary_write_helper<std::array<Type, _Size>>
 	{
-		template<typename Archive, typename Type, size_t _Size>
-		void write_member( Archive& bw, const std::array<Type, _Size>& val, std::true_type )
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::array<Type, _Size>& val, std::true_type )
 		{
 			bw.write( &val[ 0 ], sizeof( Type ) * _Size );
 		}
 
-		template<typename Archive, typename Type, size_t _Size>
-		void write_member( Archive& bw, const std::array<Type, _Size>& val, std::false_type )
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::array<Type, _Size>& val, std::false_type )
 		{
 			for( size_t i = 0; i < _Size; ++i )
 			{
@@ -29,21 +30,21 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type, size_t _Size>
-		void write_member( Archive& bw, const std::array<Type, _Size>& val )
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::array<Type, _Size>& val )
 		{
 			typedef typename std::is_arithmetic<typename std::remove_const<Type>::type> use_optimized;
 			write_member( bw, val, use_optimized() );
 		}
 
-		template<typename Archive, typename Type, size_t _Size>
-		void invoke( Archive& bw, const std::array<Type, _Size>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::array<Type, _Size>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( _Size );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
-	}
+	};
 }
 
 #endif //USELESS_CORE_NATIVE_IO_BINARY_WRITER_STL_ARRAY_INCLUDED

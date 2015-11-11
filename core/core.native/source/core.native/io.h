@@ -12,7 +12,7 @@
 #include "io/stream/dynamic_stream.h"
 #include "io/stream/file_stream.h"
 #include "io/binary_writer/binary_writer.h"
-#include "io/binary_writer/STL/string.h"
+#include "io/binary_writer/STL/_string.h"
 #include "io/binary_writer/STL/vector.h"
 #include "io/binary_writer/STL/array.h"
 #include "io/binary_writer/STL/deque.h"
@@ -21,7 +21,7 @@
 #include "io/binary_writer/STL/set.h"
 #include "io/binary_writer/STL/map.h"
 #include "io/binary_reader/binary_reader.h"
-#include "io/binary_reader/STL/string.h"
+#include "io/binary_reader/STL/_string.h"
 #include "io/binary_reader/STL/vector.h"
 #include "io/binary_reader/STL/array.h"
 #include "io/binary_reader/STL/deque.h"
@@ -38,4 +38,4 @@ namespace useless
 	typedef basic_binary_reader<std::allocator<char>> binary_reader;
 }
 
-#endif USELESS_CORE_NATIVE_IO_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_INCLUDED

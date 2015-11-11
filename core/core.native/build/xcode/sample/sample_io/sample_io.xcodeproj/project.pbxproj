@@ -1,0 +1,290 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4819C0AD1BF32B4300C69B20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4819C0AC1BF32B4300C69B20 /* main.cpp */; };
+		4819C0EC1BF3D8C800C69B20 /* libencoding.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4819C0EB1BF3D8C800C69B20 /* libencoding.a */; };
+		4819C0EE1BF3D8EB00C69B20 /* libio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4819C0ED1BF3D8EB00C69B20 /* libio.a */; };
+		4819C0F11BF3D92000C69B20 /* libboost_locale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4819C0EF1BF3D92000C69B20 /* libboost_locale.a */; };
+		4819C0F21BF3D92000C69B20 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4819C0F01BF3D92000C69B20 /* libboost_system.a */; };
+		4819C0F41BF3D92C00C69B20 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4819C0F31BF3D92C00C69B20 /* libiconv.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4819C09E1BF32ADE00C69B20 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4819C0A01BF32ADE00C69B20 /* sample_io */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sample_io; sourceTree = BUILT_PRODUCTS_DIR; };
+		4819C0AC1BF32B4300C69B20 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../../sample/io/main.cpp; sourceTree = "<group>"; };
+		4819C0EB1BF3D8C800C69B20 /* libencoding.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libencoding.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/core.native-fxyblbuvwltlvqfajyubgghwshhu/Build/Products/Debug/libencoding.a"; sourceTree = "<group>"; };
+		4819C0ED1BF3D8EB00C69B20 /* libio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libio.a; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/core.native-fxyblbuvwltlvqfajyubgghwshhu/Build/Products/Debug/libio.a"; sourceTree = "<group>"; };
+		4819C0EF1BF3D92000C69B20 /* libboost_locale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_locale.a; path = ../../../../../../../../boost_1_59_0/stage/lib/libboost_locale.a; sourceTree = "<group>"; };
+		4819C0F01BF3D92000C69B20 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = ../../../../../../../../boost_1_59_0/stage/lib/libboost_system.a; sourceTree = "<group>"; };
+		4819C0F31BF3D92C00C69B20 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4819C09D1BF32ADE00C69B20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4819C0F41BF3D92C00C69B20 /* libiconv.dylib in Frameworks */,
+				4819C0F11BF3D92000C69B20 /* libboost_locale.a in Frameworks */,
+				4819C0F21BF3D92000C69B20 /* libboost_system.a in Frameworks */,
+				4819C0EE1BF3D8EB00C69B20 /* libio.a in Frameworks */,
+				4819C0EC1BF3D8C800C69B20 /* libencoding.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4819C0971BF32ADE00C69B20 = {
+			isa = PBXGroup;
+			children = (
+				4819C0F51BF3D9BA00C69B20 /* lib */,
+				4819C0AA1BF32B0100C69B20 /* io */,
+				4819C0A11BF32ADE00C69B20 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4819C0A11BF32ADE00C69B20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4819C0A01BF32ADE00C69B20 /* sample_io */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4819C0AA1BF32B0100C69B20 /* io */ = {
+			isa = PBXGroup;
+			children = (
+				4819C0AC1BF32B4300C69B20 /* main.cpp */,
+			);
+			name = io;
+			sourceTree = "<group>";
+		};
+		4819C0F51BF3D9BA00C69B20 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				4819C0F31BF3D92C00C69B20 /* libiconv.dylib */,
+				4819C0EF1BF3D92000C69B20 /* libboost_locale.a */,
+				4819C0F01BF3D92000C69B20 /* libboost_system.a */,
+				4819C0ED1BF3D8EB00C69B20 /* libio.a */,
+				4819C0EB1BF3D8C800C69B20 /* libencoding.a */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4819C09F1BF32ADE00C69B20 /* sample_io */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4819C0A71BF32ADE00C69B20 /* Build configuration list for PBXNativeTarget "sample_io" */;
+			buildPhases = (
+				4819C09C1BF32ADE00C69B20 /* Sources */,
+				4819C09D1BF32ADE00C69B20 /* Frameworks */,
+				4819C09E1BF32ADE00C69B20 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sample_io;
+			productName = sample_io;
+			productReference = 4819C0A01BF32ADE00C69B20 /* sample_io */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4819C0981BF32ADE00C69B20 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Park Seoung Jun";
+				TargetAttributes = {
+					4819C09F1BF32ADE00C69B20 = {
+						CreatedOnToolsVersion = 6.3.2;
+					};
+				};
+			};
+			buildConfigurationList = 4819C09B1BF32ADE00C69B20 /* Build configuration list for PBXProject "sample_io" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4819C0971BF32ADE00C69B20;
+			productRefGroup = 4819C0A11BF32ADE00C69B20 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4819C09F1BF32ADE00C69B20 /* sample_io */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4819C09C1BF32ADE00C69B20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4819C0AD1BF32B4300C69B20 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4819C0A51BF32ADE00C69B20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4819C0A61BF32ADE00C69B20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4819C0A81BF32ADE00C69B20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/kiro/boost_1_59_0,
+					"$(project_dir)../../../../source",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/Users/kiro/boost_1_59_0/stage/lib,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/core.native-fxyblbuvwltlvqfajyubgghwshhu/Build/Products/Debug",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4819C0A91BF32ADE00C69B20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/Users/kiro/boost_1_59_0,
+					"$(project_dir)../../../../source",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/Users/kiro/boost_1_59_0/stage/lib,
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/core.native-fxyblbuvwltlvqfajyubgghwshhu/Build/Products/Debug",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4819C09B1BF32ADE00C69B20 /* Build configuration list for PBXProject "sample_io" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4819C0A51BF32ADE00C69B20 /* Debug */,
+				4819C0A61BF32ADE00C69B20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4819C0A71BF32ADE00C69B20 /* Build configuration list for PBXNativeTarget "sample_io" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4819C0A81BF32ADE00C69B20 /* Debug */,
+				4819C0A91BF32ADE00C69B20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4819C0981BF32ADE00C69B20 /* Project object */;
+}

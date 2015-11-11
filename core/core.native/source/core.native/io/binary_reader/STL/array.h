@@ -12,16 +12,17 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename Type, size_t _Size>
+	struct binary_read_helper<std::array<Type, _Size>>
 	{
-		template<typename Archive, typename Type, size_t _Size>
-		void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count, std::true_type )
+		template<typename Archive>
+		static void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count, std::true_type )
 		{
 			br.read( &val[ 0 ], sizeof( Type ) * count );
 		}
 
-		template<typename Archive, typename Type, size_t _Size>
-		void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count, std::false_type )
+		template<typename Archive>
+		static void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count, std::false_type )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -29,8 +30,8 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type, size_t _Size>
-		void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count )
+		template<typename Archive>
+		static void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count )
 		{
 			if( !val.empty() )
 			{
@@ -39,14 +40,14 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type>
-		void drop_member( Archive& br, Type* temp, unsigned long count, std::true_type )
+		template<typename Archive>
+		static void drop_member( Archive& br, Type* temp, unsigned long count, std::true_type )
 		{
 			br.read( &temp[ 0 ], sizeof( Type ) * count );
 		}
 
-		template<typename Archive, typename Type>
-		void drop_member( Archive& br, Type* temp, unsigned long count, std::false_type )
+		template<typename Archive>
+		static void drop_member( Archive& br, Type* temp, unsigned long count, std::false_type )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -54,18 +55,18 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type>
+		template<typename Archive>
 		static void drop_member( Archive& br, Type* temp, unsigned long count )
 		{
 			if( count > 0 )
 			{
-				typedef typename std::is_arithmetic<typename std::remove_const<T>::type> use_optimized;
+				typedef typename std::is_arithmetic<typename std::remove_const<Type>::type> use_optimized;
 				drop_member( br, &temp[ 0 ], count, use_optimized() );
 			}
 		}
 
-		template<typename Archive, typename Type, size_t _Size>
-		void invoke( Archive& br, std::array<Type, _Size>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::array<Type, _Size>& val )
 		{
 			unsigned long count;
 			br.read( &count, sizeof( unsigned long ) );
@@ -85,7 +86,7 @@ namespace useless
 				read_member( br, &val[ 0 ], count );
 			}
 		}
-	}
+    };
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_STL_ARRAY_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_STL_ARRAY_INCLUDED

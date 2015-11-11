@@ -6,6 +6,7 @@
 
 #define USELESS_IO_SOURCE
 #include "file_stream.h"
+#include "core.native/encoding.h"
 
 namespace useless
 {
@@ -217,7 +218,12 @@ namespace useless
 			0
 		};
 
+#if ( _WIN32 || _WIN64 )
 		return ( ::fopen_s( &file, filename, mods[ mode ] ) == 0 );
+#else
+        file = ::fopen( filename, mods[ mode ] );
+		return ( file != 0 );
+#endif
 	}
 
 	bool file_stream::xfsopen( FILE*& file, const wchar_t* filename, int mode )
@@ -233,6 +239,8 @@ namespace useless
 		};
 
 		return ( ::_wfopen_s( &file, filename, mods[ mode ] ) == 0 );
+#else
+        return xfsopen( file, encoding::get().from_wide( filename ).buffer(), mode );
 #endif
 	}
 }

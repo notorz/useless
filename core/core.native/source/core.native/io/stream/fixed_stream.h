@@ -21,7 +21,7 @@ namespace useless
 		{
 			m_base = m_next = &m_buffer[ 0 ];
 			m_end = m_base + size;
-			m_seekhigh = base;
+			m_seekhigh = m_base;
 		}
 
 		virtual size_t size() const
@@ -53,7 +53,11 @@ namespace useless
 
 			size_t read = ( ( m_next + count ) > m_seekhigh ) ? ( m_seekhigh - m_next ) : count;
 
+#if ( _WIN32 || _WIN64 )
 			::memcpy_s( buffer, read, m_next, read );
+#else
+			::memcpy( buffer, m_next, read );
+#endif
 			m_next += read;
 
 			return read;
@@ -68,7 +72,11 @@ namespace useless
 
 			size_t write = ( ( m_next + count ) > m_end ) ? ( m_end - m_next ) : count;
 
+#if ( _WIN32 || _WIN64 )
 			::memcpy_s( m_next, write, buffer, write );
+#else
+			::memcpy( m_next, buffer, write );
+#endif
 			m_next += write;
 
 			if( m_next > m_seekhigh )

@@ -16,15 +16,16 @@
 
 namespace useless
 {
-	namespace binary_write_helper
-	{
-		template<typename Archive, typename T>
-		void invoke( Archive& bw, const T& val )
-		{
-			const_cast<T&>( val ).serialize( bw, 0 );
-		}
-	}
-
+    template<typename T>
+    struct binary_write_helper
+    {
+        template<typename Archive>
+        static void invoke( Archive& bw, const T& val )
+        {
+            const_cast<T&>( val ).serialize( bw, 0 );
+        }
+    };
+    
 	template<typename Allocator>
 	class basic_binary_writer
 	{
@@ -116,17 +117,18 @@ namespace useless
 				template<typename T>
 				static void invoke( basic_binary_writer& bw, const T& val )
 				{
-					binary_write_helper::invoke( bw, val );
+					binary_write_helper<T>::invoke( bw, val );
 				}
 			};
 
 			template<typename T>
 			static void invoke( basic_binary_writer& bw, const T& val )
 			{
-				typename boost::mpl::eval_if<std::is_fundamental<T>,
-					write_primitive_type,	// true
-					write_object_class_type	// false
-				>::invoke( bw, val );
+				typedef typename boost::mpl::eval_if<std::is_fundamental<T>,
+					boost::mpl::identity<write_primitive_type>,     // true
+					boost::mpl::identity<write_object_class_type>	// false
+                >::type typex;
+                typex::invoke( bw, val );
 			}
 		};
 
@@ -135,19 +137,20 @@ namespace useless
 			template<typename T>
 			static void invoke( basic_binary_writer& bw, const T& val )
 			{
-				typename boost::mpl::eval_if<std::is_pointer<T>,
-					write_pointer_type,
+				typedef typename boost::mpl::eval_if<std::is_pointer<T>,
+                    boost::mpl::identity<write_pointer_type>,
 					//else
 					typename boost::mpl::eval_if<std::is_enum<T>,
-					write_enum_type,
+					boost::mpl::identity<write_enum_type>,
 					//else
 					typename boost::mpl::eval_if<std::is_array<T>,
-					write_array_type,
+					boost::mpl::identity<write_array_type>,
 					//else
-					write_non_pointer_type
+					boost::mpl::identity<write_non_pointer_type>
 					>
 					>
-				>::invoke( bw, val );
+                >::type typex;
+                typex::invoke( bw, val );
 			}
 		};
 
@@ -277,7 +280,7 @@ namespace useless
 			return m_stream;
 		}
 
-		bool encoding( const encoding& encoding )
+		void encoding( const encoding& encoding )
 		{
 			m_encoding = encoding;
 		}
@@ -383,7 +386,7 @@ namespace useless
 		streambase* m_stream;
 		bool m_must_be_deleted;
 
-		const useless::encoding& m_encoding;
+		useless::encoding m_encoding;
 	};
 }
 

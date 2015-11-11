@@ -17,14 +17,15 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename T>
+	struct binary_read_helper
 	{
-		template<typename Archive, typename T>
-		void invoke( Archive& br, T& val )
+		template<typename Archive>
+		static void invoke( Archive& br, T& val )
 		{
 			val.serialize( br, 0 );
 		}
-	}
+    };
 
 	template<typename Allocator>
 	class basic_binary_reader
@@ -118,7 +119,11 @@ namespace useless
 				if( dest_count >= 1 )
 				{
 					size_t count = ( std::min )( dest_count, temp.size() );
+#if ( _WIN32 || _WIN64 )
 					::memcpy_s( val, count, temp.c_str(), count );
+#else
+                    ::memcpy( val, temp.c_str(), count );
+#endif
 					val[ dest_count - 1 ] = 0;
 				}
 			}
@@ -131,7 +136,11 @@ namespace useless
 				if( dest_count >= 1 )
 				{
 					size_t count = ( std::min )( dest_count, temp.size() ) * sizeof( wchar_t );
+#if ( _WIN32 || _WIN64 )
 					::memcpy_s( val, count, temp.c_str(), count );
+#else
+					::memcpy( val, temp.c_str(), count );
+#endif
 					val[ dest_count - 1 ] = 0;
 				}
 			}
@@ -163,17 +172,18 @@ namespace useless
 				template<typename T>
 				static void invoke( basic_binary_reader& br, T& val )
 				{
-					binary_read_helper::invoke( br, val );
+					binary_read_helper<T>::invoke( br, val );
 				}
 			};
 
 			template<typename T>
 			static void invoke( basic_binary_reader& br, T& val )
 			{
-				typename boost::mpl::eval_if<std::is_fundamental<T>,
-					read_primitive_type,	// true
-					read_object_class_type	// false
-				>::invoke( br, val );
+				typedef typename boost::mpl::eval_if<std::is_fundamental<T>,
+					boost::mpl::identity<read_primitive_type>,      // true
+					boost::mpl::identity<read_object_class_type>	// false
+                >::type typex;
+                typex::invoke( br, val );
 			}
 		};
 
@@ -182,19 +192,20 @@ namespace useless
 			template<typename T>
 			static void invoke( basic_binary_reader& br, T& val )
 			{
-				typename boost::mpl::eval_if<std::is_pointer<T>,
-					read_pointer_type,
+				typedef typename boost::mpl::eval_if<std::is_pointer<T>,
+					boost::mpl::identity<read_pointer_type>,
 					//else
 					typename boost::mpl::eval_if<std::is_enum<T>,
-					read_enum_type,
+					boost::mpl::identity<read_enum_type>,
 					//else
 					typename boost::mpl::eval_if<std::is_array<T>,
-					read_array_type,
+					boost::mpl::identity<read_array_type>,
 					//else
-					read_non_pointer_type
+					boost::mpl::identity<read_non_pointer_type>
 					>
 					>
-				>::invoke( br, val );
+                >::type typex;
+                typex::invoke( br, val );
 			}
 		};
 
@@ -453,8 +464,8 @@ namespace useless
 		streambase* m_stream;
 		bool m_must_be_deleted;
 
-		const useless::encoding& m_encoding;
+		useless::encoding m_encoding;
 	};
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_INCLUDED

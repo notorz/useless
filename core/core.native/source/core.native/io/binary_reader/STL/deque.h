@@ -12,16 +12,17 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename Type, typename Allocator>
+	struct binary_read_helper<std::deque<Type, Allocator>>
 	{
-		template<typename Archive, typename Type, typename Allocator>
-		void read_member( Archive& br, std::deque<Type, Allocator>& val, unsigned long count, std::true_type )
+		template<typename Archive>
+		static void read_member( Archive& br, std::deque<Type, Allocator>& val, unsigned long count, std::true_type )
 		{
 			br.read( &val[ 0 ], sizeof( Type ) * count );
 		}
 
-		template<typename Archive, typename Type, typename Allocator>
-		void read_member( Archive& br, std::deque<Type, Allocator>& val, unsigned long count, std::false_type )
+		template<typename Archive>
+		static void read_member( Archive& br, std::deque<Type, Allocator>& val, unsigned long count, std::false_type )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -29,8 +30,8 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type, typename Allocator>
-		void read_member( Archive& br, std::deque<Type, Allocator>& val, unsigned long count )
+		template<typename Archive>
+		static void read_member( Archive& br, std::deque<Type, Allocator>& val, unsigned long count )
 		{
 			if( !val.empty() )
 			{
@@ -39,8 +40,8 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type, typename Allocator>
-		void invoke( Archive& br, std::deque<Type, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::deque<Type, Allocator>& val )
 		{
 			unsigned long current_count = static_cast< unsigned long >( val.size() );
 			
@@ -54,7 +55,7 @@ namespace useless
 
 			read_member( br, val, count );
 		}
-	}
+    };
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_STL_DEQUE_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_STL_DEQUE_INCLUDED

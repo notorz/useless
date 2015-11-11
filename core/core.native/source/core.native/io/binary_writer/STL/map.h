@@ -12,10 +12,11 @@
 
 namespace useless
 {
-	namespace binary_write_helper
+    template<typename Key, typename Type, typename Compare, typename Allocator>
+	struct binary_write_helper<std::map<Key, Type, Compare, Allocator>>
 	{
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void write_member( Archive& bw, const std::map<Key, Type, Compare, Allocator>& val )
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::map<Key, Type, Compare, Allocator>& val )
 		{
 			if( !val.empty() )
 			{
@@ -28,16 +29,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void invoke( Archive& bw, const std::map<Key, Type, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::map<Key, Type, Compare, Allocator>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( val.size() );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
+    };
 
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void write_member( Archive& bw, const std::multimap<Key, Type, Compare, Allocator>& val )
+    template<typename Key, typename Type, typename Compare, typename Allocator>
+    struct binary_write_helper<std::multimap<Key, Type, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::multimap<Key, Type, Compare, Allocator>& val )
 		{
 			if( !val.empty() )
 			{
@@ -50,16 +55,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Type, typename Compare, typename Allocator>
-		void invoke( Archive& bw, const std::multimap<Key, Type, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::multimap<Key, Type, Compare, Allocator>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( val.size() );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
+    };
 
-		template<typename Archive, typename Key, typename Type, typename Hasher, typename Compare, typename Allocator>
-		void write_member( Archive& bw, const std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
+    template<typename Key, typename Type, typename Hasher, typename Compare, typename Allocator>
+    struct binary_write_helper<std::unordered_map<Key, Type, Hasher, Compare, Allocator>>
+    {
+		template<typename Archive>
+		static void write_member( Archive& bw, const std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
 		{
 			if( !val.empty() )
 			{
@@ -72,14 +81,14 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Key, typename Type, typename Hasher, typename Compare, typename Allocator>
-		void invoke( Archive& bw, const std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
 		{
 			unsigned long count = static_cast< unsigned long >( val.size() );
 			bw.write( &count, sizeof( unsigned long ) );
 			write_member( bw, val );
 		}
-	}
+    };
 }
 
 #endif //USELESS_CORE_NATIVE_IO_BINARY_WRITER_STL_MAP_INCLUDED

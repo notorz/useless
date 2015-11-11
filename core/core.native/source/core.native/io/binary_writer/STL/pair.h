@@ -11,15 +11,16 @@
 
 namespace useless
 {
-	namespace binary_write_helper
+    template<typename T1, typename T2>
+	struct binary_write_helper<std::pair<T1, T2>>
 	{
-		template<typename Archive, typename T1, typename T2>
-		void invoke( Archive& bw, const std::pair<T1, T2>& val )
+		template<typename Archive>
+		static void invoke( Archive& bw, const std::pair<T1, T2>& val )
 		{
 			bw.write( val.first );
 			bw.write( val.second );
 		}
-	}
+    };
 }
 
 #endif //USELESS_CORE_NATIVE_IO_BINARY_WRITER_STL_PAIR_INCLUDED

@@ -33,9 +33,9 @@ namespace useless
 	// Check GCC
 #if __GNUC__
 #	if __x86_64__ || __ppc64__
-#		define ENV64
+#		define ENV64 1
 #	else
-#		define ENV32
+#		define ENV32 1
 #	endif
 #endif
 
@@ -48,7 +48,7 @@ namespace useless
 	class streambase
 	{
 	public:
-		virtual ~streambase() = 0 {}
+        virtual ~streambase() {}
 
 		virtual size_t size() const = 0;
 		virtual bool can_be_read() const = 0;

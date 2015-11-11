@@ -15,21 +15,25 @@
 
 #include "core.native/io.h"
 
+#include <boost/locale.hpp>
 using namespace useless;
+
+#include <iconv.h>
 
 int main()
 {
 	{
+        const char temp[ 9 ] = { -66, -75, -72, -16, -66, -8, -76, -62, 0 };
 		dynamic_stream ds( 100 );
 		binary_writer bw( ds );
-		bw << "¾µµ¥¾ø´Â";
-		bw << L"¾µµ¥¾ø´Â";
-		bw << 14;
+        bw.encoding( encoding::get( charset::korean ) );
+		bw << temp;
+		bw << L"ì“¸ëª¨ì—†ëŠ”";
 
 		ds.setpos( seekdir::beg, 0 );
 		binary_reader br( ds );
-		wchar_t temp1[ 2 ] = { 0, };
-		char temp2[ 2 ] = { 0, };
+		wchar_t temp1[ 10 ] = { 0, };
+		char temp2[ 10 ] = { 0, };
 		br >> temp1;
 		br >> temp2;
 	}
@@ -40,7 +44,7 @@ int main()
 
 		bw << "12345";
 
-		string str = L"sdfkasdf";
+		string_wide str = L"sdfkasdf";
 		bw << str;
 
 		std::vector<int> vec;

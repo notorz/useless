@@ -12,10 +12,11 @@
 
 namespace useless
 {
-	namespace binary_read_helper
+    template<typename Type, typename Allocator>
+	struct binary_read_helper<std::list<Type, Allocator>>
 	{
-		template<typename Archive, typename Type, typename Allocator>
-		void read_member( Archive& br, std::list<Type, Allocator>& val, unsigned long count )
+		template<typename Archive>
+		static void read_member( Archive& br, std::list<Type, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -25,16 +26,20 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type, typename Allocator>
-		void invoke( Archive& br, std::list<Type, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::list<Type, Allocator>& val )
 		{
 			unsigned long count;
-			ve.read( &count, sizeof( unsigned long ) );
+			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
+    };
 
-		template<typename Archive, typename Type, typename Allocator>
-		void read_member( Archive& br, std::forward_list<Type, Allocator>& val, unsigned long count )
+    template<typename Type, typename Allocator>
+    struct binary_read_helper<std::forward_list<Type, Allocator>>
+    {
+		template<typename Archive>
+		static void read_member( Archive& br, std::forward_list<Type, Allocator>& val, unsigned long count )
 		{
 			for( unsigned long i = 0; i < count; ++i )
 			{
@@ -44,14 +49,14 @@ namespace useless
 			}
 		}
 
-		template<typename Archive, typename Type, typename Allocator>
-		void invoke( Archive& br, std::forward_list<Type, Allocator>& val )
+		template<typename Archive>
+		static void invoke( Archive& br, std::forward_list<Type, Allocator>& val )
 		{
 			unsigned long count;
-			ve.read( &count, sizeof( unsigned long ) );
+			br.read( &count, sizeof( unsigned long ) );
 			read_member( br, val, count );
 		}
-	}
+    };
 }
 
-#endif USELESS_CORE_NATIVE_IO_BINARY_READER_STL_LIST_INCLUDED
+#endif //USELESS_CORE_NATIVE_IO_BINARY_READER_STL_LIST_INCLUDED

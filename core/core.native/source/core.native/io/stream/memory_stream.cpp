@@ -47,7 +47,11 @@ namespace useless
 
 		size_t read = ( ( m_next + count ) > m_end ) ? ( m_end - m_next ) : count;
 
+#if ( _WIN32 || _WIN64 )
 		::memcpy_s( buffer, read, m_next, read );
+#else
+		::memcpy( buffer, m_next, read );
+#endif
 		m_next += read;
 
 		return read;
@@ -62,7 +66,11 @@ namespace useless
 
 		size_t write = ( ( m_next + count ) > m_end ) ? ( m_end - m_next ) : count;
 
+#if ( _WIN32 || _WIN64 )
 		::memcpy_s( m_next, write, buffer, write );
+#else
+		::memcpy( m_next, buffer, write );
+#endif
 		m_next += write;
 
 		return write;

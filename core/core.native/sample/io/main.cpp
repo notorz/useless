@@ -1,4 +1,4 @@
-//
+﻿//
 // Copyright (c) 2015. SeongJun Park.
 //
 // Distributed under the MIT License.
@@ -15,10 +15,7 @@
 
 #include "core.native/io.h"
 
-#include <boost/locale.hpp>
 using namespace useless;
-
-#include <iconv.h>
 
 int main()
 {

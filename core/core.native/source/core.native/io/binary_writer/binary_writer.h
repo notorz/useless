@@ -55,22 +55,22 @@ namespace useless
 		struct write_array_type
 		{
 			template<typename T>
-			static void write_member( basic_binary_writer& bw, const T* val, unsigned long count, std::true_type )
+			static void write_member( basic_binary_writer& bw, const T* val, uint32_t count, std::true_type )
 			{
 				bw.write( &val[ 0 ], sizeof( T ) * count );
 			}
 
 			template<typename T>
-			static void write_member( basic_binary_writer& bw, const T* val, unsigned long count, std::false_type )
+			static void write_member( basic_binary_writer& bw, const T* val, uint32_t count, std::false_type )
 			{
-				for( unsigned long i = 0; i < count; ++i )
+				for( uint32_t i = 0; i < count; ++i )
 				{
 					bw.write( val[ i ] );
 				}
 			}
 
 			template<typename T>
-			static void write_member( basic_binary_writer& bw, const T* val, unsigned long count )
+			static void write_member( basic_binary_writer& bw, const T* val, uint32_t count )
 			{
 				if( count > 0 )
 				{
@@ -82,11 +82,11 @@ namespace useless
 			template<typename T>
 			static void invoke( basic_binary_writer& bw, const T& val )
 			{
-				unsigned long count = static_cast< unsigned long >( sizeof( val ) /
+				uint32_t count = static_cast< uint32_t >( sizeof( val ) /
 					( static_cast< const char* >( static_cast< const void* >( &val[ 1 ] ) )
 						- static_cast< const char* >( static_cast< const void* >( &val[ 0 ] ) ) ) );
 
-				bw.write( &count, sizeof( unsigned long ) );
+				bw.write( &count, sizeof( uint32_t ) );
 				write_member( bw, &val[ 0 ], count );
 			}
 
@@ -298,34 +298,34 @@ namespace useless
 			}
 		}
 
-		void write_u8( unsigned char val )
+		void write_u8( uint8_t val )
 		{
-			write<unsigned char>( val );
+			write<uint8_t>( val );
 		}
 
-		void write_s8( char val )
+		void write_s8( int8_t val )
 		{
-			write<char>( val );
+			write<int8_t>( val );
 		}
 
-		void write_u16( unsigned short val )
+		void write_u16( uint16_t val )
 		{
-			write<unsigned short>( val );
+			write<uint16_t>( val );
 		}
 
-		void write_s16( short val )
+		void write_s16( int16_t val )
 		{
-			write<short>( val );
+			write<int16_t>( val );
 		}
 
-		void write_u32( unsigned long val )
+		void write_u32( uint32_t val )
 		{
-			write<unsigned long>( val );
+			write<uint32_t>( val );
 		}
 
-		void write_s32( long val )
+		void write_s32( int32_t val )
 		{
-			write<long>( val );
+			write<int32_t>( val );
 		}
 
 		void write_u64( uint64_t val )

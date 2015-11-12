@@ -15,7 +15,7 @@ namespace useless
 	struct binary_write_helper<std::basic_string<char, Allocator>>
 	{
 		template<typename Archive>
-		static void write_member( Archive& bw, const std::basic_string<char, Allocator>& val, unsigned long count )
+		static void write_member( Archive& bw, const std::basic_string<char, Allocator>& val, uint32_t count )
 		{
 			if( !val.empty() )
 			{
@@ -27,8 +27,8 @@ namespace useless
 		static void invoke( Archive& bw, const std::basic_string<char, Allocator>& val )
 		{
 			std::string temp = encoding::convert( bw.encoding(), encoding::utf8(), val ).buffer();
-			unsigned long count = static_cast< unsigned long >( temp.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( temp.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, temp, count );
 		}
     };
@@ -37,7 +37,7 @@ namespace useless
     struct binary_write_helper<std::basic_string<wchar_t, Allocator>>
     {
         template<typename Archive>
-        static void write_member( Archive& bw, const std::string& val, unsigned long count )
+        static void write_member( Archive& bw, const std::string& val, uint32_t count )
         {
             if( !val.empty() )
             {
@@ -49,8 +49,8 @@ namespace useless
 		static void invoke( Archive& bw, const std::basic_string<wchar_t, Allocator>& val )
 		{
 			std::string temp = encoding::utf8().from_wide( val ).buffer();
-			unsigned long count = static_cast< unsigned long >( temp.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( temp.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, temp, count );
 		}
     };

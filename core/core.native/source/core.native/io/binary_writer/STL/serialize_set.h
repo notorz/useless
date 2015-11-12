@@ -31,8 +31,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::set<Key, Compare, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };
@@ -56,8 +56,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::multiset<Key, Compare, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };
@@ -81,8 +81,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::unordered_set<Key, Hasher, Compare, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };

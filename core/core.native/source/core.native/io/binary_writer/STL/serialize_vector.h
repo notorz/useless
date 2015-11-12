@@ -16,22 +16,22 @@ namespace useless
 	struct binary_write_helper<std::vector<Type, Allocator>>
 	{
 		template<typename Archive>
-		static void write_member( Archive& bw, const std::vector<Type, Allocator>& val, unsigned long count, std::true_type )
+		static void write_member( Archive& bw, const std::vector<Type, Allocator>& val, uint32_t count, std::true_type )
 		{
 			bw.write( &val[ 0 ], sizeof( Type ) * count );
 		}
 
 		template<typename Archive>
-		static void write_member( Archive& bw, const std::vector<Type, Allocator>& val, unsigned long count, std::false_type )
+		static void write_member( Archive& bw, const std::vector<Type, Allocator>& val, uint32_t count, std::false_type )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				bw.write( val[ i ] );
 			}
 		}
 
 		template<typename Archive>
-		static void write_member( Archive& bw, const std::vector<Type, Allocator>& val, unsigned long count )
+		static void write_member( Archive& bw, const std::vector<Type, Allocator>& val, uint32_t count )
 		{
 			if( !val.empty() )
 			{
@@ -42,11 +42,11 @@ namespace useless
 
 		// bool Æ¯¼öÈ­
 		template<typename Archive>
-		static void write_member( Archive& bw, const std::vector<bool, Allocator>& val, unsigned long count )
+		static void write_member( Archive& bw, const std::vector<bool, Allocator>& val, uint32_t count )
 		{
 			if( !val.empty() )
 			{
-				for( unsigned long i = 0; i < count; ++i )
+				for( uint32_t i = 0; i < count; ++i )
 				{
 					char temp = val[ i ] ? 1 : 0;
 					bw.write( &temp, sizeof( char ) );
@@ -57,8 +57,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::vector<Type, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val, count );
 		}
     };
@@ -67,11 +67,11 @@ namespace useless
     struct binary_write_helper<std::vector<bool, Allocator>>
     {   
         template<typename Archive>
-        static void write_member( Archive& bw, const std::vector<bool, Allocator>& val, unsigned long count )
+        static void write_member( Archive& bw, const std::vector<bool, Allocator>& val, uint32_t count )
         {
             if( !val.empty() )
             {
-                for( unsigned long i = 0; i < count; ++i )
+                for( uint32_t i = 0; i < count; ++i )
                 {
                     char temp = val[ i ] ? 1 : 0;
                     bw.write( &temp, sizeof( char ) );
@@ -82,8 +82,8 @@ namespace useless
         template<typename Archive>
         static void invoke( Archive& bw, const std::vector<bool, Allocator>& val )
         {
-            unsigned long count = static_cast< unsigned long >( val.size() );
-            bw.write( &count, sizeof( unsigned long ) );
+            uint32_t count = static_cast< uint32_t >( val.size() );
+            bw.write( &count, sizeof( uint32_t ) );
             write_member( bw, val, count );
         }
     };

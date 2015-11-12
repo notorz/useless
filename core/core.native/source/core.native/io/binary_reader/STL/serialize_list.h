@@ -16,9 +16,9 @@ namespace useless
 	struct binary_read_helper<std::list<Type, Allocator>>
 	{
 		template<typename Archive>
-		static void read_member( Archive& br, std::list<Type, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::list<Type, Allocator>& val, uint32_t count )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				Type temp;
 				br.read( temp );
@@ -29,8 +29,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::list<Type, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 			read_member( br, val, count );
 		}
     };
@@ -39,9 +39,9 @@ namespace useless
     struct binary_read_helper<std::forward_list<Type, Allocator>>
     {
 		template<typename Archive>
-		static void read_member( Archive& br, std::forward_list<Type, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::forward_list<Type, Allocator>& val, uint32_t count )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				Type temp;
 				br.read( temp );
@@ -52,8 +52,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::forward_list<Type, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 			read_member( br, val, count );
 		}
     };

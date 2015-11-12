@@ -29,23 +29,23 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\core.native\io.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\binary_reader.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\array.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\deque.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\list.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\map.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\pair.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\set.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\string.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\vector.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_array.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_deque.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_list.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_map.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_pair.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_set.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_string.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_vector.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\binary_writer.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\array.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\deque.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\list.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\map.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\pair.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\set.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\string.h" />
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\vector.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_array.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_deque.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_list.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_map.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_pair.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_set.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_string.h" />
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_vector.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\definitions.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\dynamic_stream.h" />
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\file_stream.h" />
@@ -56,6 +56,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\core.native\io\stream\file_stream.cpp" />
     <ClCompile Include="..\..\..\..\source\core.native\io\stream\memory_stream.cpp" />
+    <ClCompile Include="..\..\..\..\source\core.native\io\stream\streambase.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F846AE75-B454-4798-ABE9-65B20F221544}</ProjectGuid>

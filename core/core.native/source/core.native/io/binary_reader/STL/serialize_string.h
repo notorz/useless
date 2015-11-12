@@ -15,7 +15,7 @@ namespace useless
 	struct binary_read_helper<std::basic_string<char, Allocator>>
 	{
 		template<typename Archive>
-		static void read_member( Archive& br, std::basic_string<char, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::basic_string<char, Allocator>& val, uint32_t count )
 		{
 			if( !val.empty() )
 			{
@@ -26,8 +26,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::basic_string<char, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 
 			std::string temp;
 			temp.resize( count );
@@ -41,7 +41,7 @@ namespace useless
     struct binary_read_helper<std::basic_string<wchar_t, Allocator>>
     {
         template<typename Archive>
-        static void read_member( Archive& br, std::string& val, unsigned long count )
+        static void read_member( Archive& br, std::string& val, uint32_t count )
         {
             if( !val.empty() )
             {
@@ -52,8 +52,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::basic_string<wchar_t, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 
 			std::string temp;
 			temp.resize( count );

@@ -40,8 +40,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::array<Type, _Size>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( _Size );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( _Size );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
 	};

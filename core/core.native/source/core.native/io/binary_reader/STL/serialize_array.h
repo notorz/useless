@@ -16,22 +16,22 @@ namespace useless
 	struct binary_read_helper<std::array<Type, _Size>>
 	{
 		template<typename Archive>
-		static void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count, std::true_type )
+		static void read_member( Archive& br, std::array<Type, _Size>& val, uint32_t count, std::true_type )
 		{
 			br.read( &val[ 0 ], sizeof( Type ) * count );
 		}
 
 		template<typename Archive>
-		static void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count, std::false_type )
+		static void read_member( Archive& br, std::array<Type, _Size>& val, uint32_t count, std::false_type )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				br.read( val[ i ] );
 			}
 		}
 
 		template<typename Archive>
-		static void read_member( Archive& br, std::array<Type, _Size>& val, unsigned long count )
+		static void read_member( Archive& br, std::array<Type, _Size>& val, uint32_t count )
 		{
 			if( !val.empty() )
 			{
@@ -41,22 +41,22 @@ namespace useless
 		}
 
 		template<typename Archive>
-		static void drop_member( Archive& br, Type* temp, unsigned long count, std::true_type )
+		static void drop_member( Archive& br, Type* temp, uint32_t count, std::true_type )
 		{
 			br.read( &temp[ 0 ], sizeof( Type ) * count );
 		}
 
 		template<typename Archive>
-		static void drop_member( Archive& br, Type* temp, unsigned long count, std::false_type )
+		static void drop_member( Archive& br, Type* temp, uint32_t count, std::false_type )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				br.read( temp[ i ] );
 			}
 		}
 
 		template<typename Archive>
-		static void drop_member( Archive& br, Type* temp, unsigned long count )
+		static void drop_member( Archive& br, Type* temp, uint32_t count )
 		{
 			if( count > 0 )
 			{
@@ -68,15 +68,15 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::array<Type, _Size>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 			
-			unsigned long dest_count = static_cast< unsigned long >( _Size );
+			uint32_t dest_count = static_cast< uint32_t >( _Size );
 			if( count > dest_count )
 			{
 				read_member( br, &val[ 0 ], dest_count );
 
-				unsigned long temp_count = count - dest_count;
+				uint32_t temp_count = count - dest_count;
 				std::vector<Type> temp;
 				temp.resize( temp_count );
 				drop_member( br, &temp[ 0 ], temp_count );

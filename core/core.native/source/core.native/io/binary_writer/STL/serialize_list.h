@@ -31,8 +31,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::list<Type, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };
@@ -56,7 +56,7 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::forward_list<Type, Allocator>& val )
 		{
-			unsigned long count = 0;
+			uint32_t count = 0;
 			if( !val.empty() )
 			{
 				auto endit = val.end();
@@ -66,7 +66,7 @@ namespace useless
 				}
 			}
 
-			bw.write( &count, sizeof( unsigned long ) );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };

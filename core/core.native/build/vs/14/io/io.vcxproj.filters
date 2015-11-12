@@ -40,58 +40,58 @@
     <ClInclude Include="..\..\..\..\source\core.native\io\stream\streambase.h">
       <Filter>io\stream</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\string.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\vector.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\deque.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\list.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\map.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\set.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\pair.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\array.h">
-      <Filter>io\binary_writer\STL</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\binary_reader.h">
       <Filter>io\binary_reader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\array.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\deque.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\list.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\pair.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\set.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\string.h">
-      <Filter>io\binary_reader\STL</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\vector.h">
-      <Filter>io\binary_reader\STL</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\core.native\io\definitions.h">
       <Filter>io</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\map.h">
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_string.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_array.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_deque.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_list.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_map.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_pair.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_set.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_reader\STL\serialize_vector.h">
+      <Filter>io\binary_reader\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_string.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_array.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_deque.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_list.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_map.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_pair.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_set.h">
+      <Filter>io\binary_writer\STL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core.native\io\binary_writer\STL\serialize_vector.h">
       <Filter>io\binary_writer\STL</Filter>
     </ClInclude>
   </ItemGroup>
@@ -100,6 +100,9 @@
       <Filter>io\stream</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\core.native\io\stream\memory_stream.cpp">
+      <Filter>io\stream</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core.native\io\stream\streambase.cpp">
       <Filter>io\stream</Filter>
     </ClCompile>
   </ItemGroup>

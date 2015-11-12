@@ -16,9 +16,9 @@ namespace useless
 	struct binary_read_helper<std::map<Key, Type, Compare, Allocator>>
 	{
 		template<typename Archive>
-		static void read_member( Archive& br, std::map<Key, Type, Compare, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::map<Key, Type, Compare, Allocator>& val, uint32_t count )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				Key key;
 				br.read( key );
@@ -33,8 +33,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::map<Key, Type, Compare, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 			read_member( br, val, count );
 		}
     };
@@ -43,9 +43,9 @@ namespace useless
     struct binary_read_helper<std::multimap<Key, Type, Compare, Allocator>>
     {
 		template<typename Archive>
-		static void read_member( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val, uint32_t count )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				Key key;
 				br.read( key );
@@ -60,8 +60,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::multimap<Key, Type, Compare, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 			read_member( br, val, count );
 		}
     };
@@ -70,9 +70,9 @@ namespace useless
     struct binary_read_helper<std::unordered_map<Key, Type, Hasher, Compare, Allocator>>
     {
 		template<typename Archive>
-		static void read_member( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val, uint32_t count )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				Key key;
 				br.read( key );
@@ -87,8 +87,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
 		{
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 			read_member( br, val, count );
 		}
     };

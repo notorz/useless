@@ -8,6 +8,7 @@
 #define USELESS_CORE_NATIVE_IO_STREAM_BASE_INCLUDED
 
 #include <boost/cstdint.hpp>
+#include "core.native/io/definitions.h"
 
 namespace useless
 {
@@ -45,10 +46,10 @@ namespace useless
 	typedef int32_t streamoff;
 #endif
 
-	class streambase
+	class CORE_IO_DECL streambase
 	{
 	public:
-        virtual ~streambase() {}
+		virtual ~streambase() = 0;
 
 		virtual size_t size() const = 0;
 		virtual bool can_be_read() const = 0;

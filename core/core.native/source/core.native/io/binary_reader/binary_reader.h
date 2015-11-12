@@ -57,22 +57,22 @@ namespace useless
 		struct read_array_type
 		{
 			template<typename T>
-			static void read_member( basic_binary_reader& br, T* val, unsigned long count, std::true_type )
+			static void read_member( basic_binary_reader& br, T* val, uint32_t count, std::true_type )
 			{
 				br.read( &val[ 0 ], sizeof( T ) * count );
 			}
 
 			template<typename T>
-			static void read_member( basic_binary_reader& br, T* val, unsigned long count, std::false_type )
+			static void read_member( basic_binary_reader& br, T* val, uint32_t count, std::false_type )
 			{
-				for( unsigned long i = 0; i < count; ++i )
+				for( uint32_t i = 0; i < count; ++i )
 				{
 					br.read( val[ i ] );
 				}
 			}
 
 			template<typename T>
-			static void read_member( basic_binary_reader& br, T* val, unsigned long count )
+			static void read_member( basic_binary_reader& br, T* val, uint32_t count )
 			{
 				if( count > 0 )
 				{
@@ -82,7 +82,7 @@ namespace useless
 			}
 
 			template<typename T>
-			static void drop_member( basic_binary_reader& br, T*, unsigned long count )
+			static void drop_member( basic_binary_reader& br, T*, uint32_t count )
 			{
 				if( count > 0 )
 				{
@@ -97,8 +97,8 @@ namespace useless
 			template<typename T>
 			static void read( basic_binary_reader& br, T& val, size_t dest_count )
 			{
-				unsigned long count;
-				br.read( &count, sizeof( unsigned long ) );
+				uint32_t count;
+				br.read( &count, sizeof( uint32_t ) );
 
 				if( count > dest_count )
 				{
@@ -338,45 +338,45 @@ namespace useless
 			}
 		}
 
-		unsigned char read_u8()
+		uint8_t read_u8()
 		{
-			unsigned char val;
-			read<unsigned char>( val );
+			uint8_t val;
+			read<uint8_t>( val );
 			return val;
 		}
 
-		char read_s8()
+		int8_t read_s8()
 		{
-			char val;
-			read<char>( val );
+			int8_t val;
+			read<int8_t>( val );
 			return val;
 		}
 
-		unsigned short read_u16()
+		uint16_t read_u16()
 		{
-			unsigned short val;
-			read<unsigned short>( val );
+			uint16_t val;
+			read<uint16_t>( val );
 			return val;
 		}
 
-		short read_s16()
+		int16_t read_s16()
 		{
-			short val;
-			read<short>( val );
+			int16_t val;
+			read<int16_t>( val );
 			return val;
 		}
 
-		unsigned long read_u32()
+		uint32_t read_u32()
 		{
-			unsigned long val;
-			read<unsigned long>( val );
+			uint32_t val;
+			read<uint32_t>( val );
 			return val;
 		}
 
-		long read_s32()
+		int32_t read_s32()
 		{
-			long val;
-			read<long>( val );
+			int32_t val;
+			read<int32_t>( val );
 			return val;
 		}
 

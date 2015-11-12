@@ -16,22 +16,22 @@ namespace useless
 	struct binary_read_helper<std::vector<Type, Allocator>>
 	{
 		template<typename Archive>
-		static void read_member( Archive& br, std::vector<Type, Allocator>& val, unsigned long count, std::true_type )
+		static void read_member( Archive& br, std::vector<Type, Allocator>& val, uint32_t count, std::true_type )
 		{
 			br.Read( &val[ 0 ], sizeof( Type ) * count );
 		}
 
 		template<typename Archive>
-		static void read_member( Archive& br, std::vector<Type, Allocator>& val, unsigned long count, std::false_type )
+		static void read_member( Archive& br, std::vector<Type, Allocator>& val, uint32_t count, std::false_type )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				br.read( val[ i ] );
 			}
 		}
 
 		template<typename Archive>
-		static void read_member( Archive& br, std::vector<Type, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::vector<Type, Allocator>& val, uint32_t count )
 		{
 			if( !val.empty() )
 			{
@@ -42,9 +42,9 @@ namespace useless
 
 		// bool Æ¯¼öÈ­
 		template<typename Archive>
-		static void read_member( Archive& br, std::vector<bool, Allocator>& val, unsigned long count )
+		static void read_member( Archive& br, std::vector<bool, Allocator>& val, uint32_t count )
 		{
-			for( unsigned long i = 0; i < count; ++i )
+			for( uint32_t i = 0; i < count; ++i )
 			{
 				char temp;
 				br.read( &temp, sizeof( char ) );
@@ -55,10 +55,10 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& br, std::vector<Type, Allocator>& val )
 		{
-			unsigned long current_count = static_cast< unsigned long >( val.size() );
+			uint32_t current_count = static_cast< uint32_t >( val.size() );
 
-			unsigned long count;
-			br.read( &count, sizeof( unsigned long ) );
+			uint32_t count;
+			br.read( &count, sizeof( uint32_t ) );
 
 			if( count > current_count )
 			{
@@ -73,9 +73,9 @@ namespace useless
     struct binary_read_helper<std::vector<bool, Allocator>>
     {
         template<typename Archive>
-        static void read_member( Archive& br, std::vector<bool, Allocator>& val, unsigned long count )
+        static void read_member( Archive& br, std::vector<bool, Allocator>& val, uint32_t count )
         {
-            for( unsigned long i = 0; i < count; ++i )
+            for( uint32_t i = 0; i < count; ++i )
             {
                 char temp;
                 br.read( &temp, sizeof( char ) );
@@ -86,10 +86,10 @@ namespace useless
         template<typename Archive>
         static void invoke( Archive& br, std::vector<bool, Allocator>& val )
         {
-            unsigned long current_count = static_cast< unsigned long >( val.size() );
+			uint32_t current_count = static_cast< uint32_t >( val.size() );
             
-            unsigned long count;
-            br.read( &count, sizeof( unsigned long ) );
+            uint32_t count;
+            br.read( &count, sizeof( uint32_t ) );
             
             if( count > current_count )
             {

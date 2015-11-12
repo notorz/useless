@@ -32,8 +32,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::map<Key, Type, Compare, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };
@@ -58,8 +58,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::multimap<Key, Type, Compare, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };
@@ -84,8 +84,8 @@ namespace useless
 		template<typename Archive>
 		static void invoke( Archive& bw, const std::unordered_map<Key, Type, Hasher, Compare, Allocator>& val )
 		{
-			unsigned long count = static_cast< unsigned long >( val.size() );
-			bw.write( &count, sizeof( unsigned long ) );
+			uint32_t count = static_cast< uint32_t >( val.size() );
+			bw.write( &count, sizeof( uint32_t ) );
 			write_member( bw, val );
 		}
     };

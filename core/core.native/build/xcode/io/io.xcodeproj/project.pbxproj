@@ -17,23 +17,24 @@
 		4819C0C11BF32B8400C69B20 /* memory_stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0BA1BF32B8400C69B20 /* memory_stream.h */; };
 		4819C0C21BF32B8400C69B20 /* streambase.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0BB1BF32B8400C69B20 /* streambase.h */; };
 		4819C0C41BF32B8F00C69B20 /* binary_writer.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0C31BF32B8F00C69B20 /* binary_writer.h */; };
-		4819C0CE1BF32B9E00C69B20 /* array.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0C61BF32B9E00C69B20 /* array.h */; };
-		4819C0CF1BF32B9E00C69B20 /* deque.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0C71BF32B9E00C69B20 /* deque.h */; };
-		4819C0D01BF32B9E00C69B20 /* list.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0C81BF32B9E00C69B20 /* list.h */; };
-		4819C0D11BF32B9E00C69B20 /* map.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0C91BF32B9E00C69B20 /* map.h */; };
-		4819C0D21BF32B9E00C69B20 /* pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0CA1BF32B9E00C69B20 /* pair.h */; };
-		4819C0D31BF32B9E00C69B20 /* set.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0CB1BF32B9E00C69B20 /* set.h */; };
-		4819C0D41BF32B9E00C69B20 /* _string.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0CC1BF32B9E00C69B20 /* _string.h */; };
-		4819C0D51BF32B9E00C69B20 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0CD1BF32B9E00C69B20 /* vector.h */; };
 		4819C0D71BF32BAA00C69B20 /* binary_reader.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0D61BF32BAA00C69B20 /* binary_reader.h */; };
-		4819C0E11BF32BB900C69B20 /* array.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0D91BF32BB900C69B20 /* array.h */; };
-		4819C0E21BF32BB900C69B20 /* deque.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0DA1BF32BB900C69B20 /* deque.h */; };
-		4819C0E31BF32BB900C69B20 /* list.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0DB1BF32BB900C69B20 /* list.h */; };
-		4819C0E41BF32BB900C69B20 /* map.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0DC1BF32BB900C69B20 /* map.h */; };
-		4819C0E51BF32BB900C69B20 /* pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0DD1BF32BB900C69B20 /* pair.h */; };
-		4819C0E61BF32BB900C69B20 /* set.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0DE1BF32BB900C69B20 /* set.h */; };
-		4819C0E71BF32BB900C69B20 /* _string.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0DF1BF32BB900C69B20 /* _string.h */; };
-		4819C0E81BF32BB900C69B20 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 4819C0E01BF32BB900C69B20 /* vector.h */; };
+		48D9CCCB1BF4896D00525DB8 /* streambase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 48D9CCCA1BF4896D00525DB8 /* streambase.cpp */; };
+		48D9CCD41BF4898200525DB8 /* serialize_array.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCCC1BF4898200525DB8 /* serialize_array.h */; };
+		48D9CCD51BF4898200525DB8 /* serialize_deque.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCCD1BF4898200525DB8 /* serialize_deque.h */; };
+		48D9CCD61BF4898200525DB8 /* serialize_list.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCCE1BF4898200525DB8 /* serialize_list.h */; };
+		48D9CCD71BF4898200525DB8 /* serialize_map.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCCF1BF4898200525DB8 /* serialize_map.h */; };
+		48D9CCD81BF4898200525DB8 /* serialize_pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCD01BF4898200525DB8 /* serialize_pair.h */; };
+		48D9CCD91BF4898200525DB8 /* serialize_set.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCD11BF4898200525DB8 /* serialize_set.h */; };
+		48D9CCDA1BF4898200525DB8 /* serialize_string.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCD21BF4898200525DB8 /* serialize_string.h */; };
+		48D9CCDB1BF4898200525DB8 /* serialize_vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCD31BF4898200525DB8 /* serialize_vector.h */; };
+		48D9CCE41BF4899600525DB8 /* serialize_array.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCDC1BF4899600525DB8 /* serialize_array.h */; };
+		48D9CCE51BF4899600525DB8 /* serialize_deque.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCDD1BF4899600525DB8 /* serialize_deque.h */; };
+		48D9CCE61BF4899600525DB8 /* serialize_list.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCDE1BF4899600525DB8 /* serialize_list.h */; };
+		48D9CCE71BF4899600525DB8 /* serialize_map.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCDF1BF4899600525DB8 /* serialize_map.h */; };
+		48D9CCE81BF4899600525DB8 /* serialize_pair.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCE01BF4899600525DB8 /* serialize_pair.h */; };
+		48D9CCE91BF4899600525DB8 /* serialize_set.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCE11BF4899600525DB8 /* serialize_set.h */; };
+		48D9CCEA1BF4899600525DB8 /* serialize_string.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCE21BF4899600525DB8 /* serialize_string.h */; };
+		48D9CCEB1BF4899600525DB8 /* serialize_vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 48D9CCE31BF4899600525DB8 /* serialize_vector.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,23 +49,24 @@
 		4819C0BA1BF32B8400C69B20 /* memory_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = memory_stream.h; path = ../../../source/core.native/io/stream/memory_stream.h; sourceTree = "<group>"; };
 		4819C0BB1BF32B8400C69B20 /* streambase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = streambase.h; path = ../../../source/core.native/io/stream/streambase.h; sourceTree = "<group>"; };
 		4819C0C31BF32B8F00C69B20 /* binary_writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = binary_writer.h; path = ../../../source/core.native/io/binary_writer/binary_writer.h; sourceTree = "<group>"; };
-		4819C0C61BF32B9E00C69B20 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = array.h; path = ../../../source/core.native/io/binary_writer/STL/array.h; sourceTree = "<group>"; };
-		4819C0C71BF32B9E00C69B20 /* deque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deque.h; path = ../../../source/core.native/io/binary_writer/STL/deque.h; sourceTree = "<group>"; };
-		4819C0C81BF32B9E00C69B20 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = ../../../source/core.native/io/binary_writer/STL/list.h; sourceTree = "<group>"; };
-		4819C0C91BF32B9E00C69B20 /* map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = map.h; path = ../../../source/core.native/io/binary_writer/STL/map.h; sourceTree = "<group>"; };
-		4819C0CA1BF32B9E00C69B20 /* pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pair.h; path = ../../../source/core.native/io/binary_writer/STL/pair.h; sourceTree = "<group>"; };
-		4819C0CB1BF32B9E00C69B20 /* set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = set.h; path = ../../../source/core.native/io/binary_writer/STL/set.h; sourceTree = "<group>"; };
-		4819C0CC1BF32B9E00C69B20 /* _string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _string.h; path = ../../../source/core.native/io/binary_writer/STL/_string.h; sourceTree = "<group>"; };
-		4819C0CD1BF32B9E00C69B20 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = ../../../source/core.native/io/binary_writer/STL/vector.h; sourceTree = "<group>"; };
 		4819C0D61BF32BAA00C69B20 /* binary_reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = binary_reader.h; path = ../../../source/core.native/io/binary_reader/binary_reader.h; sourceTree = "<group>"; };
-		4819C0D91BF32BB900C69B20 /* array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = array.h; path = ../../../source/core.native/io/binary_reader/STL/array.h; sourceTree = "<group>"; };
-		4819C0DA1BF32BB900C69B20 /* deque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = deque.h; path = ../../../source/core.native/io/binary_reader/STL/deque.h; sourceTree = "<group>"; };
-		4819C0DB1BF32BB900C69B20 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = ../../../source/core.native/io/binary_reader/STL/list.h; sourceTree = "<group>"; };
-		4819C0DC1BF32BB900C69B20 /* map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = map.h; path = ../../../source/core.native/io/binary_reader/STL/map.h; sourceTree = "<group>"; };
-		4819C0DD1BF32BB900C69B20 /* pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = pair.h; path = ../../../source/core.native/io/binary_reader/STL/pair.h; sourceTree = "<group>"; };
-		4819C0DE1BF32BB900C69B20 /* set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = set.h; path = ../../../source/core.native/io/binary_reader/STL/set.h; sourceTree = "<group>"; };
-		4819C0DF1BF32BB900C69B20 /* _string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _string.h; path = ../../../source/core.native/io/binary_reader/STL/_string.h; sourceTree = "<group>"; };
-		4819C0E01BF32BB900C69B20 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vector.h; path = ../../../source/core.native/io/binary_reader/STL/vector.h; sourceTree = "<group>"; };
+		48D9CCCA1BF4896D00525DB8 /* streambase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = streambase.cpp; path = ../../../source/core.native/io/stream/streambase.cpp; sourceTree = "<group>"; };
+		48D9CCCC1BF4898200525DB8 /* serialize_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_array.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_array.h; sourceTree = "<group>"; };
+		48D9CCCD1BF4898200525DB8 /* serialize_deque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_deque.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_deque.h; sourceTree = "<group>"; };
+		48D9CCCE1BF4898200525DB8 /* serialize_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_list.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_list.h; sourceTree = "<group>"; };
+		48D9CCCF1BF4898200525DB8 /* serialize_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_map.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_map.h; sourceTree = "<group>"; };
+		48D9CCD01BF4898200525DB8 /* serialize_pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_pair.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_pair.h; sourceTree = "<group>"; };
+		48D9CCD11BF4898200525DB8 /* serialize_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_set.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_set.h; sourceTree = "<group>"; };
+		48D9CCD21BF4898200525DB8 /* serialize_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_string.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_string.h; sourceTree = "<group>"; };
+		48D9CCD31BF4898200525DB8 /* serialize_vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_vector.h; path = ../../../source/core.native/io/binary_reader/STL/serialize_vector.h; sourceTree = "<group>"; };
+		48D9CCDC1BF4899600525DB8 /* serialize_array.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_array.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_array.h; sourceTree = "<group>"; };
+		48D9CCDD1BF4899600525DB8 /* serialize_deque.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_deque.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_deque.h; sourceTree = "<group>"; };
+		48D9CCDE1BF4899600525DB8 /* serialize_list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_list.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_list.h; sourceTree = "<group>"; };
+		48D9CCDF1BF4899600525DB8 /* serialize_map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_map.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_map.h; sourceTree = "<group>"; };
+		48D9CCE01BF4899600525DB8 /* serialize_pair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_pair.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_pair.h; sourceTree = "<group>"; };
+		48D9CCE11BF4899600525DB8 /* serialize_set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_set.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_set.h; sourceTree = "<group>"; };
+		48D9CCE21BF4899600525DB8 /* serialize_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_string.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_string.h; sourceTree = "<group>"; };
+		48D9CCE31BF4899600525DB8 /* serialize_vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = serialize_vector.h; path = ../../../source/core.native/io/binary_writer/STL/serialize_vector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				4819C0B81BF32B8400C69B20 /* fixed_stream.h */,
 				4819C0B91BF32B8400C69B20 /* memory_stream.cpp */,
 				4819C0BA1BF32B8400C69B20 /* memory_stream.h */,
+				48D9CCCA1BF4896D00525DB8 /* streambase.cpp */,
 				4819C0BB1BF32B8400C69B20 /* streambase.h */,
 			);
 			name = stream;
@@ -141,14 +144,14 @@
 		4819C0C51BF32B9300C69B20 /* STL */ = {
 			isa = PBXGroup;
 			children = (
-				4819C0C61BF32B9E00C69B20 /* array.h */,
-				4819C0C71BF32B9E00C69B20 /* deque.h */,
-				4819C0C81BF32B9E00C69B20 /* list.h */,
-				4819C0C91BF32B9E00C69B20 /* map.h */,
-				4819C0CA1BF32B9E00C69B20 /* pair.h */,
-				4819C0CB1BF32B9E00C69B20 /* set.h */,
-				4819C0CC1BF32B9E00C69B20 /* _string.h */,
-				4819C0CD1BF32B9E00C69B20 /* vector.h */,
+				48D9CCDC1BF4899600525DB8 /* serialize_array.h */,
+				48D9CCDD1BF4899600525DB8 /* serialize_deque.h */,
+				48D9CCDE1BF4899600525DB8 /* serialize_list.h */,
+				48D9CCDF1BF4899600525DB8 /* serialize_map.h */,
+				48D9CCE01BF4899600525DB8 /* serialize_pair.h */,
+				48D9CCE11BF4899600525DB8 /* serialize_set.h */,
+				48D9CCE21BF4899600525DB8 /* serialize_string.h */,
+				48D9CCE31BF4899600525DB8 /* serialize_vector.h */,
 			);
 			name = STL;
 			sourceTree = "<group>";
@@ -156,14 +159,14 @@
 		4819C0D81BF32BAD00C69B20 /* STL */ = {
 			isa = PBXGroup;
 			children = (
-				4819C0D91BF32BB900C69B20 /* array.h */,
-				4819C0DA1BF32BB900C69B20 /* deque.h */,
-				4819C0DB1BF32BB900C69B20 /* list.h */,
-				4819C0DC1BF32BB900C69B20 /* map.h */,
-				4819C0DD1BF32BB900C69B20 /* pair.h */,
-				4819C0DE1BF32BB900C69B20 /* set.h */,
-				4819C0DF1BF32BB900C69B20 /* _string.h */,
-				4819C0E01BF32BB900C69B20 /* vector.h */,
+				48D9CCCC1BF4898200525DB8 /* serialize_array.h */,
+				48D9CCCD1BF4898200525DB8 /* serialize_deque.h */,
+				48D9CCCE1BF4898200525DB8 /* serialize_list.h */,
+				48D9CCCF1BF4898200525DB8 /* serialize_map.h */,
+				48D9CCD01BF4898200525DB8 /* serialize_pair.h */,
+				48D9CCD11BF4898200525DB8 /* serialize_set.h */,
+				48D9CCD21BF4898200525DB8 /* serialize_string.h */,
+				48D9CCD31BF4898200525DB8 /* serialize_vector.h */,
 			);
 			name = STL;
 			sourceTree = "<group>";
@@ -175,31 +178,31 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4819C0E31BF32BB900C69B20 /* list.h in Headers */,
-				4819C0D21BF32B9E00C69B20 /* pair.h in Headers */,
-				4819C0E51BF32BB900C69B20 /* pair.h in Headers */,
 				4819C0D71BF32BAA00C69B20 /* binary_reader.h in Headers */,
-				4819C0D51BF32B9E00C69B20 /* vector.h in Headers */,
 				4819C0BC1BF32B8400C69B20 /* dynamic_stream.h in Headers */,
 				4819C0AF1BF32B5000C69B20 /* io.h in Headers */,
-				4819C0E21BF32BB900C69B20 /* deque.h in Headers */,
-				4819C0E81BF32BB900C69B20 /* vector.h in Headers */,
-				4819C0E61BF32BB900C69B20 /* set.h in Headers */,
-				4819C0D31BF32B9E00C69B20 /* set.h in Headers */,
-				4819C0E11BF32BB900C69B20 /* array.h in Headers */,
-				4819C0E41BF32BB900C69B20 /* map.h in Headers */,
-				4819C0D41BF32B9E00C69B20 /* _string.h in Headers */,
-				4819C0E71BF32BB900C69B20 /* _string.h in Headers */,
 				4819C0BE1BF32B8400C69B20 /* file_stream.h in Headers */,
-				4819C0D01BF32B9E00C69B20 /* list.h in Headers */,
+				48D9CCD91BF4898200525DB8 /* serialize_set.h in Headers */,
+				48D9CCE81BF4899600525DB8 /* serialize_pair.h in Headers */,
+				48D9CCE61BF4899600525DB8 /* serialize_list.h in Headers */,
+				48D9CCD51BF4898200525DB8 /* serialize_deque.h in Headers */,
+				48D9CCDA1BF4898200525DB8 /* serialize_string.h in Headers */,
 				4819C0C11BF32B8400C69B20 /* memory_stream.h in Headers */,
 				4819C0BF1BF32B8400C69B20 /* fixed_stream.h in Headers */,
+				48D9CCD81BF4898200525DB8 /* serialize_pair.h in Headers */,
+				48D9CCE51BF4899600525DB8 /* serialize_deque.h in Headers */,
 				4819C0B11BF32B5E00C69B20 /* definitions.h in Headers */,
-				4819C0CE1BF32B9E00C69B20 /* array.h in Headers */,
+				48D9CCEA1BF4899600525DB8 /* serialize_string.h in Headers */,
+				48D9CCD71BF4898200525DB8 /* serialize_map.h in Headers */,
 				4819C0C41BF32B8F00C69B20 /* binary_writer.h in Headers */,
-				4819C0D11BF32B9E00C69B20 /* map.h in Headers */,
+				48D9CCD61BF4898200525DB8 /* serialize_list.h in Headers */,
 				4819C0C21BF32B8400C69B20 /* streambase.h in Headers */,
-				4819C0CF1BF32B9E00C69B20 /* deque.h in Headers */,
+				48D9CCD41BF4898200525DB8 /* serialize_array.h in Headers */,
+				48D9CCDB1BF4898200525DB8 /* serialize_vector.h in Headers */,
+				48D9CCE71BF4899600525DB8 /* serialize_map.h in Headers */,
+				48D9CCE91BF4899600525DB8 /* serialize_set.h in Headers */,
+				48D9CCE41BF4899600525DB8 /* serialize_array.h in Headers */,
+				48D9CCEB1BF4899600525DB8 /* serialize_vector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4819C0C01BF32B8400C69B20 /* memory_stream.cpp in Sources */,
+				48D9CCCB1BF4896D00525DB8 /* streambase.cpp in Sources */,
 				4819C0BD1BF32B8400C69B20 /* file_stream.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,6 +403,7 @@
 				4819C0961BF32AB900C69B20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

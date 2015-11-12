@@ -131,6 +131,11 @@ namespace useless
 		return m_can_be_write;
 	}
 
+	void* file_stream::raw_data()
+	{
+		return m_file;
+	}
+
 	const void* file_stream::raw_data() const
 	{
 		return m_file;

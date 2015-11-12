@@ -39,6 +39,11 @@ namespace useless
 			return ( m_end > m_next );
 		}
 
+		virtual void* raw_data()
+		{
+			return &m_buffer[ 0 ];
+		}
+
 		virtual const void* raw_data() const
 		{
 			return &m_buffer[ 0 ];

@@ -54,6 +54,7 @@ namespace useless
 		virtual size_t size() const = 0;
 		virtual bool can_be_read() const = 0;
 		virtual bool can_be_write() const = 0;
+		virtual void* raw_data() = 0;
 		virtual const void* raw_data() const = 0;
 		virtual size_t read( void* buffer, size_t count ) = 0;
 		virtual size_t write( const void* buffer, size_t count ) = 0;

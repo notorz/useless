@@ -254,6 +254,17 @@ namespace useless
 		basic_binary_writer& operator=( const basic_binary_writer& );
 
 	public:
+		void close()
+		{
+			if( m_must_be_deleted )
+			{
+				delete m_stream;
+			}
+
+			m_stream = nullptr;
+			m_must_be_deleted = false;
+		}
+
 		bool stream( streambase& stream )
 		{
 			if( !stream.can_be_write() )
@@ -268,6 +279,7 @@ namespace useless
 
 			m_stream = &stream;
 			m_must_be_deleted = false;
+			return true;
 		}
 
 		streambase* stream()

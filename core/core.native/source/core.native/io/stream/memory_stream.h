@@ -20,6 +20,7 @@ namespace useless
 		virtual size_t size() const;
 		virtual bool can_be_read() const;
 		virtual bool can_be_write() const;
+		virtual void* raw_data();
 		virtual const void* raw_data() const;
 		virtual size_t read( void* buffer, size_t count );
 		virtual size_t write( const void* buffer, size_t count );

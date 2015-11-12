@@ -95,7 +95,7 @@ namespace useless
 			}
 
 			template<typename T>
-			static void read( basic_binary_reader& br, T& val, size_t dest_count )
+			static void read( basic_binary_reader& br, T& val, uint32_t dest_count )
 			{
 				uint32_t count;
 				br.read( &count, sizeof( uint32_t ) );
@@ -111,14 +111,14 @@ namespace useless
 				}
 			}
 
-			static void read( basic_binary_reader& br, char val[], size_t dest_count )
+			static void read( basic_binary_reader& br, char val[], uint32_t dest_count )
 			{
 				std::string temp;
 				br.read( temp );
 
 				if( dest_count >= 1 )
 				{
-					size_t count = ( std::min )( dest_count, temp.size() );
+					size_t count = ( std::min )( static_cast<size_t>( dest_count ), temp.size() );
 #if ( _WIN32 || _WIN64 )
 					::memcpy_s( val, count, temp.c_str(), count );
 #else
@@ -128,14 +128,14 @@ namespace useless
 				}
 			}
 
-			static void read( basic_binary_reader& br, wchar_t val[], size_t dest_count )
+			static void read( basic_binary_reader& br, wchar_t val[], uint32_t dest_count )
 			{
 				std::wstring temp;
 				br.read( temp );
 
 				if( dest_count >= 1 )
 				{
-					size_t count = ( std::min )( dest_count, temp.size() ) * sizeof( wchar_t );
+					size_t count = ( std::min )( static_cast<size_t>( dest_count ), temp.size() ) * sizeof( wchar_t );
 #if ( _WIN32 || _WIN64 )
 					::memcpy_s( val, count, temp.c_str(), count );
 #else
@@ -148,9 +148,9 @@ namespace useless
 			template<typename T>
 			static void invoke( basic_binary_reader& br, T& val )
 			{
-				size_t dest_count = sizeof( val ) /
+				uint32_t dest_count = static_cast<uint32_t>( sizeof( val ) /
 					( static_cast<const char*>( static_cast<const void*>( &val[ 1 ] ) )
-						- static_cast<const char*>( static_cast<const void*>( &val[ 0 ] ) ) );
+						- static_cast<const char*>( static_cast<const void*>( &val[ 0 ] ) ) ) );
 
 				read( br, val, dest_count );
 			}
@@ -294,6 +294,17 @@ namespace useless
 		basic_binary_reader& operator=( const basic_binary_reader& );
 
 	public:
+		void close()
+		{
+			if( m_must_be_deleted )
+			{
+				delete m_stream;
+			}
+
+			m_stream = nullptr;
+			m_must_be_deleted = false;
+		}
+
 		bool stream( streambase& stream )
 		{
 			if( !stream.can_be_read() )

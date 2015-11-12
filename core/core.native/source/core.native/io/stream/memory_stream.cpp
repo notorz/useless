@@ -33,6 +33,11 @@ namespace useless
 		return ( m_end > m_next );
 	}
 
+	void* memory_stream::raw_data()
+	{
+		return m_base;
+	}
+
 	const void* memory_stream::raw_data() const
 	{
 		return m_base;
